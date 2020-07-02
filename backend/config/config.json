@@ -6,8 +6,8 @@
     "dialect": "postgres",
     "port": 5432,
     "host": "localhost",
-    "database": "contentpi",
-    "username": "cms",
+    "database": "ContentPI",
+    "username": "czantany",
     "password": "12345678"
   },
   "security": {

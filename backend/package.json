@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "ts-node-dev src/index.ts",
     "start": "ts-node dist/index.js",
     "build": "tsc -p .",
     "lint": "eslint . --ext .js,.tsx,.ts"
@@ -26,8 +26,9 @@
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.0.5",
     "sequelize-mock": "0.10.2",
+    "ts-node-dev": "^1.0.0-pre.50",
     "tslint": "6.1.2",
-    "typescript": "3.9.5"
+    "typescript": "3.9.6"
   },
   "dependencies": {
     "apollo-server": "2.15.1",
