@@ -13,11 +13,14 @@ export interface iDataTypes {
   FLOAT: number
 }
 
+// App
 export interface iApp extends App {
   id: string
   createdAt: Date
   updatedAt: Date
 }
+
+export interface iCreateAppInput extends App {}
 
 // User
 export interface iUser extends User {
@@ -26,6 +29,8 @@ export interface iUser extends User {
   createdAt: Date
   updatedAt: Date
 }
+
+export interface iCreateUserInput extends User {}
 
 // Models
 export interface iModels {

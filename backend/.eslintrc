@@ -34,7 +34,7 @@
     "no-restricted-syntax": "off",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
-    "max-len": ["error", { "code": 100, "tabWidth": 2 }],
+    "max-len": ["error", { "code": 80, "tabWidth": 2 }],
     "no-param-reassign": "off",
     "no-underscore-dangle": "off",
     "prettier/prettier": "error",
