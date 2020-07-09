@@ -32,6 +32,15 @@ export interface iUser extends User {
 
 export interface iCreateUserInput extends User {}
 
+export interface iLoginInput {
+  email: string
+  password: string
+}
+
+export interface iAuthPayload {
+  token: string
+}
+
 // Models
 export interface iModels {
   App: any
