@@ -12,3 +12,10 @@ export type User = {
   privilege: string
   active: boolean
 }
+
+export type Sequelize = {
+  _defaults?: any
+  name?: string
+  options?: any
+  associate?: any
+}

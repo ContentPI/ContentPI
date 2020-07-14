@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#typeDefs should match the GraphQL schema 1`] = `
+"schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  getApps: [App!]
+  getUsers: [User!]
+}
+
+type Mutation {
+  createApp(input: CreateAppInput): App!
+  createUser(input: CreateUserInput): User!
+  login(input: LoginInput): AuthPayload!
+}
+
+type App {
+  id: UUID!
+  userId: UUID!
+  appName: String!
+  identifier: String!
+  icon: String!
+  description: String!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+}
+
+input CreateAppInput {
+  appName: String!
+  identifier: String!
+  icon: String!
+  description: String!
+  userId: UUID!
+}
+
+scalar UUID
+
+scalar Datetime
+
+type User {
+  id: UUID!
+  username: String!
+  password: String!
+  email: String!
+  privilege: String!
+  active: Boolean!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+  email: String!
+  privilege: String!
+  active: Boolean!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type AuthPayload {
+  token: String!
+}
+"
+`;
