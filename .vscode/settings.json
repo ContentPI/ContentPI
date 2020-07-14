@@ -1,6 +1,9 @@
 {
   "eslint.enable": true,
-  "eslint.workingDirectories": ["./src"],
+  "eslint.workingDirectories": [
+    "./backend",
+    "./frontend"
+  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "typescript.tsdk": "node_modules/typescript/lib"
