@@ -8,9 +8,13 @@
     "resolveJsonModule": true,
     "sourceMap": false,
     "target": "es6",
+    "types": [
+      "node",
+      "express"
+    ],
     "typeRoots": [
-      "src/@types",
-      "./node_modules/@types"
+      "typings",
+      "../node_modules/@types"
     ],
     "lib": [
       "dom",
@@ -19,7 +23,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "moduleResolution": "node",
