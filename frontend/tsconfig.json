@@ -36,5 +36,16 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "paths": {
+    "@app/*": [
+      "app/*"
+    ],
+    "@pages/*": [
+      "pages/*"
+    ],
+    "@shared/*": [
+      "shared/*"
+    ]
+  }
 }

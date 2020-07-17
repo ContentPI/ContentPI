@@ -1,0 +1,19 @@
+html,
+body {
+  background-color: $white;
+  margin: 0;
+  padding: 0;
+  font-family: BlinkMacSystemFont, Helvetica, sans-serif;
+  touch-action: none;
+}
+
+input {
+  appearance: none;
+  background-clip: padding-box;
+  outline: none;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
