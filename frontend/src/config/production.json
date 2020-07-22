@@ -1,0 +1,18 @@
+{
+  "baseUrl": "http://www.ContentPI.com",
+  "api": {
+    "uri": "http://www.ContentPI.com/graphql",
+    "credentials": "same-origin"
+  },
+  "debug": false,
+  "cache": {
+    "enable": true
+  },
+  "session": {
+    "cookieDomain": "www.ContentPI.com",
+    "maxAge": 604800,
+    "cookiePrefix": "",
+    "path": "/",
+    "httpOnly": true
+  }
+}

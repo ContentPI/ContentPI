@@ -28,7 +28,24 @@
     "noEmit": true,
     "moduleResolution": "node",
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ],
+      "@config": [
+        "config"
+      ],
+      "@lib/*": [
+        "shared/lib/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts",
@@ -36,16 +53,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "paths": {
-    "@app/*": [
-      "app/*"
-    ],
-    "@pages/*": [
-      "pages/*"
-    ],
-    "@shared/*": [
-      "shared/*"
-    ]
-  }
+  ]
 }
