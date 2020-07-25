@@ -36,6 +36,15 @@
       "@config": [
         "config"
       ],
+      "@contexts/*": [
+        "contexts/*"
+      ],
+      "@graphql/*": [
+        "graphql/*"
+      ],
+      "@interfaces": [
+        "interfaces"
+      ],
       "@lib/*": [
         "shared/lib/*"
       ],

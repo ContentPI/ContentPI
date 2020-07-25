@@ -1,6 +1,9 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
+import React, { FC, ReactElement, memo, useContext } from 'react'
 import Head from 'next/head'
+
+// Contexts
+import { UserContext } from '@contexts/user'
 
 // Components
 import Login from './Login'
@@ -8,7 +11,14 @@ import Login from './Login'
 // Styles
 import './Layout.scss'
 
-const Layout: FC = (): ReactElement => {
+// Interfaces
+interface iProps {
+  currentUrl: string
+}
+
+const Layout: FC<iProps> = ({ currentUrl }): ReactElement => {
+  const { login } = useContext(UserContext)
+
   return (
     <>
       <Head>
@@ -16,7 +26,7 @@ const Layout: FC = (): ReactElement => {
         <meta name="title" content="Login" />
       </Head>
 
-      <Login />
+      <Login login={login} currentUrl={currentUrl} />
     </>
   )
 }
