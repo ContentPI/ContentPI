@@ -7,10 +7,13 @@ type User {
   active: Boolean!
   createdAt: Datetime!
   updatedAt: Datetime!
+  apps: [App!]
+  _DEBUG: JSON
 }
 
 type Query {
   getUsers: [User!]
+  getUserData(at: String!): User!
 }
 
 type Mutation {

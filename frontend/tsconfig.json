@@ -8,19 +8,9 @@
     "resolveJsonModule": true,
     "sourceMap": false,
     "target": "es6",
-    "types": [
-      "node",
-      "express"
-    ],
-    "typeRoots": [
-      "typings",
-      "../node_modules/@types"
-    ],
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "types": ["node", "express"],
+    "typeRoots": ["typings", "../node_modules/@types"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -30,40 +20,18 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "@app/*": [
-        "app/*"
-      ],
-      "@config": [
-        "config"
-      ],
-      "@contexts/*": [
-        "contexts/*"
-      ],
-      "@graphql/*": [
-        "graphql/*"
-      ],
-      "@interfaces": [
-        "interfaces"
-      ],
-      "@lib/*": [
-        "shared/lib/*"
-      ],
-      "@layouts/*": [
-        "shared/components/layouts/*"
-      ],
-      "@pages/*": [
-        "pages/*"
-      ],
-      "@shared/*": [
-        "shared/*"
-      ]
+      "@modals/*": ["app/dashboard/components/Modals/*"],
+      "@app/*": ["app/*"],
+      "@config": ["config"],
+      "@contexts/*": ["contexts/*"],
+      "@graphql/*": ["graphql/*"],
+      "@interfaces": ["interfaces"],
+      "@lib/*": ["shared/lib/*"],
+      "@layouts/*": ["shared/components/layouts/*"],
+      "@pages/*": ["pages/*"],
+      "@shared/*": ["shared/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules"]
 }

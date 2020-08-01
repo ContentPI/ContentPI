@@ -1,15 +1,19 @@
 // Dependencies
-import React, { FC, createContext, ReactElement } from 'react'
+import React, { FC, createContext, ReactElement, useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
-import { getGraphQlError } from 'fogg-utils'
-import { useMutation } from '@apollo/client'
+import { getGraphQlError, redirectTo, getDebug } from 'fogg-utils'
+import { useQuery, useMutation } from '@apollo/client'
 
 // Mutations
 import LOGIN_MUTATION from '@graphql/user/login.mutation'
 
+// Queries
+import GET_USER_DATA_QUERY from '@graphql/user/getUserData.query'
+
 // Interfaces
 interface iUserContext {
   login(input: any): any
+  user: any
 }
 
 interface iProps {
@@ -18,14 +22,36 @@ interface iProps {
 
 // Creating context
 export const UserContext = createContext<iUserContext>({
-  login: () => null
+  login: () => null,
+  user: null
 })
 
 const UserProvider: FC<iProps> = ({ children }): ReactElement => {
-  const [, setCookie] = useCookies()
+  const [cookies, setCookie] = useCookies()
+  const [user, setUser] = useState(null)
 
   // Mutations
   const [loginMutation] = useMutation(LOGIN_MUTATION)
+
+  // Queries
+  const { data: dataUser } = useQuery(GET_USER_DATA_QUERY, {
+    variables: {
+      at: cookies.at || ''
+    }
+  })
+
+  // Effects
+  useEffect(() => {
+    if (dataUser) {
+      const debug = getDebug(dataUser.getUserData)
+
+      if (!dataUser.getUserData.id && debug.hasCookie) {
+        redirectTo('/logout?redirectTo=/dashboard')
+      } else {
+        setUser(dataUser.getUserData)
+      }
+    }
+  }, [dataUser])
 
   async function login(input: { email: string; password: string }): Promise<any> {
     try {
@@ -47,7 +73,8 @@ const UserProvider: FC<iProps> = ({ children }): ReactElement => {
   }
 
   const context = {
-    login
+    login,
+    user
   }
 
   return <UserContext.Provider value={context}>{children}</UserContext.Provider>

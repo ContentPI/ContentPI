@@ -1,0 +1,40 @@
+@import '~styles/_dependencies';
+
+.modal {
+  p {
+    font-size: 14px;
+    line-height: 25px;
+    letter-spacing: 0.2px;
+
+    &.center {
+      text-align: center;
+    }
+
+    .saved {
+      color: $mySin;
+      font-weight: 600;
+    }
+
+    .published {
+      color: $mountainMeadow;
+      font-weight: 600;
+    }
+  }
+
+  .values {
+    > div {
+      height: 200px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    &.center {
+      justify-content: space-between;
+    }
+  }
+}
