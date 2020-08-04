@@ -8,7 +8,9 @@ exports[`#typeDefs should match the GraphQL schema 1`] = `
 
 type Query {
   getApps: [App!]
+  getAppById(id: String!): App!
   getUsers: [User!]
+  getUserData(at: String!): User!
 }
 
 type Mutation {
@@ -40,6 +42,8 @@ scalar UUID
 
 scalar Datetime
 
+scalar JSON
+
 type User {
   id: UUID!
   username: String!
@@ -49,6 +53,8 @@ type User {
   active: Boolean!
   createdAt: Datetime!
   updatedAt: Datetime!
+  apps: [App!]
+  _DEBUG: JSON
 }
 
 input CreateUserInput {

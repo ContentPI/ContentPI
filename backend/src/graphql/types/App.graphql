@@ -11,6 +11,7 @@ type App {
 
 type Query {
   getApps: [App!]
+  getAppById(id: String!): App!
 }
 
 type Mutation {

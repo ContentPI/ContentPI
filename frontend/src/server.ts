@@ -1,11 +1,12 @@
 // Dependencies
-import express from 'express'
+import express, { Application, Request, Response } from 'express'
 import next from 'next'
 import path from 'path'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import session from 'express-session'
+import { buildUrl } from 'fogg-utils'
 
 // Middleware
 import { isConnected } from './shared/lib/middlewares/user'
@@ -20,7 +21,7 @@ const handle = nextApp.getRequestHandler()
 
 // Running Next App
 nextApp.prepare().then(() => {
-  const app = express()
+  const app: Application = express()
 
   // Public static
   app.use(express.static(path.join(__dirname, '../public')))
@@ -39,15 +40,24 @@ nextApp.prepare().then(() => {
   app.use(cors({ credentials: true, origin: true }))
 
   // Routes
-  app.get('/login', isConnected(false), (req: any, res: any) => {
-    return nextApp.render(req, res, '/users/login', req.query)
+  app.get('/login', isConnected(false), (req: Request, res: Response) => {
+    return nextApp.render(req, res, '/users/login')
+  })
+
+  app.get('/logout', (req: Request, res: Response) => {
+    const redirect: any = req.query.redirectTo || '/'
+    res.clearCookie('at')
+    res.redirect(redirect)
   })
 
   app.use(
-    '/dashboard',
+    `/dashboard/:appId?/:stage?`,
     isConnected(true, ['god', 'admin', 'editor'], '/login?redirectTo=/dashboard'),
     (req: any, res: any) => {
-      return nextApp.render(req, res, '/dashboard', req.query)
+      const { appId, stage } = req.params
+      const url = buildUrl(['dashboard', appId, stage])
+
+      return nextApp.render(req, res, `/${url}`)
     }
   )
 

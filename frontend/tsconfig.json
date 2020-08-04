@@ -21,14 +21,17 @@
     "jsx": "preserve",
     "paths": {
       "@modals/*": ["app/dashboard/components/Modals/*"],
+      "@dashboard/*": ["app/dashboard/*"],
       "@app/*": ["app/*"],
       "@config": ["config"],
+      "@constants/*": ["constants/*"],
       "@contexts/*": ["contexts/*"],
       "@graphql/*": ["graphql/*"],
       "@interfaces": ["interfaces"],
       "@lib/*": ["shared/lib/*"],
       "@layouts/*": ["shared/components/layouts/*"],
       "@pages/*": ["pages/*"],
+      "@ui/*": ["shared/components/ui/*"],
       "@shared/*": ["shared/*"]
     }
   },
