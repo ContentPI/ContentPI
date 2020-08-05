@@ -3,11 +3,8 @@ import { iApp, iCreateAppInput, iModels } from '../../interfaces'
 
 export default {
   Query: {
-    getApps: (
-      _: object,
-      _args: object,
-      { models }: { models: iModels }
-    ): iApp[] => models.App.findAll(),
+    getApps: (_: any, _args: any, { models }: { models: iModels }): iApp[] =>
+      models.App.findAll(),
     getAppById: async (
       _: any,
       { id }: { id: string },
@@ -24,7 +21,7 @@ export default {
   },
   Mutation: {
     createApp: (
-      _: object,
+      _: any,
       { input }: { input: iCreateAppInput },
       { models }: { models: iModels }
     ): iApp => models.App.create({ ...input })

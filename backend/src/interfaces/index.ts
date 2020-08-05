@@ -1,6 +1,5 @@
 // Types
 import { App, User, Sequelize } from './types'
-import { Sequelize } from 'sequelize/types';
 
 // Sequelize
 export interface iDataTypes {
@@ -21,7 +20,7 @@ export interface iApp extends App, Sequelize {
   updatedAt: Date
 }
 
-export interface iCreateAppInput extends App { }
+export interface iCreateAppInput extends App {}
 
 // User
 export interface iUser extends User, Sequelize {
@@ -31,7 +30,7 @@ export interface iUser extends User, Sequelize {
   updatedAt?: Date
 }
 
-export interface iCreateUserInput extends User { }
+export interface iCreateUserInput extends User {}
 
 export interface iLoginInput {
   email: string
