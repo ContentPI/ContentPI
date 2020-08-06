@@ -1,5 +1,5 @@
 // Interface
-import { iApp, iDataTypes } from '../interfaces'
+import { iApp, iModels, iDataTypes } from '../interfaces'
 
 export default (sequelize: any, DataTypes: iDataTypes): iApp => {
   const App = sequelize.define('App', {
@@ -28,6 +28,17 @@ export default (sequelize: any, DataTypes: iDataTypes): iApp => {
       allowNull: true
     }
   })
+
+  App.associate = (models: iModels): void => {
+    App.hasMany(models.Model, {
+      foreignKey: {
+        name: 'appId',
+        field: 'app_id'
+      },
+      as: 'models',
+      onDelete: 'CASCADE'
+    })
+  }
 
   return App
 }

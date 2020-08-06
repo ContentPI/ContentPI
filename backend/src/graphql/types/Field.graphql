@@ -1,0 +1,38 @@
+type Field {
+  id: UUID!
+  type: String!
+  fieldName: String!
+  identifier: String!
+  order: String!
+  description: String!
+  defaultValue: String!
+  isMedia: Boolean!
+  isRequired: Boolean!
+  isUnique: Boolean!
+  isHide: Boolean!
+  isSystem: Boolean!
+  isPrimaryKey: Boolean!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  modelId: UUID!
+}
+
+type Mutation {
+  createField(input: CreateFieldInput): Field!
+}
+
+input CreateFieldInput {
+  type: String!
+  fieldName: String!
+  identifier: String!
+  order: String!
+  description: String!
+  defaultValue: String!
+  isMedia: Boolean!
+  isRequired: Boolean!
+  isUnique: Boolean!
+  isHide: Boolean!
+  isSystem: Boolean!
+  isPrimaryKey: Boolean!
+  modelId: UUID!
+}

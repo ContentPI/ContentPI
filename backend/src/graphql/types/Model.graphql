@@ -1,0 +1,26 @@
+type Model {
+  id: UUID!
+  modelName: String!
+  identifier: String!
+  description: String!
+  createdAt: Datetime!
+  updatedAt: Datetime!
+  appId: UUID!
+  fields: [Field!]
+}
+
+type Query {
+  getModels: [Model!]
+  getModel(identifier: String!, appId: UUID!): Model!
+}
+
+type Mutation {
+  createModel(input: CreateModelInput): Model!
+}
+
+input CreateModelInput {
+  modelName: String!
+  identifier: String!
+  description: String!
+  appId: UUID!
+}
