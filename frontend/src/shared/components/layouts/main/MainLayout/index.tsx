@@ -39,7 +39,7 @@ const MainLayout: FC<iProps> = ({
       </Head>
 
       <div className={styles.mainLayout}>
-        {sidebar && <Sidebar />}
+        {sidebar && <Sidebar router={router} />}
         {content && (
           <Content header={header} footer={footer} noWrapper={noWrapper} router={router}>
             {children}

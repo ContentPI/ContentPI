@@ -8,6 +8,11 @@ export default gql`
       appName
       identifier
       icon
+      models {
+        id
+        modelName
+        identifier
+      }
     }
   }
 `

@@ -8,6 +8,10 @@ import { AppContext } from '@contexts/app'
 // Constants
 import { STAGE_LINK } from '@constants/links'
 
+// Sidebars
+import ModelSidebar from '@dashboard/components/Models/ModelSidebar'
+import ContentSidebar from '@dashboard/components/Content/ContentSidebar'
+
 // Components
 import Link from '@ui/Link'
 import AppIcon from '@dashboard/components/MyApps/AppIcon'
@@ -54,21 +58,21 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           )}
 
           <li onClick={(): void => handleOpen('model', true)}>
-            <Link href="#" title="Models">
+            <a title="Models">
               <Icon type="fas fa-cubes" />
-            </Link>
+            </a>
           </li>
 
           <li onClick={(): void => handleOpen('content', true)}>
-            <Link href="#" title="Content">
+            <a title="Content">
               <Icon type="fas fa-pencil-alt" />
-            </Link>
+            </a>
           </li>
 
           <li>
-            <Link href="#">
+            <a title="Assets">
               <Icon type="fas fa-photo-video" />
-            </Link>
+            </a>
           </li>
 
           <li>
@@ -91,8 +95,8 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
         </div>
 
         <div className={styles.subOptions}>
-          {sidebar === 'model' && <h2>Model</h2>}
-          {sidebar === 'content' && <h2>Content</h2>}
+          {sidebar === 'model' && <ModelSidebar app={getAppById} router={router} />}
+          {sidebar === 'content' && <ContentSidebar />}
         </div>
       </section>
     </aside>

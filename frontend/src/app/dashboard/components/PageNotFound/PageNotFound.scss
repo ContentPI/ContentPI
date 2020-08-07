@@ -1,0 +1,89 @@
+@import '~styles/_dependencies';
+
+.pageNotFound {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+
+  @include mobile {
+    align-content: flex-start;
+    padding: 50px 20px;
+  }
+
+  img {
+    margin-right: 50px;
+    width: 250px;
+
+    @include tablet {
+      margin-right: 0;
+      width: 250px;
+    }
+
+    @include mobile {
+      margin-bottom: 20px;
+      width: 150px;
+    }
+  }
+
+  .notFound {
+    font-family: Arial;
+
+    @include mobile {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 208px;
+      margin: 0;
+
+      @include tablet {
+        font-size: 160px;
+      }
+
+      @include mobile {
+        font-size: 112px;
+      }
+    }
+
+    span {
+      font-size: 29px;
+
+      @include tablet {
+        font-size: 24px;
+      }
+    }
+
+    p {
+      font-size: 24px;
+      margin: 30px 0 80px 0;
+      max-width: 500px;
+
+      @include tablet {
+        font-size: 16px;
+      }
+
+      @include mobile {
+        margin: 20px 0 80px 0;
+      }
+    }
+
+    a {
+      color: $dodgerBlue;
+      text-decoration: none;
+
+      &:hover {
+        color: $bondiBlue;
+
+        @include tablet {
+          font-size: 16px;
+        }
+      }
+
+      i {
+        margin-left: 15px;
+      }
+    }
+  }
+}

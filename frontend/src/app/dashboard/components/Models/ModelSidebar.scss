@@ -1,0 +1,39 @@
+@import '~styles/_dependencies';
+
+.modelSidebar {
+  margin: 0 auto;
+  width: 90%;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    .models {
+      color: $gray;
+      font-size: $smaller;
+      font-weight: $bold;
+    }
+
+    .create {
+      margin-top: -5px;
+    }
+  }
+
+  .modelsWrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    a {
+      color: $tuna;
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: $gallery;
+      }
+    }
+  }
+}

@@ -51,11 +51,11 @@ nextApp.prepare().then(() => {
   })
 
   app.use(
-    `/dashboard/:appId?/:stage?`,
+    `/dashboard/:appId?/:stage?/:moduleName?/:section?/:model?`,
     isConnected(true, ['god', 'admin', 'editor'], '/login?redirectTo=/dashboard'),
     (req: any, res: any) => {
-      const { appId, stage } = req.params
-      const url = buildUrl(['dashboard', appId, stage])
+      const { appId, stage, moduleName, section, model } = req.params
+      const url = buildUrl(['dashboard', appId, stage, moduleName, section, model])
 
       return nextApp.render(req, res, `/${url}`)
     }

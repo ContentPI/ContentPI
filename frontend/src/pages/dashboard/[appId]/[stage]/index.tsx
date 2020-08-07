@@ -22,7 +22,7 @@ const Page: FC = (): ReactElement => {
     <UserProvider>
       <AppProvider id={appId}>
         <FormProvider>
-          <Home />
+          <Home router={router.query} />
         </FormProvider>
       </AppProvider>
     </UserProvider>

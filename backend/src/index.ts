@@ -1,6 +1,9 @@
 // Dependencies
 import { ApolloServer, makeExecutableSchema } from 'apollo-server'
 
+// Data
+import { setInitialData } from './data'
+
 // Models
 import models from './models'
 
@@ -32,5 +35,11 @@ models.sequelize.sync({ alter, force }).then(() => {
   apolloServer
     .listen($server.port)
     // eslint-disable-next-line no-console
-    .then(({ url }) => console.log(`Running on ${url}`))
+    .then(({ url }) => {
+      // Setting up initial data
+      setInitialData()
+
+      // eslint-disable-next-line no-console
+      console.log(`Running on ${url}`)
+    })
 })
