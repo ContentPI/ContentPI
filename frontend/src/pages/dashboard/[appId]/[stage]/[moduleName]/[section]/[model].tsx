@@ -19,18 +19,18 @@ const Page: FC = (): ReactElement => {
   // Router
   const router = useRouter()
   const { appId, section, moduleName, model } = router.query
-  let dataModel: any = null
 
   // Executing Queries
-  if (section === 'model') {
-    const response = useQuery(GET_MODEL_QUERY, {
-      variables: {
-        identifier: model,
-        appId
-      }
-    })
+  const { data: getModelQueryData } = useQuery(GET_MODEL_QUERY, {
+    variables: {
+      identifier: model,
+      appId
+    },
+    skip: section !== 'model'
+  })
 
-    dataModel = response.data
+  if (!getModelQueryData) {
+    return <div />
   }
 
   // Pages components
@@ -44,12 +44,12 @@ const Page: FC = (): ReactElement => {
         router: router.query,
         data: {
           section,
-          ...dataModel
+          ...getModelQueryData
         }
       })
-    } else {
-      return <PageNotFound />
     }
+
+    return <PageNotFound />
   }
 
   return (

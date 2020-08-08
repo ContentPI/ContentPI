@@ -45,6 +45,20 @@ export default {
       _: any,
       { input }: { input: iCreateModelInput },
       { models }: { models: iModels }
-    ): iModel => models.Model.create({ ...input })
+    ): iModel => models.Model.create({ ...input }),
+    deleteModel: async (
+      _: any,
+      { id }: { id: string },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const modelToRemove = await models.Model.findByPk(id)
+
+      if (modelToRemove) {
+        await modelToRemove.destroy({ where: { id } })
+        return modelToRemove
+      }
+
+      return null
+    }
   }
 }

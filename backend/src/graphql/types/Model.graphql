@@ -16,6 +16,7 @@ type Query {
 
 type Mutation {
   createModel(input: CreateModelInput): Model!
+  deleteModel(id: UUID!): Model!
 }
 
 input CreateModelInput {

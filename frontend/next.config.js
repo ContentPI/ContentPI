@@ -1,6 +1,7 @@
 // Dependencies
 import withSass from '@zeit/next-sass'
 import path from 'path'
+import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
 
 export default withSass({
   cssModules: true,
@@ -27,6 +28,13 @@ export default withSass({
     config.resolve.alias['@ui'] = path.resolve(dir, './src/shared/components/ui')
     config.resolve.alias['@shared'] = path.resolve(dir, './src/shared')
     config.resolve.alias.styles = path.resolve(dir, './src/shared/styles')
+
+    // Plugins
+    config.plugins.push(
+      new FilterWarningsPlugin({
+        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
+      })
+    )
 
     return config
   }
