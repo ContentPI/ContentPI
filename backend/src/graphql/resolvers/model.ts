@@ -1,6 +1,9 @@
 // Interfaces
 import { iModel, iCreateModelInput, iModels } from '../../interfaces'
 
+// Data
+import systemFields from '../../data/systemFields'
+
 export default {
   Query: {
     getModels: (
@@ -41,11 +44,18 @@ export default {
     }
   },
   Mutation: {
-    createModel: (
+    createModel: async (
       _: any,
       { input }: { input: iCreateModelInput },
       { models }: { models: iModels }
-    ): iModel => models.Model.create({ ...input }),
+    ): Promise<iModel> => {
+      const newModel = await models.Model.create({ ...input })
+
+      // Creating system fields
+      await models.Field.bulkCreate(systemFields(newModel))
+
+      return newModel
+    },
     deleteModel: async (
       _: any,
       { id }: { id: string },

@@ -1,12 +1,12 @@
 // Dependencies
 import React, { FC, ReactElement, useState, memo } from 'react'
-import { LinkButton, Menu } from 'fogg-ui'
+import { LinkButton, Menu, Toggle } from 'fogg-ui'
 
 // Components
-import DeleteModelModal from '@modals/DeleteModelModal'
-
-// Shared components
 import MainLayout from '@layouts/main/MainLayout'
+import DeleteModelModal from '@modals/DeleteModelModal'
+import Fields from './Fields'
+import Declarations from './Declarations'
 
 // Styles
 import styles from './Schema.scss'
@@ -21,6 +21,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [modalData, setModalData] = useState({})
+  const [showSystem, setShowSystem] = useState(false)
 
   // Methods
   const handleDeleteModal = (): void => setIsOpenDelete(!isOpenDelete)
@@ -32,9 +33,10 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
   }
 
   // Data
-  const { getModel } = data
+  const { getModel, getDeclarations } = data
 
-  if (!getModel) {
+  // First render
+  if (!getModel && !getDeclarations) {
     return <div />
   }
 
@@ -69,6 +71,20 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
                 }
               ]}
             />
+          </div>
+
+          <div className={styles.toggle}>
+            <Toggle
+              checked={showSystem}
+              type="round"
+              label="Show system fields"
+              onChange={(): void => setShowSystem(!showSystem)}
+            />
+          </div>
+
+          <div className={styles.wrapper}>
+            <Fields fields={getModel.fields} showSystem={showSystem} />
+            <Declarations model={getModel} declarations={getDeclarations} />
           </div>
         </div>
       </MainLayout>

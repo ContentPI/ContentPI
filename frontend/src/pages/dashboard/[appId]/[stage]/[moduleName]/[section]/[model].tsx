@@ -14,6 +14,7 @@ import PageNotFound from '@dashboard/components/PageNotFound'
 
 // Queries
 import GET_MODEL_QUERY from '@graphql/models/getModel.query'
+import GET_DECLARATIONS_QUERY from '@graphql/declarations/getDeclarations.query'
 
 const Page: FC = (): ReactElement => {
   // Router
@@ -28,6 +29,8 @@ const Page: FC = (): ReactElement => {
     },
     skip: section !== 'model'
   })
+
+  const { data: getDeclarationsQueryData } = useQuery(GET_DECLARATIONS_QUERY)
 
   if (!getModelQueryData) {
     return <div />
@@ -44,7 +47,8 @@ const Page: FC = (): ReactElement => {
         router: router.query,
         data: {
           section,
-          ...getModelQueryData
+          ...getModelQueryData,
+          ...getDeclarationsQueryData
         }
       })
     }

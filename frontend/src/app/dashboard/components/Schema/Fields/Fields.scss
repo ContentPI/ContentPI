@@ -1,0 +1,142 @@
+@import '~styles/_dependencies';
+
+.fields {
+  display: flex;
+  flex-flow: column;
+  margin-top: 0px;
+  width: 75%;
+
+  @include minBreakpoint(1300px) {
+    width: 88%;
+  }
+
+  .field {
+    box-sizing: border-box;
+    box-shadow: 0px 2px 2px -1px rgba(235, 235, 235, 1);
+    border: 1px solid $gallery;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    position: relative;
+
+    .actions {
+      position: absolute;
+      top: 6px;
+      right: 10px;
+
+      i {
+        margin-right: 10px;
+        font-size: 25px;
+        color: $gallery;
+
+        &:hover {
+          color: red;
+
+          &:first-child {
+            color: $sunglow;
+          }
+        }
+      }
+    }
+
+    &.sys {
+      background-color: $gallery;
+    }
+
+    &.hideSys {
+      display: none;
+    }
+
+    .icon {
+      color: $white;
+      display: inline-block;
+      border-radius: 5px;
+      margin-right: 20px;
+
+      &.String {
+        background-color: $malachite;
+      }
+
+      &.Text {
+        background-color: $hollywoodCerise;
+      }
+
+      &.DateTime,
+      &.Status {
+        background-color: $black;
+      }
+
+      &.Media {
+        background-color: $denim;
+      }
+
+      &.Boolean {
+        background-color: $tuna;
+      }
+
+      &.Dropdown {
+        background-color: $dodgerBlue;
+      }
+
+      i {
+        padding: 16px;
+        font-style: normal;
+
+        &.id,
+        &.integer,
+        &.float {
+          background-color: $black;
+          color: $white;
+          display: inline-block;
+          border-radius: 5px;
+          font-style: normal;
+        }
+
+        &.integer {
+          background-color: $oxfordBlue;
+        }
+
+        &.float {
+          background-color: $fuelYellow;
+        }
+      }
+    }
+
+    .name {
+      display: inline-block;
+      font-weight: 500;
+      margin-top: -47px;
+      vertical-align: text-top;
+      line-height: 80px;
+
+      .identifier {
+        margin-left: 5px;
+        font-weight: 100;
+        color: $frenchGray;
+        font-size: 14px;
+      }
+
+      .information {
+        display: block;
+        margin-top: -24px;
+        line-height: 10px;
+
+        .tag {
+          background-color: $alabaster;
+          border-radius: 5px;
+          color: $tuna;
+          font-size: 12px;
+          margin-right: 5px;
+          padding: 5px;
+          text-align: center;
+          width: 40px;
+
+          &.system {
+            background-color: $logan;
+            color: $gallery;
+          }
+        }
+      }
+    }
+  }
+}
