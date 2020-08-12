@@ -1,7 +1,10 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
+import React, { FC, ReactElement, useState, memo } from 'react'
 import { cx } from 'fogg-utils'
 import { Icon } from 'fogg-ui'
+
+// Components
+import DeleteFieldModal from '@modals/DeleteFieldModal'
 
 // Styles
 import styles from './Fields.scss'
@@ -12,8 +15,31 @@ interface iProps {
 }
 
 const Fields: FC<iProps> = ({ fields, showSystem }): ReactElement => {
+  // State
+  const [isOpenDelete, setIsOpenDelete] = useState(false)
+  const [data, setData] = useState({})
+
+  // Methods
+  const handleDeleteModal = (): void => setIsOpenDelete(!isOpenDelete)
+
+  const handleDelete = (id: any): any => {
+    handleDeleteModal()
+    setData({ id })
+  }
+
   return (
     <>
+      <DeleteFieldModal
+        label="Delete Field"
+        isOpen={isOpenDelete}
+        onClose={handleDeleteModal}
+        options={{
+          data,
+          position: 'center',
+          width: '600px'
+        }}
+      />
+
       <div className={styles.fields}>
         {fields.map((field: any) => (
           <div
@@ -94,6 +120,16 @@ const Fields: FC<iProps> = ({ fields, showSystem }): ReactElement => {
                   </span>
                 )}
               </div>
+
+              {!field.isSystem && (
+                <div className={styles.actions}>
+                  <Icon
+                    type="fas fa-trash"
+                    title="Delete"
+                    onClick={(): void => handleDelete(field.id)}
+                  />
+                </div>
+              )}
             </div>
           </div>
         ))}
