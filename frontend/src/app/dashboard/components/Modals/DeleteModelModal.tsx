@@ -17,7 +17,7 @@ interface iProps {
   onClose(): void
 }
 
-const DeleteFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const DeleteModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Mutations
   const [deleteModelMutation] = useMutation(DELETE_MODEL_MUTATION)
 
@@ -60,4 +60,4 @@ const DeleteFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   )
 }
 
-export default memo(DeleteFieldModal)
+export default memo(DeleteModelModal)

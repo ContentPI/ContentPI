@@ -5,6 +5,7 @@ import { Icon } from 'fogg-ui'
 
 // Components
 import DeleteFieldModal from '@modals/DeleteFieldModal'
+import EditFieldModal from '@modals/EditFieldModal'
 
 // Styles
 import styles from './Fields.scss'
@@ -17,14 +18,21 @@ interface iProps {
 const Fields: FC<iProps> = ({ fields, showSystem }): ReactElement => {
   // State
   const [isOpenDelete, setIsOpenDelete] = useState(false)
+  const [isOpenEdit, setIsOpenEdit] = useState(false)
   const [data, setData] = useState({})
 
   // Methods
   const handleDeleteModal = (): void => setIsOpenDelete(!isOpenDelete)
+  const handleEditModal = (): void => setIsOpenEdit(!isOpenEdit)
 
   const handleDelete = (id: any): any => {
     handleDeleteModal()
     setData({ id })
+  }
+
+  const handleEdit = (id: any): any => {
+    handleEditModal()
+    setData({ id, fields })
   }
 
   return (
@@ -36,6 +44,18 @@ const Fields: FC<iProps> = ({ fields, showSystem }): ReactElement => {
         options={{
           data,
           position: 'center',
+          width: '600px'
+        }}
+      />
+
+      <EditFieldModal
+        label="Edit Field"
+        isOpen={isOpenEdit}
+        onClose={handleEditModal}
+        options={{
+          data,
+          position: 'top',
+          height: '760px',
           width: '600px'
         }}
       />
@@ -123,6 +143,11 @@ const Fields: FC<iProps> = ({ fields, showSystem }): ReactElement => {
 
               {!field.isSystem && (
                 <div className={styles.actions}>
+                  <Icon
+                    type="fas fa-edit"
+                    title="Edit"
+                    onClick={(): void => handleEdit(field.id)}
+                  />
                   <Icon
                     type="fas fa-trash"
                     title="Delete"

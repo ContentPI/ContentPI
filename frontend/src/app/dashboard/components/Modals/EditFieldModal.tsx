@@ -1,18 +1,17 @@
 // Dependencies
-import React, { FC, ReactElement, useContext, useState, useEffect, memo } from 'react'
+import React, { FC, ReactElement, useState, useEffect, useContext, memo } from 'react'
 import { Modal, Badge, Input, PrimaryButton, LinkButton, Toggle } from 'fogg-ui'
-import { camelCase, getEmptyValues, redirectTo, getParamsFromUrl, waitFor } from 'fogg-utils'
-import { useLazyQuery, useMutation } from '@apollo/client'
-
-// Contexts
-import { FormContext } from '@contexts/form'
+import { camelCase, getEmptyValues, redirectTo, waitFor } from 'fogg-utils'
+import { useMutation } from '@apollo/client'
 
 // Hooks
 import usePrevious from '@lib/usePrevious'
 
+// Contexts
+import { FormContext } from '@contexts/form'
+
 // Mutation
-import CREATE_FIELD_MUTATION from '@graphql/fields/createField.mutation'
-import GET_MODEL_QUERY from '@graphql/models/getModel.query'
+import EDIT_FIELD_MUTATION from '@graphql/fields/editField.mutation'
 
 // Styles
 import styles from './Modal.scss'
@@ -24,52 +23,48 @@ interface iProps {
   onClose(): void
 }
 
-const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
-  const { appId } = getParamsFromUrl(['page', 'appId', 'stage'])
-
+const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+  // Getting data from options
   const {
-    data: { fieldsCount = 0 }
+    data: { id: fieldId, fields }
   } = options
+
+  // Previous Props
+  const prevProps: any = usePrevious({ options })
 
   // States
   const initialValues = {
-    model: options.data.modelIdentifier,
-    modelId: '',
+    type: '',
     fieldName: '',
     identifier: '',
-    order: `${Number(fieldsCount) + 1}`,
-    type: options.data.type,
-    defaultValue: '',
+    order: '1',
     description: '',
-    isHide: false,
     isMedia: false,
-    isUnique: false,
     isRequired: true,
+    isUnique: false,
+    isHide: false,
     isSystem: false,
     isPrimaryKey: false
   }
   const [values, setValues] = useState(initialValues)
   const [required, setRequired] = useState<any>({
-    fieldName: false,
+    appName: false,
     identifier: false
   })
   const [loading, setLoading] = useState(false)
 
+  // Mutations
+  const [editFieldMutation] = useMutation(EDIT_FIELD_MUTATION)
+
   // Contexts
   const { onChange, setValue } = useContext(FormContext)
 
-  // Mutations
-  const [createFieldMutation] = useMutation(CREATE_FIELD_MUTATION)
-
-  // Queries
-  const [getModelQueryThenCreateField] = useLazyQuery(GET_MODEL_QUERY, {
-    onCompleted: async data => createField(data)
-  })
-
-  // Previous Props
-  const prevProps: any = usePrevious({ options })
-
   // Methods
+  const _onClose = (): any => {
+    setValues(initialValues)
+    onClose()
+  }
+
   const _onChange = (e: any): any => {
     if (e.target.name === 'fieldName') {
       setValue('identifier', camelCase(e.target.value), setValues)
@@ -77,7 +72,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
     if (e.target.name === 'order') {
       if (Number(e.target.value) <= 0) {
-        e.target.value = e.target.value === '0' ? '1' : Math.abs(e.target.value)
+        e.target.value = e.target.value === '0' ? '1' : e.target.value
       } else if (e.target.value > 25) {
         e.target.value = '25'
       }
@@ -86,26 +81,6 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
     }
 
     onChange(e, setValues)
-  }
-
-  const _onClose = (): any => {
-    setValues(initialValues)
-    onClose()
-  }
-
-  const createField = async (data: any): Promise<void> => {
-    if (data.getModel && data.getModel.id) {
-      values.modelId = data.getModel.id
-
-      const { data: dataField } = await createFieldMutation({
-        variables: values
-      })
-
-      if (dataField.createField) {
-        _onClose()
-        redirectTo('_self')
-      }
-    }
   }
 
   const handleSubmit = async (): Promise<void> => {
@@ -119,23 +94,35 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
       waitFor(1).then(async () => {
         setLoading(false)
 
-        // Creating a new field
-        getModelQueryThenCreateField({
+        const edited = await editFieldMutation({
           variables: {
-            identifier: values.model,
-            appId
+            id: fieldId,
+            ...values
           }
         })
+
+        if (edited) {
+          redirectTo('_self')
+        }
       })
     }
   }
 
   // Effects
   useEffect(() => {
-    if (prevProps && prevProps.options !== options) {
-      setValue('type', options.data.type, setValues)
+    const currentField = fields ? fields.filter((field: any) => field.id === fieldId) : []
+
+    if (prevProps && prevProps.options !== options && currentField.length > 0) {
+      setValues(currentField[0])
+    } else if (currentField.length > 0) {
+      setValues(currentField[0])
     }
-  }, [prevProps, options])
+  }, [fields, options])
+
+  // Wait until we set our form context
+  if (!values) {
+    return <div />
+  }
 
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={_onClose}>
@@ -223,6 +210,16 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           <Toggle
             color="#42f598"
             type="round"
+            label="Is System Field?"
+            onChange={(): void => setValue('isSystem', !values.isSystem, setValues)}
+            checked={values.isSystem}
+          />
+        </div>
+
+        <div style={{ marginBottom: '20px' }}>
+          <Toggle
+            color="#42f598"
+            type="round"
             label="Hide field"
             onChange={(): void => setValue('isHide', !values.isHide, setValues)}
             checked={values.isHide}
@@ -241,8 +238,8 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
         <div className={styles.buttons}>
           <LinkButton onClick={_onClose}>Cancel</LinkButton>
-          <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Creating Field...">
-            Create Field
+          <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Updating Field...">
+            Update Field
           </PrimaryButton>
         </div>
       </div>
@@ -250,4 +247,4 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   )
 }
 
-export default memo(CreateFieldModal)
+export default memo(EditFieldModal)
