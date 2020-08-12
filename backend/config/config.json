@@ -2,16 +2,8 @@
   "server": {
     "port": 5000
   },
-  "db": {
-    "dialect": "postgres",
-    "port": 5432,
-    "host": "localhost",
-    "database": "ContentPI",
-    "username": "czantany",
-    "password": "12345678"
-  },
   "security": {
-    "secretKey": "C0nT3ntP1",
+    "secretKey": "",
     "expiresIn": "7d"
   }
 }

@@ -1,7 +1,13 @@
+// Dependencies
+import dotenv from 'dotenv'
+
 // Configuration
 import common from './common.json'
 import local from './local.json'
 import production from './production.json'
+
+// Loading .env vars
+dotenv.config()
 
 // Interface
 interface iConfig {
@@ -33,6 +39,12 @@ interface iConfig {
     expiresIn: string
   }
 }
+
+// Extracting data from .env file
+const { SECURITY_SECRET_KEY = '' } = process.env
+
+// Getting Secret Key from .env file
+common.security.secretKey = SECURITY_SECRET_KEY
 
 // development => local
 let env = 'local'

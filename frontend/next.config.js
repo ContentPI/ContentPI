@@ -2,6 +2,7 @@
 import withSass from '@zeit/next-sass'
 import path from 'path'
 import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
+import Dotenv from 'dotenv-webpack'
 
 export default withSass({
   cssModules: true,
@@ -11,7 +12,15 @@ export default withSass({
   devIndicators: {
     autoPrerender: false
   },
-  webpack: config => {
+  webpack: (config, { isServer }) => {
+    // Fixes npm packages that depend on `fs` module
+    if (!isServer) {
+      config.node = {
+        fs: 'empty'
+      }
+    }
+
+    // Aliases
     const dir = __dirname
 
     config.resolve.alias['@app'] = path.resolve(dir, './src/app')
@@ -33,6 +42,9 @@ export default withSass({
     config.plugins.push(
       new FilterWarningsPlugin({
         exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
+      }),
+      new Dotenv({
+        silent: true
       })
     )
 

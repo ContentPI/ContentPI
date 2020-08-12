@@ -4,13 +4,10 @@
   },
   "languages": {
     "default": "en",
-    "list": [
-      "es",
-      "en"
-    ]
+    "list": ["es", "en"]
   },
   "security": {
-    "secretKey": "C0nT3ntP1",
+    "secretKey": "",
     "expiresIn": "7d"
   }
 }
