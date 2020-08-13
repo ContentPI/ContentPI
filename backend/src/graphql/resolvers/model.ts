@@ -1,5 +1,10 @@
 // Interfaces
-import { iModel, iCreateModelInput, iModels } from '../../interfaces'
+import {
+  iModel,
+  iCreateModelInput,
+  iEditModelInput,
+  iModels
+} from '../../interfaces'
 
 // Data
 import systemFields from '../../data/systemFields'
@@ -66,6 +71,24 @@ export default {
       if (modelToRemove) {
         await modelToRemove.destroy({ where: { id } })
         return modelToRemove
+      }
+
+      return null
+    },
+    editModel: async (
+      _: any,
+      { id, input }: { id: string; input: iEditModelInput },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const modelToEdit = await models.Model.findByPk(id)
+
+      if (modelToEdit) {
+        const updatedModel = await modelToEdit.update(
+          { ...input },
+          { where: { id } }
+        )
+
+        return updatedModel
       }
 
       return null

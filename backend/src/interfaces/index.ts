@@ -48,6 +48,7 @@ export interface iModel extends Model, Sequelize {
 }
 
 export interface iCreateModelInput extends Model {}
+export interface iEditModelInput extends Model {}
 
 // User
 export interface iUser extends User, Sequelize {

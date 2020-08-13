@@ -5,6 +5,7 @@ import { LinkButton, Menu, Toggle } from 'fogg-ui'
 // Components
 import MainLayout from '@layouts/main/MainLayout'
 import DeleteModelModal from '@modals/DeleteModelModal'
+import EditModelModal from '@modals/EditModelModal'
 import Fields from './Fields'
 import Declarations from './Declarations'
 
@@ -20,16 +21,22 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
   // State
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
+  const [isOpenEdit, setIsOpenEdit] = useState(false)
   const [modalData, setModalData] = useState({})
   const [showSystem, setShowSystem] = useState(false)
 
   // Methods
   const handleDeleteModal = (): void => setIsOpenDelete(!isOpenDelete)
   const handleMenu = (): void => setIsOpen(!isOpen)
+  const handleEditModal = (): void => setIsOpenEdit(!isOpenEdit)
   const handleDelete = (id: any): any => {
     handleMenu()
     handleDeleteModal()
     setModalData({ id })
+  }
+  const handleEdit = (): any => {
+    handleMenu()
+    handleEditModal()
   }
 
   // Data
@@ -53,6 +60,17 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
         }}
       />
 
+      <EditModelModal
+        label="Edit Model"
+        isOpen={isOpenEdit}
+        onClose={handleEditModal}
+        options={{
+          data: { model: getModel },
+          position: 'center',
+          width: '400px'
+        }}
+      />
+
       <MainLayout title="Schema" header content footer sidebar router={router}>
         <div className={styles.schema}>
           <div className={styles.model}>
@@ -64,6 +82,11 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
             <Menu
               isOpen={isOpen}
               items={[
+                {
+                  option: 'Edit Model',
+                  icon: 'edit',
+                  onClick: (): void => handleEdit()
+                },
                 {
                   option: 'Delete Model',
                   icon: 'trash',

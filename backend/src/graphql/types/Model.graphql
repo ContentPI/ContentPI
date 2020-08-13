@@ -17,6 +17,7 @@ type Query {
 type Mutation {
   createModel(input: CreateModelInput): Model!
   deleteModel(id: UUID!): Model!
+  editModel(id: UUID!, input: EditModelInput): Model!
 }
 
 input CreateModelInput {
@@ -24,4 +25,10 @@ input CreateModelInput {
   identifier: String!
   description: String!
   appId: UUID!
+}
+
+input EditModelInput {
+  modelName: String!
+  identifier: String!
+  description: String!
 }
