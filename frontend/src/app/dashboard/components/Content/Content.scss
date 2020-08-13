@@ -1,0 +1,12 @@
+@import '~styles/_dependencies';
+
+.content {
+  margin: 0 auto;
+  width: 98%;
+
+  .model {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+}

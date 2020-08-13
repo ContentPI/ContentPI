@@ -1,11 +1,12 @@
 // Dependencies
 import React, { FC, ReactElement, useState, memo } from 'react'
-import { LinkButton, Menu, Toggle } from 'fogg-ui'
+import { LinkButton, Menu, Toggle, Icon } from 'fogg-ui'
 
 // Components
 import MainLayout from '@layouts/main/MainLayout'
 import DeleteModelModal from '@modals/DeleteModelModal'
 import EditModelModal from '@modals/EditModelModal'
+import Link from '@ui/Link'
 import Fields from './Fields'
 import Declarations from './Declarations'
 
@@ -94,6 +95,15 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
                 }
               ]}
             />
+            <div className={styles.editContent}>
+              <Link
+                href={`/dashboard/${getModel.appId}/master/content/model/${getModel.identifier}`}
+              >
+                <>
+                  <Icon type="fas fa-edit" /> Go to content editing
+                </>
+              </Link>
+            </div>
           </div>
 
           <div className={styles.toggle}>

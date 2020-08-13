@@ -7,3 +7,8 @@ export const MODEL_LINK = (u: any) => ({
   as: u ? `${STAGE_LINK(u).as}/schema/model/${u.model}` : '',
   href: `${STAGE_LINK(u).href}/[moduleName]/[section]/[model]`
 })
+
+export const CONTENT_LINK = (u: any) => ({
+  as: u ? `${STAGE_LINK(u).as}/content/${u.section}/${u.model}` : '',
+  href: `${STAGE_LINK(u).href}/[moduleName]/[section]/[model]`
+})
