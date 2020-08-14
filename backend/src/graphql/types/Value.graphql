@@ -1,0 +1,16 @@
+type Value {
+  id: UUID!
+  entry: UUID!
+  value: String!
+  fieldId: UUID!
+}
+
+type Mutation {
+  createValues(input: [CreateOrUpdateValueInput]): [Value!]
+}
+
+input CreateOrUpdateValueInput {
+  entry: UUID!
+  value: String!
+  fieldId: UUID!
+}

@@ -21,6 +21,7 @@ const models: iModels = {
   App: sequelize.import('./App'),
   Declaration: sequelize.import('./Declaration'),
   Field: sequelize.import('./Field'),
+  Value: sequelize.import('./Value'),
   Model: sequelize.import('./Model'),
   User: sequelize.import('./User'),
   sequelize

@@ -21,6 +21,11 @@ export type Field = {
   isHide: boolean
 }
 
+export type Value = {
+  entry: string
+  value: string
+}
+
 export type Model = {
   modelName: string
   identifier: string

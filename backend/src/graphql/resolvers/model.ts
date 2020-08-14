@@ -37,7 +37,13 @@ export default {
         include: [
           {
             model: models.Field,
-            as: 'fields'
+            as: 'fields',
+            include: [
+              {
+                model: models.Value,
+                as: 'values'
+              }
+            ]
           }
         ]
       })

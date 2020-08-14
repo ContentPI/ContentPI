@@ -1,5 +1,5 @@
 // Interface
-import { iField, iDataTypes } from '../interfaces'
+import { iField, iModels, iDataTypes } from '../interfaces'
 
 export default (sequelize: any, DataTypes: iDataTypes): iField => {
   const Field = sequelize.define('Field', {
@@ -66,6 +66,17 @@ export default (sequelize: any, DataTypes: iDataTypes): iField => {
       defaultValue: false
     }
   })
+
+  Field.associate = (models: iModels): void => {
+    Field.hasMany(models.Value, {
+      foreignKey: {
+        name: 'fieldId',
+        field: 'field_id'
+      },
+      as: 'values',
+      onDelete: 'CASCADE'
+    })
+  }
 
   return Field
 }
