@@ -7,6 +7,11 @@ type Value {
 
 type Mutation {
   createValues(input: [CreateOrUpdateValueInput]): [Value!]
+  findUniqueValues(input: [ValueInput]): [Value!]
+}
+
+input ValueInput {
+  value: String!
 }
 
 input CreateOrUpdateValueInput {

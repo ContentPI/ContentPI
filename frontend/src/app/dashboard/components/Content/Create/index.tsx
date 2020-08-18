@@ -1,12 +1,9 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { slugFn, getEmptyValues, uploadFile, waitFor } from 'fogg-utils'
+import { slugFn, getEmptyValues, waitFor } from 'fogg-utils'
 import { v4 as uuidv4 } from 'uuid'
 import moment from 'moment'
 import { useMutation } from '@apollo/client'
-
-// Configuration
-import config from '@config'
 
 // Shared components
 import MainLayout from '@layouts/main/MainLayout'
@@ -16,6 +13,7 @@ import { FormContext } from '@contexts/form'
 
 // Mutation
 import CREATE_VALUES_MUTATION from '@graphql/values/createValues.mutation'
+import FIND_UNIQUE_VALUES_MUTATION from '@graphql/values/findUniqueValues.mutation'
 
 // Components
 import CustomFields from '../CustomFields'
@@ -39,6 +37,7 @@ const Create: FC<iProps> = ({ data, router }): ReactElement => {
   const requiredValues: any = {}
   const systemFields = getModel.fields.filter((field: any) => field.isSystem)
   const customFields = getModel.fields.filter((field: any) => !field.isSystem)
+  const uniqueFields = getModel.fields.filter((field: any) => field.isUnique && !field.isSystem)
 
   // Custom fields
   customFields.forEach((field: any) => {
@@ -79,6 +78,7 @@ const Create: FC<iProps> = ({ data, router }): ReactElement => {
 
   // Mutations
   const [createValuesMutation] = useMutation(CREATE_VALUES_MUTATION)
+  const [findUniqueValuesMutation] = useMutation(FIND_UNIQUE_VALUES_MUTATION)
 
   // Contexts
   const { onChange, setValue } = useContext(FormContext)
@@ -102,7 +102,7 @@ const Create: FC<iProps> = ({ data, router }): ReactElement => {
     onChange(e, setValues)
   }
 
-  const handleSubmit = async (action: string, isFile: boolean): Promise<void> => {
+  const handleSubmit = async (action: string): Promise<void> => {
     const emptyValues = getEmptyValues(values, Object.keys(requiredValues))
     const entryValues: any[] = []
 
@@ -115,6 +115,14 @@ const Create: FC<iProps> = ({ data, router }): ReactElement => {
         setPublishLoading(true)
       }
 
+      const uniqueValues = uniqueFields.map((field: any) => ({ value: values[field.identifier] }))
+
+      const { data: dataFindUniqueValues } = await findUniqueValuesMutation({
+        variables: {
+          input: uniqueValues
+        }
+      })
+
       waitFor(2).then(async () => {
         if (action === 'save') {
           setSaveLoading(false)
@@ -122,42 +130,56 @@ const Create: FC<iProps> = ({ data, router }): ReactElement => {
           setPublishLoading(false)
         }
 
-        // Setting up System Field values
-        values.id = newId
-        values.status = action === 'save' ? 'Draft' : 'Published'
-        values.createdAt = moment().format()
-        values.updatedAt = moment().format()
-
-        Object.keys(values).forEach((fieldIdentifier: string) => {
-          const valueField = getModel.fields.find(
-            (field: any) => field.identifier === fieldIdentifier
-          )
-
-          entryValues.push({
-            entry: newId,
-            fieldId: valueField.id,
-            value: values[fieldIdentifier]
-          })
-        })
-
-        const { data: dataCreateValues } = await createValuesMutation({
-          variables: {
-            values: entryValues
-          }
-        })
-
-        if (dataCreateValues) {
-          const message = action === 'save' ? 'Saved' : 'Published'
-
-          setAlert(message)
+        if (dataFindUniqueValues.findUniqueValues.length > 0) {
+          setAlert('This entry already exists')
+          setAlertType('danger')
           setShowAlert(true)
-          setAlertType('success')
-          setSystemValues({
-            id: values.id,
-            createdAt: values.createdAt,
-            updatedAt: values.updatedAt,
-            status: values.status
+
+          waitFor(2).then(() => {
+            setShowAlert(false)
           })
+        } else {
+          // Setting up System Field values
+          values.id = newId
+          values.status = action === 'save' ? 'Draft' : 'Published'
+          values.createdAt = moment().format()
+          values.updatedAt = moment().format()
+
+          Object.keys(values).forEach((fieldIdentifier: string) => {
+            const valueField = getModel.fields.find(
+              (field: any) => field.identifier === fieldIdentifier
+            )
+
+            entryValues.push({
+              entry: newId,
+              fieldId: valueField.id,
+              value: values[fieldIdentifier]
+            })
+          })
+
+          const { data: dataCreateValues } = await createValuesMutation({
+            variables: {
+              values: entryValues
+            }
+          })
+
+          if (dataCreateValues) {
+            const message = action === 'save' ? 'Saved' : 'Published'
+
+            setAlert(message)
+            setShowAlert(true)
+            setAlertType('success')
+            setSystemValues({
+              id: values.id,
+              createdAt: values.createdAt,
+              updatedAt: values.updatedAt,
+              status: values.status
+            })
+
+            waitFor(2).then(() => {
+              setShowAlert(false)
+            })
+          }
         }
       })
     }
