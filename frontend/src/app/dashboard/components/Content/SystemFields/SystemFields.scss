@@ -1,0 +1,121 @@
+@import '~styles/_dependencies';
+
+.systemFields {
+  background-color: $whisper;
+  border-bottom: 1px solid $gallery;
+  border-left: 1px solid $gallery;
+  height: 100vh;
+  margin-top: -20px;
+  padding-top: 10px;
+  position: relative;
+  width: 420px;
+
+  @include maxBreakpoint(1024px) {
+    width: 350px;
+    margin-left: -100px;
+  }
+
+  @include tablet {
+    width: 300px;
+    margin-left: -160px;
+  }
+
+  .wrapper {
+    margin: 0 auto;
+    width: 90%;
+
+    .block {
+      color: $doveGray;
+      font-size: 12px;
+      font-weight: 600;
+      border-bottom: 1px solid $gallery;
+      text-transform: uppercase;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+
+    .row {
+      margin-bottom: 20px;
+
+      .systemField {
+        display: flex;
+        justify-content: space-between;
+        color: $doveGray;
+        font-size: 13px;
+        margin-bottom: 20px;
+
+        .label {
+          display: inline-block;
+          background-color: $gallery;
+          border-radius: 3px;
+          color: $gray;
+          font-size: 11px;
+          padding: 5px 6px;
+          margin-top: -5px;
+          width: 66px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: center;
+        }
+
+        .id {
+          @extend .label;
+          width: 237px;
+
+          @include tablet {
+            width: 100px;
+          }
+        }
+
+        .status {
+          color: $mySin;
+          text-transform: uppercase;
+
+          &.published {
+            color: $mountainMeadow;
+          }
+        }
+
+        .createdAt,
+        .updatedAt {
+          @extend .label;
+          width: 160px;
+
+          @include tablet {
+            width: 100px;
+          }
+        }
+
+        .empty {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .alert {
+    width: 100%;
+    transition-property: right, left;
+    transition-duration: 1s;
+    -webkit-transition-property: right, left;
+    -webkit-transition-duration: 1s;
+    position: absolute;
+    right: calc(100% - 900px);
+    bottom: 150px;
+
+    &.show {
+      @include minBreakpoint(1024px) {
+        right: calc(100% - 300px);
+      }
+
+      @include minBreakpoint(1280px) {
+        right: calc(100% - 350px);
+      }
+
+      @include tablet {
+        right: calc(100% - 270px);
+      }
+    }
+  }
+}

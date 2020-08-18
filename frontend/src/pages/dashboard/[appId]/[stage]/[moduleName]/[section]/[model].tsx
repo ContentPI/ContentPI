@@ -11,6 +11,7 @@ import FormProvider from '@contexts/form'
 // Components
 import Schema from '@dashboard/components/Schema'
 import Content from '@dashboard/components/Content'
+import Create from '@dashboard/components/Content/Create'
 import PageNotFound from '@dashboard/components/PageNotFound'
 
 // Queries
@@ -40,6 +41,7 @@ const Page: FC = (): ReactElement => {
   // Pages components
   const Pages: any = {
     content: Content,
+    create: Create,
     schema: Schema
   }
 
