@@ -10,6 +10,21 @@ import {
 } from '../../interfaces'
 
 export default {
+  Query: {
+    getValuesByEntry: async (
+      _: any,
+      { entry }: { entry: string },
+      { models }: { models: iModels }
+    ): Promise<iValue[]> => {
+      const values = await models.Value.findAll({
+        where: {
+          entry
+        }
+      })
+
+      return values
+    }
+  },
   Mutation: {
     createValues: async (
       _: any,
@@ -32,6 +47,48 @@ export default {
       })
 
       return data
+    },
+    updateValues: async (
+      _: any,
+      { entry, input }: { entry: string; input: iCreateOrUpdateValueInput[] },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const updatedValuesPromises: any = []
+
+      if (input) {
+        input.forEach((item: any) => {
+          const updateValuePromise = new Promise((resolve: any) => {
+            models.Value.findAll({
+              where: {
+                entry,
+                fieldId: item.fieldId
+              }
+            }).then((valueToEdit: any) => {
+              if (valueToEdit) {
+                valueToEdit[0]
+                  .update(
+                    { ...item },
+                    {
+                      where: {
+                        entry,
+                        fieldId: item.fieldId
+                      },
+                      returning: true,
+                      plain: true
+                    }
+                  )
+                  .then((updatedValue: any) => resolve(updatedValue))
+              }
+            })
+          })
+
+          updatedValuesPromises.push(updateValuePromise)
+        })
+      }
+
+      const newValues = await Promise.all(updatedValuesPromises)
+
+      return newValues
     }
   }
 }

@@ -10,7 +10,7 @@ import styles from './Logo.scss'
 const Logo = (): ReactElement => {
   return (
     <div className={styles.logo}>
-      <Link href="/dashboard">
+      <Link href="/dashboard" as="/dashboard">
         <img alt="Logo" src="/images/logo.png" />
       </Link>
     </div>
