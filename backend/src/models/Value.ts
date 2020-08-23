@@ -16,6 +16,10 @@ export default (sequelize: any, DataTypes: iDataTypes): iValue => {
     value: {
       type: DataTypes.TEXT,
       allowNull: false
+    },
+    fieldIdentifier: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   })
 

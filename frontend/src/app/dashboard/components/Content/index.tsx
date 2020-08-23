@@ -52,6 +52,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
         <div className={styles.rows}>
           <Table
             url={EDIT_ENTRY_LINK(router).as}
+            query="?entryId="
             data={{
               body,
               head,

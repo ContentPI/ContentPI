@@ -11,17 +11,18 @@ import FormProvider from '@contexts/form'
 // Components
 import Schema from '@dashboard/components/Schema'
 import Content from '@dashboard/components/Content'
-import Create from '@dashboard/components/Content/Create'
+import CreateOrEditEntry from '@dashboard/components/Content/CreateOrEditEntry'
 import PageNotFound from '@dashboard/components/PageNotFound'
 
 // Queries
 import GET_MODEL_QUERY from '@graphql/models/getModel.query'
 import GET_DECLARATIONS_QUERY from '@graphql/declarations/getDeclarations.query'
+import GET_VALUES_BY_ENTRY_QUERY from '@graphql/values/getValuesByEntry.query'
 
 const Page: FC = (): ReactElement => {
   // Router
   const router = useRouter()
-  const { appId, section, moduleName, model } = router.query
+  const { appId, section, moduleName, model, entryId } = router.query
 
   // Executing Queries
   const { data: getModelQueryData } = useQuery(GET_MODEL_QUERY, {
@@ -34,6 +35,18 @@ const Page: FC = (): ReactElement => {
 
   const { data: getDeclarationsQueryData } = useQuery(GET_DECLARATIONS_QUERY)
 
+  const { data: dataValues } = useQuery(GET_VALUES_BY_ENTRY_QUERY, {
+    variables: {
+      entry: entryId
+    },
+    skip: !entryId
+  })
+
+  // Blocking render if dataValues is not ready
+  if (entryId && !dataValues) {
+    return <div />
+  }
+
   if (!getModelQueryData) {
     return <div />
   }
@@ -41,7 +54,8 @@ const Page: FC = (): ReactElement => {
   // Pages components
   const Pages: any = {
     content: Content,
-    create: Create,
+    create: CreateOrEditEntry,
+    edit: CreateOrEditEntry,
     schema: Schema
   }
 
@@ -50,9 +64,11 @@ const Page: FC = (): ReactElement => {
       return createElement(Pages[page], {
         router: router.query,
         data: {
+          entryId,
           section,
           ...getModelQueryData,
-          ...getDeclarationsQueryData
+          ...getDeclarationsQueryData,
+          ...dataValues
         }
       })
     }

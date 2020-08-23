@@ -7,6 +7,7 @@ export default gql`
       id
       entry
       value
+      fieldIdentifier
     }
   }
 `

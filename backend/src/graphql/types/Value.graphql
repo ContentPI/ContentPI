@@ -2,6 +2,7 @@ type Value {
   id: UUID!
   entry: UUID!
   value: String!
+  fieldIdentifier: String!
   fieldId: UUID!
 }
 
@@ -22,5 +23,6 @@ input ValueInput {
 input CreateOrUpdateValueInput {
   entry: UUID!
   value: String!
+  fieldIdentifier: String!
   fieldId: UUID!
 }
