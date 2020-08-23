@@ -1,7 +1,13 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
 import { Alert, PrimaryButton, SuccessButton } from 'fogg-ui'
-import { cx } from 'fogg-utils'
+import { cx, redirectTo } from 'fogg-utils'
+
+// Shared components
+import AfterCreateOrEditEntryModal from '@modals/AfterCreateOrEditEntryModal'
+
+// Constants
+import { CONTENT_LINK, CREATE_ENTRY_LINK, EDIT_ENTRY_LINK } from '@constants/links'
 
 // Styles
 import styles from './SystemFields.scss'
@@ -17,6 +23,7 @@ interface iProps {
   systemFields: any
   systemValues: any
   values: any
+  isModalOpen: boolean
 }
 
 const SystemFields: FC<iProps> = ({
@@ -27,10 +34,31 @@ const SystemFields: FC<iProps> = ({
   saveLoading,
   showAlert,
   systemFields,
-  systemValues
+  systemValues,
+  isModalOpen,
+  router
 }): ReactElement => {
+  const editUrl = `${EDIT_ENTRY_LINK(router).as}/${systemValues.id}`
+  const handleEditNewEntry = (): void => redirectTo(editUrl)
+  const handleCreateNewEntry = (): void => redirectTo(CREATE_ENTRY_LINK(router).as)
+  const handleGoToEntriesList = (): void => redirectTo(CONTENT_LINK(router).as)
+
   return (
     <>
+      <AfterCreateOrEditEntryModal
+        label="What's next?"
+        isOpen={isModalOpen}
+        onClose={handleEditNewEntry}
+        options={{
+          position: 'center',
+          width: '620px',
+          action: alert === 'Saved' ? 'saved' : 'published',
+          handleEditNewEntry,
+          handleCreateNewEntry,
+          handleGoToEntriesList
+        }}
+      />
+
       <div className={styles.systemFields}>
         <div className={styles.wrapper}>
           <div className={styles.block}>Status</div>
