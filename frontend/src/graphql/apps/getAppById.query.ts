@@ -13,6 +13,12 @@ export default gql`
         modelName
         identifier
       }
+      enumerations {
+        id
+        enumerationName
+        identifier
+        values
+      }
     }
   }
 `

@@ -11,6 +11,13 @@ export type Declaration = {
   description: string
 }
 
+export type Enumeration = {
+  enumerationName: string
+  identifier: string
+  description: string
+  values: string
+}
+
 export type Field = {
   type: string
   fieldName: string

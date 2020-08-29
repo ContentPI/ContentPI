@@ -38,6 +38,16 @@ export default (sequelize: any, DataTypes: iDataTypes): iApp => {
       as: 'models',
       onDelete: 'CASCADE'
     })
+
+    App.hasMany(models.Enumeration, {
+      foreignKey: {
+        name: 'appId',
+        field: 'app_id'
+      },
+      as: 'enumerations',
+      onDelete: 'CASCADE'
+    })
+  }
   }
 
   return App

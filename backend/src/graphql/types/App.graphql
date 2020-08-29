@@ -8,6 +8,7 @@ type App {
   createdAt: Datetime!
   updatedAt: Datetime!
   models: [Model!]
+  enumerations: [Enumeration!]
 }
 
 type Query {

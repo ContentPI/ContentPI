@@ -20,6 +20,7 @@ const sequelize = new Sequelize(uri)
 const models: iModels = {
   App: sequelize.import('./App'),
   Declaration: sequelize.import('./Declaration'),
+  Enumeration: sequelize.import('./Enumeration'),
   Field: sequelize.import('./Field'),
   Value: sequelize.import('./Value'),
   Model: sequelize.import('./Model'),

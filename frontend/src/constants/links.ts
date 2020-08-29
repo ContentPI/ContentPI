@@ -22,3 +22,8 @@ export const EDIT_ENTRY_LINK = (u: any) => ({
   as: u ? `${STAGE_LINK(u).as}/edit/${u.section}/${u.model}` : '',
   href: `${STAGE_LINK(u).href}/[moduleName]/[section]/[model]`
 })
+
+export const ENUMERATION_LINK = (u: any) => ({
+  as: u ? `${STAGE_LINK(u).as}/schema/enumeration/${u.enumeration}` : '',
+  href: `${STAGE_LINK(u).href}/[moduleName]/[section]/[model]`
+})

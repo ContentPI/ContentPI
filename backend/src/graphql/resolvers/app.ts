@@ -9,6 +9,10 @@ export default {
           {
             model: models.Model,
             as: 'models'
+          },
+          {
+            model: models.Enumeration,
+            as: 'enumerations'
           }
         ]
       })
@@ -26,6 +30,10 @@ export default {
           {
             model: models.Model,
             as: 'models'
+          },
+          {
+            model: models.Enumeration,
+            as: 'enumerations'
           }
         ]
       })
