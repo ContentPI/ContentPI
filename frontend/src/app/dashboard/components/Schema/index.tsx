@@ -121,7 +121,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
           </div>
 
           <div className={styles.wrapper}>
-            <Fields fields={getModel.fields} showSystem={showSystem} />
+            <Fields model={getModel.identifier} fields={getModel.fields} showSystem={showSystem} />
             <Declarations
               model={getModel}
               declarations={getDeclarations}

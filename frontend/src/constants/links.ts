@@ -27,3 +27,8 @@ export const ENUMERATION_LINK = (u: any) => ({
   as: u ? `${STAGE_LINK(u).as}/schema/enumeration/${u.enumeration}` : '',
   href: `${STAGE_LINK(u).href}/[moduleName]/[section]/[model]`
 })
+
+export const ASSET_LINK = (u: any) => ({
+  as: u ? `${STAGE_LINK(u).as}/content/model/asset` : '',
+  href: `${STAGE_LINK(u).href}/[moduleName]/[section]/[model]`
+})

@@ -1,7 +1,10 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
-import { Badge, Icon, Input, TextArea, Select } from 'fogg-ui'
-import { cx } from 'fogg-utils'
+import React, { FC, ReactElement, useState, memo } from 'react'
+import { Badge, Icon, Input, TextArea, Select, File } from 'fogg-ui'
+import { cx, slugFn, bytesToSize, getFileInfo, getImageData, getRandomCode } from 'fogg-utils'
+
+// Configuration
+import config from '@config'
 
 // Constants
 import { CONTENT_LINK } from '@constants/links'
@@ -39,6 +42,62 @@ const CustomFields: FC<iProps> = ({
   setValues,
   enumerations
 }): ReactElement => {
+  const [selectedFile, setSelectedFile] = useState({})
+
+  const handleSelectedFile = async (e: any) => {
+    if (e.target.files[0]) {
+      const file = e.target.files[0]
+      const fileSize = bytesToSize(file.size, config.files.maxFileSize)
+      const { fileName, extension } = getFileInfo(file.name)
+      const identifier = slugFn(fileName)
+      const code = getRandomCode(4)
+      const isDocument = config.files.types.documents.includes(extension)
+      const isImage = config.files.types.images.includes(extension)
+      const isVideo = config.files.types.videos.includes(extension)
+      let information = ''
+      let url = config.files.path
+
+      if (isDocument) {
+        url += '/documents'
+      }
+
+      if (isImage) {
+        const img: any = await getImageData(file)
+        information = `${img.width}x${img.height}px`
+        url += '/images'
+      }
+
+      if (isVideo) {
+        url += '/videos'
+      }
+
+      setValues((preValues: any) => ({
+        ...preValues,
+        file,
+        fileName: `${fileName}.${extension}`,
+        fileUrl: `${url}/${identifier}_${code}.${extension}`,
+        size: fileSize.size,
+        information
+      }))
+
+      setSelectedFile(file)
+    }
+  }
+
+  const renderFileInput = (field: any) => {
+    return (
+      <File
+        name={field.identifier}
+        selectedFile={selectedFile}
+        label="Choose a file"
+        onChange={handleSelectedFile}
+        maxFileSize={config.files.maxFileSize}
+        theme="success"
+        allowedExtensions={config.files.allowedExtensions}
+      />
+    )
+  }
+
   const renderDropdown = (field: any) => {
     const enumId = field.defaultValue
     const enumeration = enumerations.find((enu: any) => enu.id === enumId)
@@ -112,6 +171,7 @@ const CustomFields: FC<iProps> = ({
                   hasError={required[field.identifier]}
                   name={field.identifier}
                   onChange={onChange}
+                  disabled={field.identifier === 'fileUrl'}
                   placeholder={field.fieldName}
                   value={values[field.identifier]}
                 />
@@ -131,6 +191,8 @@ const CustomFields: FC<iProps> = ({
             )}
 
             {field.type === 'Dropdown' && renderDropdown(field)}
+
+            {field.type === 'File' && renderFileInput(field)}
           </div>
         ))}
       </div>

@@ -11,11 +11,12 @@ import EditFieldModal from '@modals/EditFieldModal'
 import styles from './Fields.scss'
 
 interface iProps {
+  model: string
   fields: any
   showSystem: boolean
 }
 
-const Fields: FC<iProps> = ({ fields, showSystem }): ReactElement => {
+const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
   // State
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenEdit, setIsOpenEdit] = useState(false)
@@ -141,7 +142,7 @@ const Fields: FC<iProps> = ({ fields, showSystem }): ReactElement => {
                 )}
               </div>
 
-              {!field.isSystem && (
+              {!field.isSystem && model !== 'asset' && (
                 <div className={styles.actions}>
                   <Icon
                     type="fas fa-edit"

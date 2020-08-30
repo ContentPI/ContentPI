@@ -27,6 +27,12 @@ interface iConfig {
     path: string
     httpOnly: boolean
   }
+  files: {
+    path: string
+    allowedExtensions: string[]
+    maxFileSize: number
+    types: any
+  }
   server: {
     port: number
   }

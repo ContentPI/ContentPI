@@ -6,7 +6,7 @@ import { Icon } from 'fogg-ui'
 import { AppContext } from '@contexts/app'
 
 // Constants
-import { STAGE_LINK } from '@constants/links'
+import { STAGE_LINK, ASSET_LINK } from '@constants/links'
 
 // Sidebars
 import ModelSidebar from '@dashboard/components/Models/ModelSidebar'
@@ -70,9 +70,9 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           </li>
 
           <li>
-            <a title="Assets">
+            <Link href={ASSET_LINK(router).as} title="Assets">
               <Icon type="fas fa-photo-video" />
-            </a>
+            </Link>
           </li>
 
           <li>

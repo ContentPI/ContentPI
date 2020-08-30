@@ -67,6 +67,10 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
           {models.map((model: any) => {
             router.model = model.identifier
 
+            if (model.identifier === 'asset') {
+              return <div key={model.id} />
+            }
+
             return (
               <div key={model.id}>
                 <Link href={MODEL_LINK(router).as}>{model.modelName}</Link>

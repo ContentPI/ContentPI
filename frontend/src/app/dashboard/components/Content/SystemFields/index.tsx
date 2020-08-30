@@ -36,12 +36,18 @@ const SystemFields: FC<iProps> = ({
   systemFields,
   systemValues,
   isModalOpen,
-  router
+  router,
+  values
 }): ReactElement => {
   const editUrl = `${EDIT_ENTRY_LINK(router).as}?entryId=${systemValues.id}`
   const handleEditNewEntry = (): void => redirectTo(editUrl)
   const handleCreateNewEntry = (): void => redirectTo(CREATE_ENTRY_LINK(router).as)
   const handleGoToEntriesList = (): void => redirectTo(CONTENT_LINK(router).as)
+  const isFile =
+    values &&
+    values.hasOwnProperty('file') &&
+    values.hasOwnProperty('fileUrl') &&
+    values.hasOwnProperty('information')
 
   return (
     <>
@@ -64,21 +70,23 @@ const SystemFields: FC<iProps> = ({
           <div className={styles.block}>Status</div>
 
           <div className={styles.row}>
-            <PrimaryButton
-              onClick={(): any => handleSubmit('save')}
-              isLoading={saveLoading}
-              disabled={publishLoading}
-              loadingText="Saving..."
-            >
-              Save
-            </PrimaryButton>
+            {!isFile && (
+              <PrimaryButton
+                onClick={(): any => handleSubmit('save', false)}
+                isLoading={saveLoading}
+                disabled={publishLoading}
+                loadingText="Saving..."
+              >
+                Save
+              </PrimaryButton>
+            )}
             <SuccessButton
-              onClick={(): any => handleSubmit('publish')}
+              onClick={(): any => handleSubmit('publish', isFile)}
               isLoading={publishLoading}
               disabled={saveLoading}
-              loadingText="Publishing..."
+              loadingText={`${isFile ? 'Uploading...' : 'Publishing...'}`}
             >
-              Publish
+              {isFile ? 'Upload and publish' : 'Publish'}
             </SuccessButton>
           </div>
 

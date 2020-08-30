@@ -3,6 +3,9 @@ import React, { FC, ReactElement, memo } from 'react'
 import { Table, PrimaryButton, Pagination } from 'fogg-ui'
 import { getValuesForTable } from 'fogg-utils'
 
+// Configuration
+import config from '@config'
+
 // Constants
 import { CREATE_ENTRY_LINK, EDIT_ENTRY_LINK, CONTENT_LINK } from '@constants/links'
 
@@ -36,6 +39,8 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
     return <PageNotFound />
   }
 
+  const isFile = body.includes('file') && body.includes('fileUrl') && body.includes('information')
+
   return (
     <MainLayout title="Content" header content footer sidebar noWrapper router={router}>
       <div className={styles.content}>
@@ -58,7 +63,8 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
               head,
               rows: rows[page - 1],
               count: total,
-              fileTypes: {}
+              fileTypes: config.files.types,
+              isFile
             }}
             onDelete={(ids: any): void => console.log('Delete', ids)}
             onPublish={(ids: any): void => console.log('Publish', ids)}

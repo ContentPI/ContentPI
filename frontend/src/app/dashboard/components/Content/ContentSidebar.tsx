@@ -31,6 +31,10 @@ const ContentSidebar: FC<iProps> = ({ app, router }): ReactElement => {
             router.section = 'model'
             router.model = model.identifier
 
+            if (model.identifier === 'asset') {
+              return <div key={model.id} />
+            }
+
             return (
               <div key={model.id}>
                 <Link href={CONTENT_LINK(router).as}>{model.modelName}</Link>

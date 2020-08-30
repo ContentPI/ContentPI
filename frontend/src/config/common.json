@@ -2,6 +2,30 @@
   "server": {
     "port": 3000
   },
+  "files": {
+    "path": "/files",
+    "allowedExtensions": [
+      "png",
+      "jpg",
+      "jpeg",
+      "gif",
+      "mp4",
+      "pdf",
+      "doc",
+      "docx",
+      "xls",
+      "xlsx",
+      "ppt",
+      "pptx",
+      "zip"
+    ],
+    "maxFileSize": 52000000,
+    "types": {
+      "documents": ["pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "zip"],
+      "images": ["png", "jpg", "jpeg", "gif"],
+      "videos": ["mp4"]
+    }
+  },
   "languages": {
     "default": "en",
     "list": ["es", "en"]
