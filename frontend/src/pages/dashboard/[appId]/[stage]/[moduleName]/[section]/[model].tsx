@@ -18,6 +18,7 @@ import PageNotFound from '@dashboard/components/PageNotFound'
 import GET_MODEL_QUERY from '@graphql/models/getModel.query'
 import GET_DECLARATIONS_QUERY from '@graphql/declarations/getDeclarations.query'
 import GET_VALUES_BY_ENTRY_QUERY from '@graphql/values/getValuesByEntry.query'
+import GET_ENUMERATIONS_BY_APP_ID_QUERY from '@graphql/enumerations/getEnumerationsByAppId.query'
 
 const Page: FC = (): ReactElement => {
   // Router
@@ -42,12 +43,23 @@ const Page: FC = (): ReactElement => {
     skip: !entryId
   })
 
+  const { data: dataEnumerationsByAppId } = useQuery(GET_ENUMERATIONS_BY_APP_ID_QUERY, {
+    variables: {
+      appId
+    },
+    skip: !appId
+  })
+
   // Blocking render if dataValues is not ready
   if (entryId && !dataValues) {
     return <div />
   }
 
-  if (!getModelQueryData) {
+  if (section === 'model' && !getModelQueryData) {
+    return <div />
+  }
+
+  if (!dataEnumerationsByAppId) {
     return <div />
   }
 
@@ -68,7 +80,8 @@ const Page: FC = (): ReactElement => {
           section,
           ...getModelQueryData,
           ...getDeclarationsQueryData,
-          ...dataValues
+          ...dataValues,
+          ...dataEnumerationsByAppId
         }
       })
     }

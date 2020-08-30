@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
-import { Badge, Icon, Input, TextArea } from 'fogg-ui'
+import { Badge, Icon, Input, TextArea, Select } from 'fogg-ui'
 import { cx } from 'fogg-utils'
 
 // Constants
@@ -23,18 +23,55 @@ interface iProps {
   router: any
   values: any
   setValues: any
+  enumerations: any[]
 }
 
 const CustomFields: FC<iProps> = ({
   active,
+  action,
   customFields,
   getModel,
   handleActive,
   onChange,
   required,
   router,
-  values
+  values,
+  setValues,
+  enumerations
 }): ReactElement => {
+  const renderDropdown = (field: any) => {
+    const enumId = field.defaultValue
+    const enumeration = enumerations.find((enu: any) => enu.id === enumId)
+    const options: any = JSON.parse(enumeration.values)
+
+    if (action === 'edit') {
+      const currentValue = values[field.identifier].split(':')[1]
+      const optionIndex = options.findIndex((option: any) => option.value === currentValue)
+
+      if (optionIndex > -1) {
+        options[optionIndex].selected = true
+      }
+    }
+
+    return (
+      <div className={styles[field.type.toLowerCase()]}>
+        <Select
+          name={enumeration.identifier}
+          label={enumeration.enumerationName}
+          onClick={({ option, value }: { option: string; value: string }): void => {
+            if (option && value) {
+              setValues((preValues: any) => ({
+                ...preValues,
+                [field.identifier]: `${option}:${value}`
+              }))
+            }
+          }}
+          options={options}
+        />
+      </div>
+    )
+  }
+
   return (
     <div className={styles.customFields}>
       <div className={styles.fields}>
@@ -92,6 +129,8 @@ const CustomFields: FC<iProps> = ({
                 />
               </div>
             )}
+
+            {field.type === 'Dropdown' && renderDropdown(field)}
           </div>
         ))}
       </div>

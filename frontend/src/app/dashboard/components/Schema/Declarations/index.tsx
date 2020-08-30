@@ -10,9 +10,10 @@ import styles from './Declarations.scss'
 interface iProps {
   declarations: any
   model: any
+  enumerations: any[]
 }
 
-const Declarations: FC<iProps> = ({ declarations, model }): ReactElement => {
+const Declarations: FC<iProps> = ({ declarations, model, enumerations }): ReactElement => {
   // Local state
   const [isOpen, setIsOpen] = useState(false)
   const [fieldType, setFieldType] = useState('')
@@ -32,10 +33,11 @@ const Declarations: FC<iProps> = ({ declarations, model }): ReactElement => {
               fieldsCount: model.fields.length - 4,
               type: fieldType,
               modelIdentifier: model.identifier,
-              appId: model.appId
+              appId: model.appId,
+              enumerations
             },
             position: 'top',
-            height: '710px',
+            height: fieldType === 'Dropdown' ? '790px' : '700px',
             width: '600px'
           }}
         />
@@ -46,6 +48,10 @@ const Declarations: FC<iProps> = ({ declarations, model }): ReactElement => {
 
         <ul>
           {declarations.map((field: any) => {
+            if (field.declaration === 'Dropdown' && enumerations.length === 0) {
+              return <li key={field.id} />
+            }
+
             return (
               <li key={field.id}>
                 <div>

@@ -76,9 +76,9 @@
     "moment": "^2.27.0",
     "next": "^9.5.2",
     "node-sass": "^4.14.1",
-    "react": "^16.13.1",
+    "react": "17.0.0-rc.0",
     "react-cookie": "^4.0.3",
-    "react-dom": "^16.13.1",
+    "react-dom": "17.0.0-rc.0",
     "uuid": "^8.3.0",
     "webpack-filter-warnings-plugin": "^1.2.1"
   }

@@ -48,7 +48,6 @@ export default (sequelize: any, DataTypes: iDataTypes): iApp => {
       onDelete: 'CASCADE'
     })
   }
-  }
 
   return App
 }
