@@ -1,1 +1,3 @@
-# ContentPI-English
+# ContentPI
+
+CPI - Headless CMS
