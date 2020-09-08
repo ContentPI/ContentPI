@@ -22,10 +22,17 @@ export type Field = {
   type: string
   fieldName: string
   identifier: string
+  order: string
+  defaultValue: string
   description: string
+  isMedia: boolean
   isRequired: boolean
   isUnique: boolean
   isHide: boolean
+  isSystem: boolean
+  isPrimaryKey: boolean
+  modelId: string
+  modelName: string
 }
 
 export type Value = {

@@ -1,6 +1,7 @@
 export default (newModel: any) => [
   {
     modelId: newModel.id,
+    modelName: newModel.modelName,
     fieldName: 'ID',
     identifier: 'id',
     type: 'ID',
@@ -15,6 +16,7 @@ export default (newModel: any) => [
   },
   {
     modelId: newModel.id,
+    modelName: newModel.modelName,
     fieldName: 'Created At',
     identifier: 'createdAt',
     type: 'DateTime',
@@ -29,6 +31,7 @@ export default (newModel: any) => [
   },
   {
     modelId: newModel.id,
+    modelName: newModel.modelName,
     fieldName: 'Updated At',
     identifier: 'updatedAt',
     type: 'DateTime',
@@ -43,6 +46,7 @@ export default (newModel: any) => [
   },
   {
     modelId: newModel.id,
+    modelName: newModel.modelName,
     fieldName: 'Status',
     identifier: 'status',
     type: 'Status',

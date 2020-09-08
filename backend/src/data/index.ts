@@ -58,6 +58,12 @@ async function createDeclarations(): Promise<any> {
         icon: 'fas fa-toggle-on',
         description: 'Boolean',
         color: '#000'
+      },
+      {
+        declaration: 'Reference',
+        icon: 'fas fa-link',
+        description: 'Reference',
+        color: '#760aff'
       }
     ]
 

@@ -3,11 +3,33 @@ import { iField, iCreateFieldInput, iModels } from '../../interfaces'
 
 export default {
   Mutation: {
-    createField: (
+    createField: async (
       _: any,
       { input }: { input: iCreateFieldInput },
       { models }: { models: iModels }
-    ): iField => models.Field.create({ ...input }),
+    ): Promise<iField> => {
+      const { defaultValue: targetModel, modelId: parentModel, type } = input
+
+      if (type === 'Reference') {
+        const hasReference = await models.Reference.findAll({
+          where: {
+            parentModel,
+            targetModel
+          }
+        })
+
+        if (!hasReference[0]) {
+          await models.Reference.create({
+            parentModel,
+            targetModel
+          })
+        }
+      }
+
+      const newField = await models.Field.create({ ...input })
+
+      return newField
+    },
     deleteField: async (
       _: any,
       { id }: { id: string },

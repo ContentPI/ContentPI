@@ -6,8 +6,13 @@ type Value {
   fieldId: UUID!
 }
 
+type Entries {
+  entries: JSON!
+}
+
 type Query {
   getValuesByEntry(entry: UUID!): [Value!]
+  getEntriesByModelId(modelId: UUID!): Entries!
 }
 
 type Mutation {

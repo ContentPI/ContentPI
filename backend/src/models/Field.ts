@@ -64,6 +64,10 @@ export default (sequelize: any, DataTypes: iDataTypes): iField => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
+    },
+    modelName: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   })
 

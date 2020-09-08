@@ -1,5 +1,6 @@
 // Dependencies
 import { Op } from 'sequelize'
+import { getEntries } from 'fogg-utils'
 
 // Interfaces
 import {
@@ -23,6 +24,54 @@ export default {
       })
 
       return values
+    },
+    getEntriesByModelId: async (
+      _: any,
+      { modelId }: { modelId: string },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const allEntriesPromises: any[] = []
+
+      const references = await models.Reference.findAll({
+        where: {
+          parentModel: modelId
+        }
+      })
+
+      if (references.length > 0) {
+        references.forEach((reference: any) => {
+          const promise = new Promise((resolve: any) => {
+            models.Field.findAll({
+              where: {
+                model_id: reference.targetModel
+              },
+              include: [
+                {
+                  model: models.Value,
+                  as: 'values'
+                }
+              ]
+            }).then((fields: any) => {
+              const [{ modelName }] = fields
+              const { entries } = getEntries(fields)
+
+              resolve({
+                modelId: reference.targetModel,
+                modelName,
+                entries
+              })
+            })
+          })
+
+          allEntriesPromises.push(promise)
+        })
+      }
+
+      const entries = await Promise.all(allEntriesPromises)
+
+      return {
+        entries: JSON.stringify(entries)
+      }
     }
   },
   Mutation: {

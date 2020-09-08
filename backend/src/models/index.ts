@@ -24,6 +24,7 @@ const models: iModels = {
   Field: sequelize.import('./Field'),
   Value: sequelize.import('./Value'),
   Model: sequelize.import('./Model'),
+  Reference: sequelize.import('./Reference'),
   User: sequelize.import('./User'),
   sequelize
 }

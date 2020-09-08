@@ -15,6 +15,7 @@ type Field {
   createdAt: Datetime!
   updatedAt: Datetime!
   modelId: UUID!
+  modelName: String!
   values: [Value!]
 }
 
@@ -38,6 +39,7 @@ input CreateFieldInput {
   isSystem: Boolean!
   isPrimaryKey: Boolean!
   modelId: UUID!
+  modelName: String!
 }
 
 input UpdateFieldInput {

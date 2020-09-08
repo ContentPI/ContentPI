@@ -9,7 +9,8 @@ export default (newModel: any) => {
     isSystem: false,
     isUnique: false,
     type: 'String',
-    modelId: newModel.id
+    modelId: newModel.id,
+    modelName: newModel.modelName
   }
 
   const fields = [
