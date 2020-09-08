@@ -11,9 +11,10 @@ interface iProps {
   declarations: any
   model: any
   enumerations: any[]
+  models: any[]
 }
 
-const Declarations: FC<iProps> = ({ declarations, model, enumerations }): ReactElement => {
+const Declarations: FC<iProps> = ({ declarations, model, enumerations, models }): ReactElement => {
   // Local state
   const [isOpen, setIsOpen] = useState(false)
   const [fieldType, setFieldType] = useState('')
@@ -38,10 +39,12 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations }): ReactE
               type: fieldType,
               modelIdentifier: model.identifier,
               appId: model.appId,
-              enumerations
+              enumerations,
+              modelName: model.modelName,
+              models
             },
             position: 'top',
-            height: fieldType === 'Dropdown' ? '790px' : '700px',
+            height: fieldType === 'Dropdown' || fieldType === 'Reference' ? '790px' : '700px',
             width: '600px'
           }}
         />
@@ -52,7 +55,13 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations }): ReactE
 
         <ul>
           {declarations.map((field: any) => {
+            // Only displaying Dropdown declaration when we have enumerations
             if (field.declaration === 'Dropdown' && enumerations.length === 0) {
+              return <li key={field.id} />
+            }
+
+            // Only displaying Reference declaration if we have at least 2 custom models.
+            if (field.declaration === 'Reference' && models.length - 1 <= 1) {
               return <li key={field.id} />
             }
 

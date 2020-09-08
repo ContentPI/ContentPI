@@ -1,6 +1,6 @@
 // Dependencies
-import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { slugFn, getEmptyValues, waitFor, uploadFile } from 'fogg-utils'
+import React, { FC, ReactElement, useState, useContext, useEffect, memo } from 'react'
+import { slugFn, getEmptyValues, waitFor, uploadFile, keys, hasOwnProperty } from 'fogg-utils'
 import { v4 as uuidv4 } from 'uuid'
 import moment from 'moment'
 import { useMutation } from '@apollo/client'
@@ -30,7 +30,13 @@ interface iProps {
 
 const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
   // Data
-  const { getModel, entryId = null, getValuesByEntry = null, getEnumerationsByAppId } = data
+  const {
+    getModel,
+    entryId = null,
+    getValuesByEntry = null,
+    getEnumerationsByAppId,
+    entries
+  } = data
   const isEditing = entryId && getValuesByEntry
 
   // Setting a unique ID
@@ -44,6 +50,7 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
   const customFields = getModel.fields.filter((field: any) => !field.isSystem)
   const uniqueFields = getModel.fields.filter((field: any) => field.isUnique && !field.isSystem)
   const enumerations: any = []
+  const initialSelectedEntries: any = {}
 
   const getValue = (fieldId: string) => {
     if (isEditing && getValuesByEntry) {
@@ -64,6 +71,19 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
       const enumerationId = field.defaultValue
       const enumeration = getEnumerationsByAppId.find((e: any) => e.id === enumerationId)
       enumerations.push(enumeration)
+    }
+
+    if (field.type === 'Reference' && isEditing) {
+      const initialEntries = entries.filter((entry: any) => entry.modelName === field.fieldName)
+      const entryValueId = field.values[0].value
+
+      if (initialEntries.length > 0) {
+        const selectedEntry = initialEntries[0].entries
+          .filter((entry: any) => entry.id === entryValueId)
+          .map((entry: any) => ({ ...entry, modelName: field.fieldName }))
+
+        initialSelectedEntries[field.fieldName] = [...selectedEntry]
+      }
     }
 
     if (field.isRequired) {
@@ -98,6 +118,9 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
   const [saveLoading, setSaveLoading] = useState(false)
   const [publishLoading, setPublishLoading] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isReferenceModalOpen, setIsReferenceModalOpen] = useState(false)
+  const [referenceEntries, setReferenceEntries] = useState(null)
+  const [selectedEntries, setSelectedEntries] = useState<any>({})
 
   // Mutations
   const [createValuesMutation] = useMutation(CREATE_VALUES_MUTATION)
@@ -108,20 +131,32 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
   const { onChange, setValue } = useContext(FormContext)
 
   // Methods
+  const setCurrentEntry = (entry: any) => {
+    const newSelectedEntries = { ...selectedEntries }
+    newSelectedEntries[entry.modelName] = [entry]
+
+    setSelectedEntries(newSelectedEntries)
+    setIsReferenceModalOpen(!isReferenceModalOpen)
+  }
+
+  const handleReferenceModal = (modelEntries: any): void => {
+    setReferenceEntries(modelEntries)
+    setIsReferenceModalOpen(!isReferenceModalOpen)
+  }
+
   const handleAfterCreateOrEditEntryModal = (): void => setIsModalOpen(!isModalOpen)
 
-  // Methods
   const handleActive = (field: string) => {
     setActive(field)
   }
 
   const _onChange = (e: any): any => {
     if (e.target.name === 'title') {
-      if (Object.prototype.hasOwnProperty.call(initialValues, 'slug')) {
+      if (hasOwnProperty(initialValues, 'slug')) {
         setValue('slug', slugFn(e.target.value), setValues)
       }
 
-      if (Object.prototype.hasOwnProperty.call(initialValues, 'identifier')) {
+      if (hasOwnProperty(initialValues, 'identifier')) {
         setValue('identifier', slugFn(e.target.value), setValues)
       }
     }
@@ -130,11 +165,21 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
   }
 
   const handleSubmit = async (action: string, isFile: boolean): Promise<void> => {
-    const emptyValues = getEmptyValues(values, Object.keys(requiredValues))
+    const emptyValues = getEmptyValues(values, keys(requiredValues))
     const entryValues: any[] = []
     let isUploaded = false
+    const entriesKeys = keys(selectedEntries)
 
-    if (emptyValues) {
+    // Looking for entries values
+    if (entriesKeys.length > 0) {
+      entriesKeys.forEach((key: string) => {
+        if (selectedEntries[key] && emptyValues[key.toLowerCase()]) {
+          delete emptyValues[key.toLowerCase()]
+        }
+      })
+    }
+
+    if (emptyValues && keys(emptyValues).length > 0) {
       setRequired(emptyValues)
     } else {
       if (action === 'save') {
@@ -173,13 +218,22 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
           values.createdAt = isEditing ? systemValues.createdAt : moment().format()
           values.updatedAt = moment().format()
 
+          // Set entries id to values
+          if (entriesKeys.length > 0) {
+            entriesKeys.forEach((key: string) => {
+              if (selectedEntries[key]) {
+                values[key.toLowerCase()] = selectedEntries[key][0].id
+              }
+            })
+          }
+
           if (isFile) {
             const [, , , fileUrl] = values.fileUrl.split('/')
             isUploaded = await uploadFile(values.file, `${config.baseUrl}/upload/${fileUrl}`)
             values.file = values.fileName
           }
 
-          Object.keys(values).forEach((fieldIdentifier: string) => {
+          keys(values).forEach((fieldIdentifier: string) => {
             const valueField = getModel.fields.find(
               (field: any) => field.identifier === fieldIdentifier
             )
@@ -229,6 +283,9 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
 
             waitFor(2).then(() => {
               setShowAlert(false)
+            })
+
+            waitFor(1).then(() => {
               handleAfterCreateOrEditEntryModal()
             })
           }
@@ -236,6 +293,12 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
       })
     }
   }
+
+  useEffect(() => {
+    if (keys(initialSelectedEntries).length > 0 && keys(selectedEntries).length === 0) {
+      setSelectedEntries(initialSelectedEntries)
+    }
+  }, [initialSelectedEntries])
 
   let title = 'Create new Entry'
 
@@ -258,6 +321,12 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
           values={values}
           setValues={setValues}
           enumerations={enumerations}
+          entries={entries}
+          referenceEntries={referenceEntries}
+          selectedEntries={selectedEntries}
+          setCurrentEntry={setCurrentEntry}
+          handleReferenceModal={handleReferenceModal}
+          isReferenceModalOpen={isReferenceModalOpen}
         />
 
         <SystemFields

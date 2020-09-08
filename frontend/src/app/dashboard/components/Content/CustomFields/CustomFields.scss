@@ -66,6 +66,15 @@
       padding-left: 10px;
       margin-top: 10px;
 
+      .entries {
+        margin-top: 5px;
+
+        .reference {
+          color: $electricViolet;
+          cursor: pointer;
+        }
+      }
+
       &.active {
         border-left: 3px solid $pictonBlue;
       }

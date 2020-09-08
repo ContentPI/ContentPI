@@ -28,13 +28,14 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   const { appId } = getParamsFromUrl(['page', 'appId', 'stage'])
 
   const {
-    data: { enumerations = [], fieldsCount = 0 }
+    data: { enumerations = [], fieldsCount = 0, models }
   } = options
 
   // States
   const initialValues = {
     model: options.data.modelIdentifier,
     modelId: '',
+    modelName: options.data.modelName,
     fieldName: '',
     identifier: '',
     order: `${Number(fieldsCount) + 1}`,
@@ -55,6 +56,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   })
   const [loading, setLoading] = useState(false)
   const [enumeration, setEnumeration] = useState('')
+  const [reference, setReference] = useState('')
 
   // Contexts
   const { onChange, setValue } = useContext(FormContext)
@@ -102,6 +104,10 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
         values.defaultValue = enumeration
       }
 
+      if (options.data.type === 'Reference') {
+        values.defaultValue = reference
+      }
+
       const { data: dataField } = await createFieldMutation({
         variables: values
       })
@@ -146,9 +152,9 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   }
 
   const renderDropdown = () => {
-    const enumOptions: any = enumerations.map((enu: any) => ({
-      option: enu.enumerationName,
-      value: enu.id
+    const selectOptions: any = enumerations.map((option: any) => ({
+      option: option.enumerationName,
+      value: option.id
     }))
 
     return (
@@ -158,13 +164,42 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
         </label>
         <Select
           name="enumeration"
-          label="Select enumeration"
+          label="Select Enumeration"
           onClick={({ value }: { value: any }): void => {
             if (value) {
               setEnumeration(value)
             }
           }}
-          options={enumOptions}
+          options={selectOptions}
+        />
+      </div>
+    )
+  }
+
+  const renderReference = () => {
+    const currentModel = options.data.modelIdentifier
+    const selectOptions: any = models
+      .filter((model: any) => model.modelName !== 'Asset' && model.identifier !== currentModel)
+      .map((option: any) => ({
+        option: option.modelName,
+        value: option.id
+      }))
+
+    return (
+      <div>
+        <label htmlFor="reference">
+          Reference {required.reference && <Badge danger>Required</Badge>}
+        </label>
+
+        <Select
+          name="reference"
+          label="Select Reference"
+          onClick={({ value }: { value: any }): void => {
+            if (value) {
+              setReference(value)
+            }
+          }}
+          options={selectOptions}
         />
       </div>
     )
@@ -220,6 +255,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
         </div>
 
         {options.data.type === 'Dropdown' && renderDropdown()}
+        {options.data.type === 'Reference' && renderReference()}
 
         <div>
           <label htmlFor="description">Description</label>

@@ -4,6 +4,7 @@ import { gql } from '@apollo/client'
 export default gql`
   mutation createField(
     $modelId: UUID!
+    $modelName: String!
     $fieldName: String!
     $identifier: String!
     $order: String!
@@ -20,6 +21,7 @@ export default gql`
     createField(
       input: {
         modelId: $modelId
+        modelName: $modelName
         fieldName: $fieldName
         identifier: $identifier
         order: $order
@@ -36,6 +38,7 @@ export default gql`
     ) {
       id
       modelId
+      modelName
       fieldName
       identifier
       order

@@ -1,6 +1,9 @@
 // Dependencies
-import React, { FC, ReactElement, useState, memo } from 'react'
+import React, { FC, ReactElement, useState, useContext, memo } from 'react'
 import { LinkButton, Menu, Toggle, Icon } from 'fogg-ui'
+
+// Contexts
+import { AppContext } from '@contexts/app'
 
 // Components
 import MainLayout from '@layouts/main/MainLayout'
@@ -27,6 +30,11 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
   const [modalData, setModalData] = useState({})
   const [showSystem, setShowSystem] = useState(false)
 
+  // Contexts
+  const {
+    state: { getAppById }
+  } = useContext(AppContext)
+
   // Methods
   const handleDeleteModal = (): void => setIsOpenDelete(!isOpenDelete)
   const handleMenu = (): void => setIsOpen(!isOpen)
@@ -39,6 +47,10 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
   const handleEdit = (): any => {
     handleMenu()
     handleEditModal()
+  }
+
+  if (!getAppById) {
+    return <div />
   }
 
   // Data
@@ -126,6 +138,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
               model={getModel}
               declarations={getDeclarations}
               enumerations={getEnumerationsByAppId}
+              models={getAppById.models}
             />
           </div>
         </div>

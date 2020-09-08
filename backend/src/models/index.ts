@@ -2,7 +2,7 @@
 import { Sequelize } from 'sequelize'
 
 // Utils
-import { hasKey } from 'fogg-utils'
+import { hasKey, keys } from 'fogg-utils'
 
 // Configuration
 import { $db } from '../../config'
@@ -30,7 +30,7 @@ const models: iModels = {
 }
 
 // Relationships
-Object.keys(models).forEach((modelName: string) => {
+keys(models).forEach((modelName: string) => {
   if (hasKey(models, modelName)) {
     if (models[modelName].associate) {
       models[modelName].associate(models)

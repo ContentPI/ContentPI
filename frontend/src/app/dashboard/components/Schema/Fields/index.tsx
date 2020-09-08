@@ -102,6 +102,7 @@ const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
               {field.type === 'Dropdown' && (
                 <Icon title={field.description} type="fas fa-caret-square-down" />
               )}
+              {field.type === 'Reference' && <Icon title={field.description} type="fas fa-link" />}
             </div>
 
             <div className={styles.name}>
