@@ -1,7 +1,7 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
+import React, { FC, ReactElement, useState, memo } from 'react'
 import { Table, PrimaryButton, Pagination } from 'fogg-ui'
-import { getValuesForTable } from 'fogg-utils'
+import { getValuesForTable, pluralify } from 'fogg-utils'
 
 // Configuration
 import config from '@config'
@@ -12,6 +12,7 @@ import { CREATE_ENTRY_LINK, EDIT_ENTRY_LINK, CONTENT_LINK } from '@constants/lin
 // Shared components
 import MainLayout from '@layouts/main/MainLayout'
 import Link from '@ui/Link'
+import DeleteEntriesModal from '@modals/DeleteEntriesModal'
 import PageNotFound from '../PageNotFound'
 
 // Styles
@@ -23,6 +24,10 @@ interface iProps {
 }
 
 const Content: FC<iProps> = ({ data, router }): ReactElement => {
+  // States
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [entries, setEntries] = useState<any[]>([])
+
   // Data
   const { getModel, getDeclarations } = data
   const { page = 1 } = router
@@ -30,6 +35,15 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
   // First render
   if (!getModel && !getDeclarations) {
     return <div />
+  }
+
+  // Methods
+  const handleDeleteEntriesModal = (entriesToDelete: any[]) => {
+    setIsModalOpen(!isModalOpen)
+
+    if (entriesToDelete.length > 0) {
+      setEntries(entriesToDelete)
+    }
   }
 
   const { body, head, rows, total } = getValuesForTable(getModel.fields, null, 'createdAt', 'desc')
@@ -42,46 +56,61 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
   const isFile = body.includes('file') && body.includes('fileUrl') && body.includes('information')
 
   return (
-    <MainLayout title="Content" header content footer sidebar noWrapper router={router}>
-      <div className={styles.content}>
-        <div className={styles.model}>
-          <PrimaryButton
-            href={CREATE_ENTRY_LINK(router).href}
-            as={CREATE_ENTRY_LINK(router).as}
-            Link={Link}
-          >
-            + New Entry
-          </PrimaryButton>
-        </div>
+    <>
+      <DeleteEntriesModal
+        label={`Delete ${pluralify('Entry', 'Entries', entries.length)}`}
+        isOpen={isModalOpen}
+        onClose={() => handleDeleteEntriesModal([])}
+        options={{
+          position: 'center',
+          width: '620px',
+          data: {
+            entries
+          }
+        }}
+      />
 
-        <div className={styles.rows}>
-          <Table
-            url={EDIT_ENTRY_LINK(router).as}
-            query="?entryId="
-            data={{
-              body,
-              head,
-              rows: rows[page - 1],
-              count: total,
-              fileTypes: config.files.types,
-              isFile
-            }}
-            onDelete={(ids: any): void => console.log('Delete', ids)}
-            onPublish={(ids: any): void => console.log('Publish', ids)}
-            onUnpublish={(ids: any): void => console.log('Unpublish', ids)}
-          />
+      <MainLayout title="Content" header content footer sidebar noWrapper router={router}>
+        <div className={styles.content}>
+          <div className={styles.model}>
+            <PrimaryButton
+              href={CREATE_ENTRY_LINK(router).href}
+              as={CREATE_ENTRY_LINK(router).as}
+              Link={Link}
+            >
+              + New Entry
+            </PrimaryButton>
+          </div>
 
-          <Pagination
-            theme="primary"
-            page={page}
-            total={total}
-            href={`${CONTENT_LINK(router).href}?page=`}
-            as={`${CONTENT_LINK(router).as}?page=`}
-            Link={Link}
-          />
+          <div className={styles.rows}>
+            <Table
+              url={EDIT_ENTRY_LINK(router).as}
+              query="?entryId="
+              data={{
+                body,
+                head,
+                rows: rows[page - 1],
+                count: total,
+                fileTypes: config.files.types,
+                isFile
+              }}
+              onDelete={(ids: any): any => handleDeleteEntriesModal(ids)}
+              onPublish={(ids: any): void => console.log('Publish', ids)}
+              onUnpublish={(ids: any): void => console.log('Unpublish', ids)}
+            />
+
+            <Pagination
+              theme="primary"
+              page={page}
+              total={total}
+              href={`${CONTENT_LINK(router).href}?page=`}
+              as={`${CONTENT_LINK(router).as}?page=`}
+              Link={Link}
+            />
+          </div>
         </div>
-      </div>
-    </MainLayout>
+      </MainLayout>
+    </>
   )
 }
 

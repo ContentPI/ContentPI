@@ -143,6 +143,31 @@ export default {
       const newValues = await Promise.all(updatedValuesPromises)
 
       return newValues
+    },
+    deleteValues: async (
+      _: any,
+      { entries }: { entries: any[] },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const deletedValuesPromises: any = []
+
+      entries.forEach((entry: any) => {
+        const deleteValuePromise = new Promise((resolve: any) => {
+          models.Value.destroy({
+            where: {
+              entry: entry.id
+            }
+          }).then(() => {
+            return resolve({ entryId: entry.id })
+          })
+        })
+
+        deletedValuesPromises.push(deleteValuePromise)
+      })
+
+      const deletedValues = await Promise.all(deletedValuesPromises)
+
+      return deletedValues
     }
   }
 }

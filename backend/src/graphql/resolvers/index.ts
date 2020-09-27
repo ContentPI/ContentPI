@@ -1,7 +1,8 @@
 import path from 'path'
-import { fileLoader, mergeResolvers } from 'merge-graphql-schemas-ts'
+import { loadFilesSync } from '@graphql-tools/load-files'
+import { mergeResolvers } from '@graphql-tools/merge'
 
-const resolversArray = fileLoader(path.join(__dirname, './'))
-const resolvers = mergeResolvers(resolversArray, { all: true })
+const resolversArray = loadFilesSync(path.join(__dirname, './'))
+const resolvers = mergeResolvers(resolversArray)
 
 export default resolvers

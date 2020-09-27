@@ -1,7 +1,15 @@
 // Dependencies
 import React, { FC, ReactElement, useState, memo } from 'react'
 import { Badge, Icon, Input, TextArea, Select, File, EntryBlock } from 'fogg-ui'
-import { cx, slugFn, bytesToSize, getFileInfo, getImageData, getRandomCode } from 'fogg-utils'
+import {
+  cx,
+  slugFn,
+  bytesToSize,
+  getFileInfo,
+  getImageData,
+  getRandomCode,
+  getReferenceTitle
+} from 'fogg-utils'
 
 // Configuration
 import config from '@config'
@@ -109,18 +117,14 @@ const CustomFields: FC<iProps> = ({
       return (
         <div className={styles.entries}>
           {currentEntries &&
-            currentEntries.map((entry: any) => {
-              const title: any = Object.entries(entry)[0][1]
-
-              return (
-                <EntryBlock
-                  key={entry.id}
-                  modelName={entry.modelName}
-                  title={title}
-                  status={entry.status}
-                />
-              )
-            })}
+            currentEntries.map((entry: any) => (
+              <EntryBlock
+                key={entry.id}
+                modelName={entry.modelName}
+                title={getReferenceTitle(entry)}
+                status={entry.status}
+              />
+            ))}
 
           <a className={styles.reference} onClick={() => handleReferenceModal(modelEntries)}>
             <Icon type="fas fa-link" /> Link existing {modelName}

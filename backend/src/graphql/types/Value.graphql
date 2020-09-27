@@ -10,6 +10,10 @@ type Entries {
   entries: JSON!
 }
 
+type DeletedEntries {
+  entryId: UUID!
+}
+
 type Query {
   getValuesByEntry(entry: UUID!): [Value!]
   getEntriesByModelId(modelId: UUID!): Entries!
@@ -19,6 +23,13 @@ type Mutation {
   createValues(input: [CreateOrUpdateValueInput]): [Value!]
   findUniqueValues(input: [ValueInput]): [Value!]
   updateValues(entry: UUID!, input: [CreateOrUpdateValueInput]): [Value!]
+  deleteValues(entries: [EntriesInput]): [DeletedEntries!]
+}
+
+input EntriesInput {
+  id: UUID!
+  checked: Boolean!
+  status: String!
 }
 
 input ValueInput {
