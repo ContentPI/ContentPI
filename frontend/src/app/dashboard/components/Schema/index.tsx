@@ -15,7 +15,7 @@ import Declarations from './Declarations'
 import Enumerations from './Enumerations'
 
 // Styles
-import styles from './Schema.scss'
+import { StyledSchema } from './Schema.styled'
 
 interface iProps {
   data: any
@@ -90,11 +90,11 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
       />
 
       <MainLayout title="Schema" header content footer sidebar router={router}>
-        <div className={styles.schema}>
-          <div className={styles.model}>
-            <h3 className={styles.name}>{getModel.modelName}</h3>{' '}
-            <span className={styles.identifier}>#{getModel.identifier}</span>{' '}
-            <LinkButton className={styles.button} onClick={handleMenu}>
+        <StyledSchema>
+          <div className="model">
+            <h3 className="name">{getModel.modelName}</h3>{' '}
+            <span className="identifier">#{getModel.identifier}</span>{' '}
+            <LinkButton className="button" onClick={handleMenu}>
               •••
             </LinkButton>
             <Menu
@@ -112,7 +112,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
                 }
               ]}
             />
-            <div className={styles.editContent}>
+            <div className="editContent">
               <Link
                 href={`/dashboard/${getModel.appId}/master/content/model/${getModel.identifier}`}
               >
@@ -123,7 +123,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
             </div>
           </div>
 
-          <div className={styles.toggle}>
+          <div className="toggle">
             <Toggle
               checked={showSystem}
               type="round"
@@ -132,7 +132,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
             />
           </div>
 
-          <div className={styles.wrapper}>
+          <div className="wrapper">
             <Fields model={getModel.identifier} fields={getModel.fields} showSystem={showSystem} />
             <Declarations
               model={getModel}
@@ -141,7 +141,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
               models={getAppById.models}
             />
           </div>
-        </div>
+        </StyledSchema>
       </MainLayout>
     </>
   )

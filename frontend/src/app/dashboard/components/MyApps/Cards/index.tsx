@@ -11,7 +11,7 @@ import CreateAppModal from '@modals/CreateAppModal'
 import AppIcon from '../AppIcon'
 
 // Styles
-import styles from './Cards.scss'
+import { StyledCards } from './Cards.styled'
 
 // Interfaces
 interface iProps {
@@ -38,7 +38,7 @@ const Cards: FC<iProps> = ({ items, router }): ReactElement => {
         }}
       />
 
-      <section className={styles.cards}>
+      <StyledCards>
         <h1>My Apps</h1>
 
         <ul>
@@ -48,7 +48,7 @@ const Cards: FC<iProps> = ({ items, router }): ReactElement => {
             return (
               <li key={app.id}>
                 <Link href={STAGE_LINK(router).href} as={STAGE_LINK(router).as}>
-                  <section className={styles.card} title={app.description}>
+                  <section className="card" title={app.description}>
                     <AppIcon app={app} />
                   </section>
                 </Link>
@@ -57,16 +57,16 @@ const Cards: FC<iProps> = ({ items, router }): ReactElement => {
           })}
 
           <li>
-            <section className={styles.card} onClick={handleModal}>
-              <section className={styles.app}>
+            <section className="card" onClick={handleModal}>
+              <section className="app">
                 <Icon type="fas fa-plus" />
               </section>
 
-              <span className={styles.createNewApp}>Create New App</span>
+              <span className="createNewApp">Create New App</span>
             </section>
           </li>
         </ul>
-      </section>
+      </StyledCards>
     </>
   )
 }

@@ -3,10 +3,10 @@ import React, { FC, ReactElement, memo } from 'react'
 import { Icon } from 'fogg-ui'
 
 // Styles
-import styles from './Breadcrumbs.scss'
+import { StyledBreadcrumbs } from './Breadcrumbs.styled'
 
 const Breadcrumbs: FC = (): ReactElement => (
-  <div className={styles.breadcrumbs}>
+  <StyledBreadcrumbs>
     <ul>
       <li>
         <Icon type="fas fa-home" />
@@ -18,7 +18,7 @@ const Breadcrumbs: FC = (): ReactElement => (
         <a href="#">Home</a>
       </li>
     </ul>
-  </div>
+  </StyledBreadcrumbs>
 )
 
 export default memo(Breadcrumbs)

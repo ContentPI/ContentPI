@@ -8,7 +8,7 @@ import DeleteFieldModal from '@modals/DeleteFieldModal'
 import EditFieldModal from '@modals/EditFieldModal'
 
 // Styles
-import styles from './Fields.scss'
+import { StyledFields } from './Fields.styled'
 
 interface iProps {
   model: string
@@ -61,29 +61,29 @@ const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
         }}
       />
 
-      <div className={styles.fields}>
+      <StyledFields>
         {fields.map((field: any) => (
           <div
             key={field.id}
             className={cx(
-              styles.field,
-              field.isSystem ? styles.sys : styles[field.type],
-              field.isSystem && !showSystem ? styles.hideSys : ''
+              'field',
+              field.isSystem ? 'sys' : field.type,
+              field.isSystem && !showSystem ? 'hideSys' : ''
             )}
           >
-            <div className={cx(styles.icon, styles[field.type])}>
+            <div className={cx('icon', field.type)}>
               {field.type === 'ID' && (
-                <Icon title={field.description} className={styles.id}>
+                <Icon title={field.description} className="id">
                   ID
                 </Icon>
               )}
               {field.type === 'Integer' && (
-                <Icon title={field.description} className={styles.integer}>
+                <Icon title={field.description} className="integer">
                   10
                 </Icon>
               )}
               {field.type === 'Float' && (
-                <Icon title={field.description} className={styles.float}>
+                <Icon title={field.description} className="float">
                   1.0
                 </Icon>
               )}
@@ -105,46 +105,36 @@ const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
               {field.type === 'Reference' && <Icon title={field.description} type="fas fa-link" />}
             </div>
 
-            <div className={styles.name}>
+            <div className="name">
               {field.fieldName}
-              <span className={styles.identifier}>#{field.identifier}</span>
+              <span className="identifier">#{field.identifier}</span>
 
-              <div className={styles.information}>
+              <div className="information">
                 {field.type !== 'Media' && (
-                  <span className={cx(styles.tag, field.isSystem ? styles.system : '')}>
-                    {field.type}
-                  </span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>{field.type}</span>
                 )}
                 {field.isPrimaryKey && (
-                  <span className={cx(styles.tag, field.isSystem ? styles.system : '')}>
-                    Primary Key
-                  </span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Primary Key</span>
                 )}
                 {field.isRequired && (
-                  <span className={cx(styles.tag, field.isSystem ? styles.system : '')}>
-                    Required
-                  </span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Required</span>
                 )}
                 {field.isUnique && (
-                  <span className={cx(styles.tag, field.isSystem ? styles.system : '')}>
-                    Unique
-                  </span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Unique</span>
                 )}
                 {field.isMedia && (
-                  <span className={cx(styles.tag, field.isSystem ? styles.system : '')}>Media</span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Media</span>
                 )}
                 {field.isHide && (
-                  <span className={cx(styles.tag, field.isSystem ? styles.system : '')}>Hide</span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Hide</span>
                 )}
                 {field.isSystem && (
-                  <span className={cx(styles.tag, field.isSystem ? styles.system : '')}>
-                    System Field
-                  </span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>System Field</span>
                 )}
               </div>
 
               {!field.isSystem && model !== 'asset' && (
-                <div className={styles.actions}>
+                <div className="actions">
                   <Icon
                     type="fas fa-edit"
                     title="Edit"
@@ -160,7 +150,7 @@ const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
             </div>
           </div>
         ))}
-      </div>
+      </StyledFields>
     </>
   )
 }

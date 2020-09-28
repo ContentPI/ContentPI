@@ -14,7 +14,7 @@ import { FormContext } from '@contexts/form'
 import EDIT_FIELD_MUTATION from '@graphql/fields/editField.mutation'
 
 // Styles
-import styles from './Modal.scss'
+import { StyledModal } from './Modal.styled'
 
 interface iProps {
   isOpen: boolean
@@ -126,7 +126,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
 
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={_onClose}>
-      <div className={styles.modal}>
+      <StyledModal>
         <div>
           <label htmlFor="fieldName">
             Field Name {required.fieldName && <Badge danger>Required</Badge>}
@@ -236,13 +236,13 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           />
         </div>
 
-        <div className={styles.buttons}>
+        <div className="buttons">
           <LinkButton onClick={_onClose}>Cancel</LinkButton>
           <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Updating Field...">
             Update Field
           </PrimaryButton>
         </div>
-      </div>
+      </StyledModal>
     </Modal>
   )
 }

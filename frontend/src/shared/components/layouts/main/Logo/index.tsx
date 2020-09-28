@@ -5,15 +5,15 @@ import React, { ReactElement, memo } from 'react'
 import Link from '@ui/Link'
 
 // Styles
-import styles from './Logo.scss'
+import { StyledLogo } from './Logo.styled'
 
 const Logo = (): ReactElement => {
   return (
-    <div className={styles.logo}>
+    <StyledLogo>
       <Link href="/dashboard" as="/dashboard">
         <img alt="Logo" src="/images/logo.png" />
       </Link>
-    </div>
+    </StyledLogo>
   )
 }
 

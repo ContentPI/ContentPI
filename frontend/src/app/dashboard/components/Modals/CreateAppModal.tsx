@@ -19,7 +19,7 @@ import { UserContext } from '@contexts/user'
 import CREATE_APP_MUTATION from '@graphql/apps/createApp.mutation'
 
 // Styles
-import styles from './Modal.scss'
+import { StyledModal } from './Modal.styled'
 
 interface iProps {
   isOpen: boolean
@@ -96,7 +96,7 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
 
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
-      <div className={styles.modal}>
+      <StyledModal>
         <div>
           <label htmlFor="appName">
             App Name {required.appName && <Badge danger>Required</Badge>}
@@ -148,13 +148,13 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           />
         </div>
 
-        <div className={styles.buttons}>
+        <div className="buttons">
           <LinkButton onClick={onClose}>Cancel</LinkButton>
           <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Creating App...">
             Create App
           </PrimaryButton>
         </div>
-      </div>
+      </StyledModal>
     </Modal>
   )
 }

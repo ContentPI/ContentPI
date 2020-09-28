@@ -1,6 +1,6 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.modal {
+export const StyledModal = styled.div`
   p {
     font-size: 14px;
     line-height: 25px;
@@ -11,13 +11,13 @@
     }
 
     .saved {
-      color: $mySin;
-      font-weight: 600;
+      color: ${props => props.theme.colors.yellow.mySin};
+      font-weight: ${props => props.theme.font.weight.bold};
     }
 
     .published {
-      color: $mountainMeadow;
-      font-weight: 600;
+      color: ${props => props.theme.colors.green.mountainMeadow};
+      font-weight: ${props => props.theme.font.weight.bold};
     }
   }
 
@@ -25,30 +25,30 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
-    border: 1px solid $frenchGray;
+    border: 1px solid ${props => props.theme.colors.gray.frenchGray};
     padding: 20px 10px;
     margin-bottom: 20px;
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.05);
     width: 95%;
 
     &:hover {
-      border: 1px solid $pictonBlue;
+      border: 1px solid ${props => props.theme.colors.blue.pictonBlue};
     }
 
     .modelName {
-      color: $gray;
+      color: ${props => props.theme.color.gray};
     }
 
     .entryTitle {
-      font-weight: bold;
+      font-weight: ${props => props.theme.font.weight.bold};
     }
 
     .Published {
-      color: $mountainMeadow;
+      color: ${props => props.theme.colors.green.mountainMeadow};
     }
 
     .Draft {
-      color: $mySin;
+      color: ${props => props.theme.colors.yellow.mySin};
     }
   }
 
@@ -68,4 +68,4 @@
       justify-content: space-between;
     }
   }
-}
+`

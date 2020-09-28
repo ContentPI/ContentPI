@@ -16,7 +16,7 @@ import DeleteEntriesModal from '@modals/DeleteEntriesModal'
 import PageNotFound from '../PageNotFound'
 
 // Styles
-import styles from './Content.scss'
+import { StyledContent } from './Content.styled'
 
 interface iProps {
   router: any
@@ -71,8 +71,8 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
       />
 
       <MainLayout title="Content" header content footer sidebar noWrapper router={router}>
-        <div className={styles.content}>
-          <div className={styles.model}>
+        <StyledContent>
+          <div className="model">
             <PrimaryButton
               href={CREATE_ENTRY_LINK(router).href}
               as={CREATE_ENTRY_LINK(router).as}
@@ -82,7 +82,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
             </PrimaryButton>
           </div>
 
-          <div className={styles.rows}>
+          <div className="rows">
             <Table
               url={EDIT_ENTRY_LINK(router).as}
               query="?entryId="
@@ -108,7 +108,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
               Link={Link}
             />
           </div>
-        </div>
+        </StyledContent>
       </MainLayout>
     </>
   )

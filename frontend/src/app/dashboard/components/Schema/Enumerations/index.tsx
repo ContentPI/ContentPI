@@ -5,7 +5,7 @@ import React, { FC, ReactElement, memo } from 'react'
 import MainLayout from '@layouts/main/MainLayout'
 
 // Styles
-import styles from './Enumerations.scss'
+import { StyledEnumerations } from './Enumerations.styled'
 
 interface iProps {
   data: any
@@ -24,23 +24,23 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
   return (
     <>
       <MainLayout title="Enumerations" header content footer sidebar router={router}>
-        <div className={styles.enumerations}>
+        <StyledEnumerations>
           <h2>Enumerations</h2>
 
-          <div className={styles.wrapper}>
+          <div className="wrapper">
             {getEnumerationsByAppId.map((enumeration: any) => {
               const values = JSON.parse(enumeration.values)
 
               return (
-                <div key={enumeration.id} className={styles.enumeration}>
-                  <div className={styles.information}>
-                    <h3 className={styles.name}>{enumeration.enumerationName}</h3>{' '}
-                    <span className={styles.identifier}>#{enumeration.identifier}</span>
+                <div key={enumeration.id} className="enumeration">
+                  <div className="information">
+                    <h3 className="name">{enumeration.enumerationName}</h3>{' '}
+                    <span className="identifier">#{enumeration.identifier}</span>
                   </div>
 
-                  <div className={styles.values}>
+                  <div className="values">
                     {values.map((value: any) => (
-                      <span key={value.value} className={styles.value}>
+                      <span key={value.value} className="value">
                         {value.option}
                       </span>
                     ))}
@@ -49,7 +49,7 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
               )
             })}
           </div>
-        </div>
+        </StyledEnumerations>
       </MainLayout>
     </>
   )

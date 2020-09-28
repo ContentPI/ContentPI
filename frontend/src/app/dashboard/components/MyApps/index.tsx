@@ -7,7 +7,7 @@ import Logo from '@layouts/main/Logo'
 import Cards from './Cards'
 
 // Styles
-import styles from './MyApps.scss'
+import { StyledMyApps } from './MyApps.styled'
 
 interface iProps {
   dataGetApps: any
@@ -22,15 +22,15 @@ const MyApps: FC<iProps> = ({ dataGetApps, router }): ReactElement => {
 
   return (
     <MainLayout title="My Apps">
-      <div className={styles.myApps}>
-        <div className={styles.header}>
-          <div className={styles.logo}>
+      <StyledMyApps>
+        <div className="header">
+          <div className="logo">
             <Logo />
           </div>
         </div>
 
         <Cards items={dataGetApps.getApps} router={router} />
-      </div>
+      </StyledMyApps>
     </MainLayout>
   )
 }

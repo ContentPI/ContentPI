@@ -18,7 +18,7 @@ import AppIcon from '@dashboard/components/MyApps/AppIcon'
 import Logo from '../Logo'
 
 // Styles
-import styles from './Sidebar.scss'
+import { StyledSidebar } from './Sidebar.styled'
 
 // Interface
 interface iProps {
@@ -42,15 +42,15 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
   }
 
   return (
-    <aside className={styles.sidebar}>
-      <section className={styles.firstOptions}>
-        <div className={styles.isoType}>
+    <StyledSidebar>
+      <section className="firstOptions">
+        <div className="isoType">
           <Logo />
         </div>
 
         <ul>
           {getAppById && (
-            <li className={styles.appIcon}>
+            <li className="appIcon">
               <Link href={STAGE_LINK(router).href} as={STAGE_LINK(router).as}>
                 <AppIcon app={getAppById} hideName />
               </Link>
@@ -82,24 +82,24 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           </li>
         </ul>
 
-        <section className={styles.profile}>
+        <section className="profile">
           <span title="Carlos Santana">CS</span>
         </section>
       </section>
 
-      <section className={`${styles.closed} ${open ? `${styles.secondOptions}` : ''}`}>
-        <div className={styles.close} onClick={(): void => handleOpen('', false)}>
+      <section className={`closed ${open ? `secondOptions` : ''}`}>
+        <div className="close" onClick={(): void => handleOpen('', false)}>
           <span>
             <Icon type="fas fa-arrow-left" />
           </span>
         </div>
 
-        <div className={styles.subOptions}>
+        <div className="subOptions">
           {sidebar === 'model' && <ModelSidebar app={getAppById} router={router} />}
           {sidebar === 'content' && <ContentSidebar app={getAppById} router={router} />}
         </div>
       </section>
-    </aside>
+    </StyledSidebar>
   )
 }
 

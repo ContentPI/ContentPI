@@ -1,8 +1,10 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.sidebar {
+export const StyledSidebar = styled.aside`
+  background: ${props => props.theme.color.white};
+
   width: auto;
-  background-color: $white;
+  background-color: ${props => props.theme.color.white};
   display: flex;
   flex-direction: row;
   box-shadow: 0 3px 10px rgba(62, 85, 120, 0.07);
@@ -16,7 +18,7 @@
       rgba(9, 9, 121, 1) 35%,
       rgba(0, 212, 255, 1) 100%
     );
-    color: $white;
+    color: ${props => props.theme.color.white};
 
     .isoType {
       width: 100%;
@@ -60,7 +62,7 @@
         }
 
         a {
-          color: $white;
+          color: ${props => props.theme.color.white};
           text-decoration: none;
           font-size: 16px;
           text-align: center;
@@ -100,12 +102,12 @@
         align-items: center;
 
         span {
-          background-color: $wildSand;
+          background-color: ${props => props.theme.colors.gray.wildSand};
           border-radius: 0.5rem;
           margin-right: 1rem;
 
           i {
-            color: $emperor;
+            color: ${props => props.theme.colors.gray.emperor};
             font-size: 14px;
             width: 45px;
             height: 40px;
@@ -172,7 +174,7 @@
                   top: 0;
                   bottom: 0;
                   right: 0;
-                  background-color: $denim;
+                  background-color: ${props => props.theme.colors.blue.denim};
                 }
               }
             }
@@ -191,7 +193,7 @@
 
     span {
       display: inline-block;
-      background-color: $pictonBlue;
+      background-color: ${props => props.theme.colors.blue.pictonBlue};
       width: 40px;
       height: 40px;
       text-align: center;
@@ -200,4 +202,4 @@
       font-weight: 100;
     }
   }
-}
+`

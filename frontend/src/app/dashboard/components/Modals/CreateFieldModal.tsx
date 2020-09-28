@@ -15,7 +15,7 @@ import CREATE_FIELD_MUTATION from '@graphql/fields/createField.mutation'
 import GET_MODEL_QUERY from '@graphql/models/getModel.query'
 
 // Styles
-import styles from './Modal.scss'
+import { StyledModal } from './Modal.styled'
 
 interface iProps {
   isOpen: boolean
@@ -214,7 +214,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={_onClose}>
-      <div className={styles.modal}>
+      <StyledModal>
         <div>
           <label htmlFor="fieldName">
             Field Name {required.fieldName && <Badge danger>Required</Badge>}
@@ -317,13 +317,13 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           />
         </div>
 
-        <div className={styles.buttons}>
+        <div className="buttons">
           <LinkButton onClick={_onClose}>Cancel</LinkButton>
           <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Creating Field...">
             Create Field
           </PrimaryButton>
         </div>
-      </div>
+      </StyledModal>
     </Modal>
   )
 }

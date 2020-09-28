@@ -10,7 +10,7 @@ import AfterCreateOrEditEntryModal from '@modals/AfterCreateOrEditEntryModal'
 import { CONTENT_LINK, CREATE_ENTRY_LINK, EDIT_ENTRY_LINK } from '@constants/links'
 
 // Styles
-import styles from './SystemFields.scss'
+import { StyledSystemFields } from './SystemFields.styled'
 
 interface iProps {
   alert: string
@@ -65,11 +65,11 @@ const SystemFields: FC<iProps> = ({
         }}
       />
 
-      <div className={styles.systemFields}>
-        <div className={styles.wrapper}>
-          <div className={styles.block}>Status</div>
+      <StyledSystemFields>
+        <div className="wrapper">
+          <div className="block">Status</div>
 
-          <div className={styles.row}>
+          <div className="row">
             {!isFile && (
               <PrimaryButton
                 onClick={(): any => handleSubmit('save', false)}
@@ -90,13 +90,13 @@ const SystemFields: FC<iProps> = ({
             </SuccessButton>
           </div>
 
-          <div className={styles.block}>System Fields</div>
+          <div className="block">System Fields</div>
 
-          <div className={styles.row}>
+          <div className="row">
             {systemFields.map((systemField: any): any => {
               if (systemField.identifier !== 'id') {
                 return (
-                  <div key={systemField.id} className={styles.systemField}>
+                  <div key={systemField.id} className="systemField">
                     <div>
                       {systemField.identifier === 'updatedAt'
                         ? 'Last saved'
@@ -104,9 +104,9 @@ const SystemFields: FC<iProps> = ({
                     </div>
                     <div
                       className={cx(
-                        styles[systemField.identifier],
-                        styles[systemValues[systemField.identifier].toLowerCase()],
-                        systemValues[systemField.identifier] === '' ? styles.empty : ''
+                        systemField.identifier,
+                        systemValues[systemField.identifier].toLowerCase(),
+                        systemValues[systemField.identifier] === '' ? 'empty' : ''
                       )}
                     >
                       {systemValues[systemField.identifier]}
@@ -120,12 +120,12 @@ const SystemFields: FC<iProps> = ({
           </div>
         </div>
 
-        <div className={cx(styles.alert, showAlert ? styles.show : '')}>
+        <div className={cx('alert', showAlert ? 'show' : '')}>
           <Alert success={alertType === 'success'} danger={alertType === 'danger'} flat>
             {alert}
           </Alert>
         </div>
-      </div>
+      </StyledSystemFields>
     </>
   )
 }

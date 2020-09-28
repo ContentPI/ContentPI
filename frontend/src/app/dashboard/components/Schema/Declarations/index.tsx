@@ -5,7 +5,7 @@ import React, { FC, ReactElement, useState, memo } from 'react'
 import CreateFieldModal from '@modals/CreateFieldModal'
 
 // Styles
-import styles from './Declarations.scss'
+import { StyledDeclarations } from './Declarations.styled'
 
 interface iProps {
   declarations: any
@@ -50,7 +50,7 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations, models })
         />
       )}
 
-      <section className={styles.declarations}>
+      <StyledDeclarations>
         <h3>Fields</h3>
 
         <ul>
@@ -71,7 +71,7 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations, models })
                   <p>{field.declaration}</p>
 
                   <div
-                    className={styles.widgetOption}
+                    className="widgetOption"
                     title={field.description}
                     onClick={(): void => {
                       setFieldType(field.declaration)
@@ -86,7 +86,7 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations, models })
             )
           })}
         </ul>
-      </section>
+      </StyledDeclarations>
     </>
   )
 }

@@ -5,15 +5,12 @@ import { Badge } from 'fogg-ui'
 // Constants
 import { MODEL_LINK, ENUMERATION_LINK } from '@constants/links'
 
-// Components
-import Link from '@ui/Link'
-
 // Modals
 import CreateModelModal from '@modals/CreateModelModal'
 import CreateEnumerationModal from '@modals/CreateEnumerationModal'
 
 // Styles
-import styles from './ModelSidebar.scss'
+import { StyledModelSidebar } from './ModelSidebar.styled'
 
 interface iProps {
   app: any
@@ -55,15 +52,15 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
         }}
       />
 
-      <div className={styles.modelSidebar}>
-        <div className={styles.wrapper}>
-          <span className={styles.models}>Models</span>
-          <span className={styles.create}>
+      <StyledModelSidebar>
+        <div className="wrapper">
+          <span className="models">Models</span>
+          <span className="create">
             <Badge onClick={handleModelModal}>+ Create</Badge>
           </span>
         </div>
 
-        <div className={styles.modelsWrapper}>
+        <div className="modelsWrapper">
           {models.map((model: any) => {
             router.model = model.identifier
 
@@ -73,31 +70,31 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
 
             return (
               <div key={model.id}>
-                <Link href={MODEL_LINK(router).as}>{model.modelName}</Link>
+                <a href={MODEL_LINK(router).as}>{model.modelName}</a>
               </div>
             )
           })}
         </div>
 
-        <div className={styles.wrapper}>
-          <span className={styles.models}>Enumerations</span>
-          <span className={styles.create}>
+        <div className="wrapper">
+          <span className="models">Enumerations</span>
+          <span className="create">
             <Badge onClick={handleEnumerationModal}>+ Create</Badge>
           </span>
         </div>
 
-        <div className={styles.modelsWrapper}>
+        <div className="modelsWrapper">
           {enumerations.map((enumeration: any) => {
             router.enumeration = enumeration.identifier
 
             return (
               <div key={enumeration.id}>
-                <Link href={ENUMERATION_LINK(router).as}>{enumeration.enumerationName}</Link>
+                <a href={ENUMERATION_LINK(router).as}>{enumeration.enumerationName}</a>
               </div>
             )
           })}
         </div>
-      </div>
+      </StyledModelSidebar>
     </>
   )
 }

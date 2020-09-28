@@ -11,7 +11,7 @@ import { FormContext } from '@contexts/form'
 import CREATE_ENUMERATION_MUTATION from '@graphql/enumerations/createEnumeration.mutation'
 
 // Styles
-import styles from './Modal.scss'
+import { StyledModal } from './Modal.styled'
 
 interface iProps {
   isOpen: boolean
@@ -90,7 +90,7 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
 
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
-      <div className={styles.modal}>
+      <StyledModal>
         <div>
           <label htmlFor="modelName">
             Enumeration Name {required.enumerationName && <Badge danger>Required</Badge>}
@@ -126,7 +126,7 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
           />
         </div>
 
-        <div className={styles.values}>
+        <div className="values">
           <label htmlFor="values">
             Values {required.enumerationValues && <Badge danger>Required</Badge>}
           </label>
@@ -141,7 +141,7 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
           />
         </div>
 
-        <div className={styles.buttons}>
+        <div className="buttons">
           <LinkButton onClick={onClose}>Cancel</LinkButton>
           <PrimaryButton
             onClick={handleSubmit}
@@ -151,7 +151,7 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
             Create Enumeration
           </PrimaryButton>
         </div>
-      </div>
+      </StyledModal>
     </Modal>
   )
 }

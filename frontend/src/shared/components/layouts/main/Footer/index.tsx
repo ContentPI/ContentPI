@@ -1,12 +1,15 @@
+// Dependencies
 import React, { FC, ReactElement, memo } from 'react'
-import styles from './Footer.scss'
+
+// Styles
+import { StyledFooter } from './Footer.styled'
 
 const Footer: FC = (): ReactElement => (
-  <footer className={styles.footer}>
-    <div className={styles.content}>
-      <div className={styles.copyright}>&copy; {new Date().getFullYear()} ContentPI.com</div>
+  <StyledFooter>
+    <div className="content">
+      <div className="copyright">&copy; {new Date().getFullYear()} ContentPI.com</div>
 
-      <nav className={styles.rightOptions}>
+      <nav className="rightOptions">
         <ul>
           <li>
             <a href="#">Blog</a>
@@ -20,7 +23,7 @@ const Footer: FC = (): ReactElement => (
         </ul>
       </nav>
     </div>
-  </footer>
+  </StyledFooter>
 )
 
 export default memo(Footer)

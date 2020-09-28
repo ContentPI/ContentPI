@@ -7,7 +7,7 @@ import Content from '../Content'
 import Sidebar from '../Sidebar'
 
 // Styles
-import styles from './MainLayout.scss'
+import { StyledMainLayout } from './MainLayout.styled'
 
 // Interface
 interface iProps {
@@ -38,7 +38,7 @@ const MainLayout: FC<iProps> = ({
         <meta name="title" content={`Dashboard ${title ? `- ${title}` : ''}`} />
       </Head>
 
-      <div className={styles.mainLayout}>
+      <StyledMainLayout>
         {sidebar && <Sidebar router={router} />}
         {content && (
           <Content header={header} footer={footer} noWrapper={noWrapper} router={router}>
@@ -46,7 +46,7 @@ const MainLayout: FC<iProps> = ({
           </Content>
         )}
         {!content && children}
-      </div>
+      </StyledMainLayout>
     </>
   )
 }

@@ -8,7 +8,7 @@ import { CONTENT_LINK } from '@constants/links'
 import Link from '@ui/Link'
 
 // Styles
-import styles from './ContentSidebar.scss'
+import { StyledContentSidebar } from './ContentSidebar.styled'
 
 interface iProps {
   app: any
@@ -21,12 +21,12 @@ const ContentSidebar: FC<iProps> = ({ app, router }): ReactElement => {
 
   return (
     <>
-      <div className={styles.contentSidebar}>
-        <div className={styles.wrapper}>
-          <span className={styles.models}>Content</span>
+      <StyledContentSidebar>
+        <div className="wrapper">
+          <span className="models">Content</span>
         </div>
 
-        <div className={styles.modelsWrapper}>
+        <div className="modelsWrapper">
           {models.map((model: any) => {
             router.section = 'model'
             router.model = model.identifier
@@ -37,12 +37,12 @@ const ContentSidebar: FC<iProps> = ({ app, router }): ReactElement => {
 
             return (
               <div key={model.id}>
-                <Link href={CONTENT_LINK(router).as}>{model.modelName}</Link>
+                <a href={CONTENT_LINK(router).as}>{model.modelName}</a>
               </div>
             )
           })}
         </div>
-      </div>
+      </StyledContentSidebar>
     </>
   )
 }

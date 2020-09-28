@@ -1,6 +1,6 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.breadcrumbs {
+export const StyledBreadcrumbs = styled.div`
   margin-right: 25px;
 
   ul {
@@ -9,29 +9,29 @@
     padding: 0px;
     margin: 0px;
     list-style: none;
-    color: $gray;
+    color: ${props => props.theme.color.gray};
 
     li {
       margin: 5px;
 
       &:last-child {
         a {
-          color: $denim;
+          color: ${props => props.theme.colors.blue.denim};
           font-weight: 600;
         }
       }
 
       a {
-        color: $gray;
+        color: ${props => props.theme.color.gray};
         font-weight: 400;
         line-height: 1.5;
         font-size: 14px;
         text-decoration: none;
 
         &:hover {
-          color: $denim;
+          color: ${props => props.theme.colors.blue.denim};
         }
       }
     }
   }
-}
+`

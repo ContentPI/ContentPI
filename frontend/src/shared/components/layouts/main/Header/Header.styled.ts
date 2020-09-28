@@ -1,7 +1,7 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.Header {
-  background: $white;
+export const StyledHeader = styled.div`
+  background: ${props => props.theme.color.white};
   height: 70px;
   width: 100%;
   display: flex;
@@ -16,4 +16,4 @@
     font-size: 18px;
     font-weight: 500;
   }
-}
+`

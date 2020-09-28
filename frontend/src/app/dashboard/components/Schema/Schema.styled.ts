@@ -1,6 +1,6 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.schema {
+export const StyledSchema = styled.div`
   padding-left: 10px;
 
   .model {
@@ -12,7 +12,7 @@
     }
 
     .identifier {
-      color: $frenchGray;
+      color: ${props => props.theme.colors.gray.frenchGray};
       margin-right: 10px;
     }
 
@@ -28,7 +28,7 @@
     .name {
       color: $tuna;
       display: inline;
-      font-size: $xLarge;
+      font-size: ${props => props.theme.font.size.xLarge};
       font-weight: 500;
     }
 
@@ -44,8 +44,8 @@
         border-radius: 0.25rem;
 
         &:hover {
-          color: rgb(0, 174, 239);
-          background-color: rgb(238, 238, 238);
+          color: ${props => props.theme.colors.blue.pacificBlue};
+          background-color: ${props => props.theme.colors.gray.gallery};
         }
       }
     }
@@ -64,4 +64,4 @@
       flex-direction: column;
     }
   }
-}
+`

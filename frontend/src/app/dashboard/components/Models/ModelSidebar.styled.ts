@@ -1,6 +1,6 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.modelSidebar {
+export const StyledModelSidebar = styled.div`
   margin: 0 auto;
   width: 90%;
 
@@ -9,9 +9,9 @@
     justify-content: space-between;
 
     .models {
-      color: $gray;
-      font-size: $smaller;
-      font-weight: $bold;
+      color: ${props => props.theme.color.gray};
+      font-size: ${props => props.theme.font.size.smaller};
+      font-weight: ${props => props.theme.font.weight.bold};
     }
 
     .create {
@@ -24,7 +24,7 @@
     margin-bottom: 20px;
 
     a {
-      color: $tuna;
+      color: ${props => props.theme.colors.gray.tuna};
       display: block;
       font-size: 13px;
       font-weight: 600;
@@ -32,8 +32,8 @@
       border-radius: 5px;
 
       &:hover {
-        background-color: $gallery;
+        background-color: ${props => props.theme.colors.gray.gallery};
       }
     }
   }
-}
+`

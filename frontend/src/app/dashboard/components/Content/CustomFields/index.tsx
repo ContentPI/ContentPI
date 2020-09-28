@@ -22,7 +22,7 @@ import Link from '@ui/Link'
 import ReferenceModal from '@modals/ReferenceModal'
 
 // Styles
-import styles from './CustomFields.scss'
+import { StyledCustomFields } from './CustomFields.styled'
 
 interface iProps {
   action: string
@@ -115,7 +115,7 @@ const CustomFields: FC<iProps> = ({
       const currentEntries = selectedEntries[modelName]
 
       return (
-        <div className={styles.entries}>
+        <div className="entries">
           {currentEntries &&
             currentEntries.map((entry: any) => (
               <EntryBlock
@@ -126,7 +126,7 @@ const CustomFields: FC<iProps> = ({
               />
             ))}
 
-          <a className={styles.reference} onClick={() => handleReferenceModal(modelEntries)}>
+          <a className="reference" onClick={() => handleReferenceModal(modelEntries)}>
             <Icon type="fas fa-link" /> Link existing {modelName}
           </a>
         </div>
@@ -163,7 +163,7 @@ const CustomFields: FC<iProps> = ({
     }
 
     return (
-      <div className={styles[field.type.toLowerCase()]}>
+      <div className={field.type.toLowerCase()}>
         <Select
           name={enumeration.identifier}
           label={enumeration.enumerationName}
@@ -197,24 +197,24 @@ const CustomFields: FC<iProps> = ({
         }}
       />
 
-      <div className={styles.customFields}>
-        <div className={styles.fields}>
-          <div className={styles.goBack}>
+      <StyledCustomFields>
+        <div className="fields">
+          <div className="goBack">
             <Link href={CONTENT_LINK(router).as} title={`Go back to ${getModel.modelName}`}>
               <Icon type="fas fa-chevron-left" />
             </Link>
             &nbsp;&nbsp;&nbsp;
-            <Badge className={styles.badge}>{getModel.modelName}</Badge>
-            <div className={styles.entryTitle}>{values.title || <>New {getModel.modelName}</>}</div>
+            <Badge className="badge">{getModel.modelName}</Badge>
+            <div className="entryTitle">{values.title || <>New {getModel.modelName}</>}</div>
           </div>
 
           {customFields.map((field: any) => (
             <div
               key={field.id}
               className={cx(
-                styles.field,
-                active === field.identifier ? styles.active : '',
-                required[field.identifier] ? styles.red : ''
+                'field',
+                active === field.identifier ? 'active' : '',
+                required[field.identifier] ? 'red' : ''
               )}
               onClick={(): void => handleActive(field.identifier)}
             >
@@ -222,7 +222,7 @@ const CustomFields: FC<iProps> = ({
                 <label>
                   {field.fieldName}{' '}
                   {field.isRequired && (
-                    <span className={cx(styles.tag, required[field.identifier] ? styles.red : '')}>
+                    <span className={cx('tag', required[field.identifier] ? 'red' : '')}>
                       Required
                     </span>
                   )}
@@ -230,7 +230,7 @@ const CustomFields: FC<iProps> = ({
               </div>
 
               {field.type === 'String' && (
-                <div className={styles[field.type.toLowerCase()]}>
+                <div className={field.type.toLowerCase()}>
                   <Input
                     type="text"
                     hasError={required[field.identifier]}
@@ -244,7 +244,7 @@ const CustomFields: FC<iProps> = ({
               )}
 
               {field.type === 'Text' && (
-                <div className={styles[field.type.toLowerCase()]}>
+                <div className={field.type.toLowerCase()}>
                   <TextArea
                     name={field.identifier}
                     hasError={required[field.identifier]}
@@ -261,7 +261,7 @@ const CustomFields: FC<iProps> = ({
             </div>
           ))}
         </div>
-      </div>
+      </StyledCustomFields>
     </>
   )
 }

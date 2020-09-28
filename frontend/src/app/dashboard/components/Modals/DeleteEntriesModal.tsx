@@ -8,7 +8,7 @@ import { useMutation } from '@apollo/client'
 import DELETE_VALUES_MUTATION from '@graphql/values/deleteValues.mutation'
 
 // Styles
-import styles from './Modal.scss'
+import { StyledModal } from './Modal.styled'
 
 interface iProps {
   isOpen: boolean
@@ -41,14 +41,14 @@ const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): Re
 
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
-      <div className={styles.modal}>
+      <StyledModal>
         <p>
           Are you sure you want to delete{' '}
           {pluralify('this entry', 'these entries', data.entries.length)}? <br />
           This cannot be reverted!
         </p>
 
-        <div className={styles.buttons}>
+        <div className="buttons">
           <LinkButton color="#6663fd" bold onClick={onClose}>
             Cancel
           </LinkButton>
@@ -57,7 +57,7 @@ const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): Re
             <>Delete {pluralify('Entry', 'Entries', data.entries.length)}</>
           </LinkButton>
         </div>
-      </div>
+      </StyledModal>
     </Modal>
   )
 }

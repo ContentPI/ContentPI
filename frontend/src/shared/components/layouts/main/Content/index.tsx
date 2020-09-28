@@ -6,7 +6,7 @@ import Header from '../Header'
 import Footer from '../Footer'
 
 // Styles
-import styles from './Content.scss'
+import { StyledContent } from './Content.styled'
 
 // Interfaces
 interface iProps {
@@ -18,19 +18,19 @@ interface iProps {
 }
 
 const Content: FC<iProps> = ({ children, header, footer, noWrapper }): ReactElement => (
-  <section className={styles.content}>
+  <StyledContent>
     {header && <Header />}
 
     {!noWrapper && (
-      <div className={styles.container}>
-        <div className={styles.wrapper}>{children}</div>
+      <div className="container">
+        <div className="wrapper">{children}</div>
       </div>
     )}
 
-    {noWrapper && <div className={styles.container}>{children}</div>}
+    {noWrapper && <div className="container">{children}</div>}
 
     {footer && <Footer />}
-  </section>
+  </StyledContent>
 )
 
 export default memo(Content)

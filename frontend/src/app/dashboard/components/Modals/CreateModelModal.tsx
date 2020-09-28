@@ -11,7 +11,7 @@ import { FormContext } from '@contexts/form'
 import CREATE_MODEL_MUTATION from '@graphql/models/createModel.mutation'
 
 // Styles
-import styles from './Modal.scss'
+import { StyledModal } from './Modal.styled'
 
 interface iProps {
   isOpen: boolean
@@ -76,7 +76,7 @@ const CreateModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
-      <div className={styles.modal}>
+      <StyledModal>
         <div>
           <label htmlFor="modelName">
             Model Name {required.modelName && <Badge danger>Required</Badge>}
@@ -112,13 +112,13 @@ const CreateModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           />
         </div>
 
-        <div className={styles.buttons}>
+        <div className="buttons">
           <LinkButton onClick={onClose}>Cancel</LinkButton>
           <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Creating Model...">
             Create Model
           </PrimaryButton>
         </div>
-      </div>
+      </StyledModal>
     </Modal>
   )
 }

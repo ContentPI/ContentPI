@@ -4,7 +4,7 @@ import { Modal, EntryBlock } from 'fogg-ui'
 import { getReferenceTitle } from 'fogg-utils'
 
 // Styles
-import styles from './Modal.scss'
+import { StyledModal } from './Modal.styled'
 
 interface iProps {
   isOpen: boolean
@@ -25,7 +25,7 @@ const ReferenceModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
 
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
-      <div className={styles.modal}>
+      <StyledModal>
         {referenceEntries.entries.map((entry: any) => {
           entry.modelName = referenceEntries.modelName
 
@@ -39,7 +39,7 @@ const ReferenceModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
             />
           )
         })}
-      </div>
+      </StyledModal>
     </Modal>
   )
 }

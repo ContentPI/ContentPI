@@ -1,58 +1,58 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.pageNotFound {
+export const StyledPageNotFound = styled.div`
   align-items: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   padding: 20px;
 
-  @include mobile {
+  ${props => props.theme.mixins.breakpoint.xs`
     align-content: flex-start;
     padding: 50px 20px;
-  }
+  `};
 
   img {
     margin-right: 50px;
     width: 250px;
 
-    @include tablet {
+    ${props => props.theme.mixins.breakpoint.sm`
       margin-right: 0;
       width: 250px;
-    }
+    `};
 
-    @include mobile {
+    ${props => props.theme.mixins.breakpoint.xs`
       margin-bottom: 20px;
       width: 150px;
-    }
+    `};
   }
 
   .notFound {
     font-family: Arial;
 
-    @include mobile {
+    ${props => props.theme.mixins.breakpoint.xs`
       text-align: center;
-    }
+    `};
 
     h1 {
       font-size: 208px;
       margin: 0;
 
-      @include tablet {
+      ${props => props.theme.mixins.breakpoint.sm`
         font-size: 160px;
-      }
+      `};
 
-      @include mobile {
+      ${props => props.theme.mixins.breakpoint.xs`
         font-size: 112px;
-      }
+      `};
     }
 
     span {
       font-size: 29px;
 
-      @include tablet {
+      ${props => props.theme.mixins.breakpoint.sm`
         font-size: 24px;
-      }
+      `};
     }
 
     p {
@@ -60,25 +60,25 @@
       margin: 30px 0 80px 0;
       max-width: 500px;
 
-      @include tablet {
+      ${props => props.theme.mixins.breakpoint.sm`
         font-size: 16px;
-      }
+      `};
 
-      @include mobile {
+      ${props => props.theme.mixins.breakpoint.xs`
         margin: 20px 0 80px 0;
-      }
+      `};
     }
 
     a {
-      color: $dodgerBlue;
+      color: ${props => props.theme.colors.blue.dodgerBlue};
       text-decoration: none;
 
       &:hover {
-        color: $bondiBlue;
+        color: ${props => props.theme.colors.blue.bondiBlue};
 
-        @include tablet {
+        ${props => props.theme.mixins.breakpoint.sm`
           font-size: 16px;
-        }
+        `};
       }
 
       i {
@@ -86,4 +86,4 @@
       }
     }
   }
-}
+`

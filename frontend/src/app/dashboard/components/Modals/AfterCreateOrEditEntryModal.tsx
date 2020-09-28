@@ -4,7 +4,7 @@ import { Modal, PrimaryButton, SuccessButton, DarkButton, Icon } from 'fogg-ui'
 import { cx } from 'fogg-utils'
 
 // Styles
-import styles from './Modal.scss'
+import { StyledModal } from './Modal.styled'
 
 interface iProps {
   isOpen: boolean
@@ -21,13 +21,13 @@ const AfterCreateOrEditEntryModal: FC<iProps> = ({
 }): ReactElement => {
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
-      <div className={styles.modal}>
-        <p className={styles.center}>
-          You <span className={styles[options.action]}>{options.action}</span> correctly your entry!
-          What do you want to do next?
+      <StyledModal>
+        <p className="center">
+          You <span className={options.action}>{options.action}</span> correctly your entry! What do
+          you want to do next?
         </p>
 
-        <div className={cx(styles.buttons, styles.center)}>
+        <div className={cx('buttons', 'center')}>
           <PrimaryButton onClick={options.handleEditNewEntry}>
             <>
               <Icon type="far fa-edit" /> Continue Editing this Entry
@@ -44,7 +44,7 @@ const AfterCreateOrEditEntryModal: FC<iProps> = ({
             </>
           </DarkButton>
         </div>
-      </div>
+      </StyledModal>
     </Modal>
   )
 }

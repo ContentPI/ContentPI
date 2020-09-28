@@ -32,6 +32,7 @@
       "@layouts/*": ["shared/components/layouts/*"],
       "@pages/*": ["pages/*"],
       "@ui/*": ["shared/components/ui/*"],
+      "@styles/*": ["shared/styles/*"],
       "@shared/*": ["shared/*"]
     }
   },

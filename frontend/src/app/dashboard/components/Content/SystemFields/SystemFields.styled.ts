@@ -1,24 +1,24 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.systemFields {
-  background-color: $whisper;
-  border-bottom: 1px solid $gallery;
-  border-left: 1px solid $gallery;
+export const StyledSystemFields = styled.div`
+  background-color: ${props => props.theme.colors.gray.whisper};
+  border-bottom: 1px solid ${props => props.theme.colors.gray.gallery};
+  border-left: 1px solid ${props => props.theme.colors.gray.gallery};
   height: 100vh;
   margin-top: -20px;
   padding-top: 10px;
   position: relative;
   width: 420px;
 
-  @include maxBreakpoint(1024px) {
+  ${props => props.theme.mixins.breakpoint.md`
     width: 350px;
     margin-left: -100px;
-  }
+  `};
 
-  @include tablet {
+  ${props => props.theme.mixins.breakpoint.sm`
     width: 300px;
     margin-left: -160px;
-  }
+  `};
 
   .wrapper {
     margin: 0 auto;
@@ -28,7 +28,7 @@
       color: $doveGray;
       font-size: 12px;
       font-weight: 600;
-      border-bottom: 1px solid $gallery;
+      border-bottom: 1px solid ${props => props.theme.colors.gray.gallery};
       text-transform: uppercase;
       padding-bottom: 5px;
       margin-bottom: 20px;
@@ -44,9 +44,12 @@
         font-size: 13px;
         margin-bottom: 20px;
 
-        .label {
+        .label,
+        .id,
+        .createdAt,
+        .updatedAt {
           display: inline-block;
-          background-color: $gallery;
+          background-color: ${props => props.theme.colors.gray.gallery};
           border-radius: 3px;
           color: $gray;
           font-size: 11px;
@@ -60,31 +63,29 @@
         }
 
         .id {
-          @extend .label;
           width: 237px;
 
-          @include tablet {
+          ${props => props.theme.mixins.breakpoint.sm`
             width: 100px;
-          }
+          `};
         }
 
         .status {
-          color: $mySin;
+          color: ${props => props.theme.colors.yellow.mySin};
           text-transform: uppercase;
 
           &.published {
-            color: $mountainMeadow;
+            color: ${props => props.theme.colors.green.mountainMeadow};
           }
         }
 
         .createdAt,
         .updatedAt {
-          @extend .label;
           width: 160px;
 
-          @include tablet {
+          ${props => props.theme.mixins.breakpoint.sm`
             width: 100px;
-          }
+          `};
         }
 
         .empty {
@@ -105,17 +106,17 @@
     bottom: 150px;
 
     &.show {
-      @include minBreakpoint(1024px) {
-        right: calc(100% - 300px);
-      }
-
-      @include minBreakpoint(1280px) {
+      ${props => props.theme.mixins.breakpoint.lg`
         right: calc(100% - 350px);
-      }
+      `};
 
-      @include tablet {
+      ${props => props.theme.mixins.breakpoint.md`
+        right: calc(100% - 300px);
+      `};
+
+      ${props => props.theme.mixins.breakpoint.sm`
         right: calc(100% - 270px);
-      }
+      `};
     }
   }
-}
+`

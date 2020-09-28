@@ -1,21 +1,13 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-html,
-body {
-  background-color: $white;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-.myApps {
+export const StyledMyApps = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
   width: 100%;
 
   .header {
-    border-bottom: 1px solid $athensGray;
+    border-bottom: 1px solid ${props => props.theme.colors.gray.athensGray};
     width: 100%;
     height: 70px;
     background: rgb(2, 0, 36);
@@ -36,4 +28,4 @@ body {
       }
     }
   }
-}
+`

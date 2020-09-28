@@ -1,6 +1,6 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.cards {
+export const StyledCards = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 40px;
@@ -23,18 +23,18 @@
 
     li {
       a {
-        color: $black;
+        color: ${props => props.theme.color.black};
 
         &:hover {
-          color: $denim;
+          color: ${props => props.theme.colors.blue.denim};
         }
       }
 
       .card {
         width: 210px;
         height: 260px;
-        box-shadow: $alto 0px 2px 4px;
-        border-color: rgb(240, 242, 247);
+        box-shadow: ${props => props.theme.colors.gray.alto} 0px 2px 4px;
+        border-color: ${props => props.theme.color.white};
         border-radius: 4px;
         margin: 70px 50px 50px 0px;
         display: flex;
@@ -67,11 +67,11 @@
 
           i {
             font-size: 54px;
-            color: $denim;
+            color: ${props => props.theme.colors.blue.denim};
             padding: 8px;
           }
         }
       }
     }
   }
-}
+`

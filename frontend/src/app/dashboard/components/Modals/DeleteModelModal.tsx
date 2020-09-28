@@ -8,7 +8,7 @@ import { useMutation } from '@apollo/client'
 import DELETE_MODEL_MUTATION from '@graphql/models/deleteModel.mutation'
 
 // Styles
-import styles from './Modal.scss'
+import { StyledModal } from './Modal.styled'
 
 interface iProps {
   isOpen: boolean
@@ -40,13 +40,13 @@ const DeleteModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
-      <div className={styles.modal}>
+      <StyledModal>
         <p>
           Are you sure you want to delete the model? <br />
           This cannot be reverted!
         </p>
 
-        <div className={styles.buttons}>
+        <div className="buttons">
           <LinkButton color="#6663fd" bold onClick={onClose}>
             Cancel
           </LinkButton>
@@ -55,7 +55,7 @@ const DeleteModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
             Delete Model
           </LinkButton>
         </div>
-      </div>
+      </StyledModal>
     </Modal>
   )
 }

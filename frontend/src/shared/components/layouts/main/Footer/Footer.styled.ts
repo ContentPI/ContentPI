@@ -1,6 +1,6 @@
-@import '~styles/_dependencies';
+import { styled } from '@styles/theme'
 
-.footer {
+export const StyledFooter = styled.footer`
   width: 97%;
   text-align: center;
   height: 54px;
@@ -15,9 +15,9 @@
     font-size: 14px;
     justify-content: space-between;
 
-    @include tablet {
+    ${props => props.theme.mixins.breakpoint.sm`
       flex-direction: column-reverse;
-    }
+    `};
 
     .copyright {
       color: $black;
@@ -38,17 +38,17 @@
           padding: 10px;
 
           a {
-            color: $gray;
+            color: ${props => props.theme.color.gray};
             text-decoration: none;
             letter-spacing: 0.5px;
             font-size: 14px;
 
             &:hover {
-              color: $black;
+              color: ${props => props.theme.color.black};
             }
           }
         }
       }
     }
   }
-}
+`
