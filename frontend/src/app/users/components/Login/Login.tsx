@@ -13,7 +13,7 @@ import Logo from '@shared/components/layouts/main/Logo'
 import { iUser } from '@interfaces'
 
 // Styles
-import styles from './Login.scss'
+import { StyledLogin } from './Login.styled'
 
 interface iProps {
   login(input: any): any
@@ -56,17 +56,17 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
         </Alert>
       </RenderIf>
 
-      <div className={styles.login}>
-        <div className={styles.wrapper}>
-          <div className={styles.form}>
-            <div className={styles.logo}>
+      <StyledLogin>
+        <div className="wrapper">
+          <div className="form">
+            <div className="logo">
               <Logo />
             </div>
 
             <Input
               autoComplete="off"
               type="email"
-              className={styles.email}
+              className="email"
               name="email"
               placeholder="Email"
               onChange={_onChange}
@@ -76,15 +76,15 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
             <Input
               autoComplete="off"
               type="password"
-              className={styles.password}
+              className="password"
               name="password"
               placeholder="Password"
               onChange={_onChange}
               value={values.password}
             />
 
-            <div className={styles.actions}>
-              <div className={styles.left}>
+            <div className="actions">
+              <div className="left">
                 <DarkButton name="login" onClick={(): Promise<void> => handleSubmit(values)}>
                   Login
                 </DarkButton>
@@ -94,7 +94,7 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
             </div>
           </div>
         </div>
-      </div>
+      </StyledLogin>
     </>
   )
 }

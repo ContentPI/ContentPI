@@ -8,9 +8,6 @@ import { UserContext } from '@contexts/user'
 // Components
 import Login from './Login'
 
-// Styles
-import './Layout.scss'
-
 // Interfaces
 interface iProps {
   currentUrl: string
