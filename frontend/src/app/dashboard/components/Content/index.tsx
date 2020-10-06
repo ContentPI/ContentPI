@@ -13,6 +13,7 @@ import { CREATE_ENTRY_LINK, EDIT_ENTRY_LINK, CONTENT_LINK } from '@constants/lin
 import MainLayout from '@layouts/main/MainLayout'
 import Link from '@ui/Link'
 import DeleteEntriesModal from '@modals/DeleteEntriesModal'
+import PublishOrUnpublishEntriesModal from '@modals/PublishOrUnpublishEntriesModal'
 import PageNotFound from '../PageNotFound'
 
 // Styles
@@ -25,8 +26,10 @@ interface iProps {
 
 const Content: FC<iProps> = ({ data, router }): ReactElement => {
   // States
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const [isPublishOrUnpublishModalOpen, setIsPublishOrUnpublishModalOpen] = useState(false)
   const [entries, setEntries] = useState<any[]>([])
+  const [action, setAction] = useState('')
 
   // Data
   const { getModel, getDeclarations } = data
@@ -38,8 +41,13 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
   }
 
   // Methods
-  const handleDeleteEntriesModal = (entriesToDelete: any[]) => {
-    setIsModalOpen(!isModalOpen)
+  const handleEntriesModal = (entriesToDelete: any[], modalAction: string) => {
+    if (modalAction === 'delete') {
+      setIsDeleteModalOpen(!isDeleteModalOpen)
+    } else {
+      setIsPublishOrUnpublishModalOpen(!isPublishOrUnpublishModalOpen)
+      setAction(modalAction)
+    }
 
     if (entriesToDelete.length > 0) {
       setEntries(entriesToDelete)
@@ -59,8 +67,8 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
     <>
       <DeleteEntriesModal
         label={`Delete ${pluralify('Entry', 'Entries', entries.length)}`}
-        isOpen={isModalOpen}
-        onClose={() => handleDeleteEntriesModal([])}
+        isOpen={isDeleteModalOpen}
+        onClose={() => handleEntriesModal([], 'delete')}
         options={{
           position: 'center',
           width: '620px',
@@ -70,8 +78,26 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
         }}
       />
 
+      <PublishOrUnpublishEntriesModal
+        label={`${action === 'publish' ? 'Publish' : 'Unpublish'} ${pluralify(
+          'Entry',
+          'Entries',
+          entries.length
+        )}`}
+        isOpen={isPublishOrUnpublishModalOpen}
+        onClose={() => handleEntriesModal([], action)}
+        options={{
+          position: 'center',
+          width: '620px',
+          data: {
+            action,
+            entries
+          }
+        }}
+      />
+
       <MainLayout title="Content" header content footer sidebar noWrapper router={router}>
-        <StyledContent>
+        <StyledContent style={{ margin: '0 auto', width: '98%' }}>
           <div className="model">
             <PrimaryButton
               href={CREATE_ENTRY_LINK(router).href}
@@ -94,9 +120,9 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
                 fileTypes: config.files.types,
                 isFile
               }}
-              onDelete={(ids: any): any => handleDeleteEntriesModal(ids)}
-              onPublish={(ids: any): void => console.log('Publish', ids)}
-              onUnpublish={(ids: any): void => console.log('Unpublish', ids)}
+              onDelete={(ids: any): any => handleEntriesModal(ids, 'delete')}
+              onPublish={(ids: any): void => handleEntriesModal(ids, 'publish')}
+              onUnpublish={(ids: any): void => handleEntriesModal(ids, 'unpublish')}
             />
 
             <Pagination

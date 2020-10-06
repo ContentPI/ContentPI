@@ -7,6 +7,7 @@ export const StyledSystemFields = styled.div`
   height: 100vh;
   margin-top: -20px;
   padding-top: 10px;
+  padding-right: 20px;
   position: relative;
   width: 420px;
 
@@ -25,7 +26,7 @@ export const StyledSystemFields = styled.div`
     width: 90%;
 
     .block {
-      color: $doveGray;
+      color: ${props => props.theme.colors.gray.doveGray};
       font-size: 12px;
       font-weight: 600;
       border-bottom: 1px solid ${props => props.theme.colors.gray.gallery};
@@ -37,10 +38,29 @@ export const StyledSystemFields = styled.div`
     .row {
       margin-bottom: 20px;
 
+      .alert {
+        visibility: hidden;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+        margin-top: 5px;
+        height: 10px;
+        text-transform: uppercase;
+        &.show {
+          visibility: visible;
+        }
+        &.saved {
+          color: ${props => props.theme.colors.blue.pacificBlue};
+        }
+        &.published {
+          color: ${props => props.theme.colors.green.mountainMeadow};
+        }
+      }
+
       .systemField {
         display: flex;
         justify-content: space-between;
-        color: $doveGray;
+        color: ${props => props.theme.colors.gray.doveGray};
         font-size: 13px;
         margin-bottom: 20px;
 
@@ -51,7 +71,7 @@ export const StyledSystemFields = styled.div`
           display: inline-block;
           background-color: ${props => props.theme.colors.gray.gallery};
           border-radius: 3px;
-          color: $gray;
+          color: ${props => props.theme.color.gray};
           font-size: 11px;
           padding: 5px 6px;
           margin-top: -5px;
@@ -92,31 +112,6 @@ export const StyledSystemFields = styled.div`
           display: none;
         }
       }
-    }
-  }
-
-  .alert {
-    width: 100%;
-    transition-property: right, left;
-    transition-duration: 1s;
-    -webkit-transition-property: right, left;
-    -webkit-transition-duration: 1s;
-    position: absolute;
-    right: calc(100% - 900px);
-    bottom: 150px;
-
-    &.show {
-      ${props => props.theme.mixins.breakpoint.lg`
-        right: calc(100% - 350px);
-      `};
-
-      ${props => props.theme.mixins.breakpoint.md`
-        right: calc(100% - 300px);
-      `};
-
-      ${props => props.theme.mixins.breakpoint.sm`
-        right: calc(100% - 270px);
-      `};
     }
   }
 `

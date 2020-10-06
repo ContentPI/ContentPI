@@ -88,6 +88,16 @@ const SystemFields: FC<iProps> = ({
             >
               {isFile ? 'Upload and publish' : 'Publish'}
             </SuccessButton>
+
+            <p
+              className={cx(
+                'alert',
+                showAlert ? 'show' : '',
+                alert === 'Published' ? 'published' : 'saved'
+              )}
+            >
+              {alert} successfully!
+            </p>
           </div>
 
           <div className="block">System Fields</div>
@@ -118,12 +128,6 @@ const SystemFields: FC<iProps> = ({
               return <div key={systemField.id} />
             })}
           </div>
-        </div>
-
-        <div className={cx('alert', showAlert ? 'show' : '')}>
-          <Alert success={alertType === 'success'} danger={alertType === 'danger'} flat>
-            {alert}
-          </Alert>
         </div>
       </StyledSystemFields>
     </>

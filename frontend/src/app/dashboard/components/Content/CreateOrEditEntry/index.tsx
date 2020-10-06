@@ -281,7 +281,7 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
               status: values.status
             })
 
-            waitFor(2).then(() => {
+            waitFor(5).then(() => {
               setShowAlert(false)
             })
 

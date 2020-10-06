@@ -168,6 +168,46 @@ export default {
       const deletedValues = await Promise.all(deletedValuesPromises)
 
       return deletedValues
+    },
+    publishOrUnpublishEntries: async (
+      _: any,
+      { entries, action }: { entries: any[]; action: 'publish' | 'unpublish' },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const publishedOrUnpublishedValuesPromises: any = []
+      let newEntries = entries
+
+      if (action === 'unpublish') {
+        newEntries = entries.filter(
+          (entry: any) => entry.status === 'Published'
+        )
+      }
+
+      newEntries.forEach((entry: any) => {
+        const publishedOrUnpublishedValuePromise = new Promise(
+          (resolve: any) => {
+            models.Value.update(
+              { value: action === 'publish' ? 'Published' : 'Draft' },
+              {
+                where: {
+                  entry: entry.id,
+                  value: action === 'publish' ? 'Draft' : 'Published'
+                }
+              }
+            ).then(() => resolve({ entryId: entry.id }))
+          }
+        )
+
+        publishedOrUnpublishedValuesPromises.push(
+          publishedOrUnpublishedValuePromise
+        )
+      })
+
+      const publishedOrUnpublishedValues = await Promise.all(
+        publishedOrUnpublishedValuesPromises
+      )
+
+      return publishedOrUnpublishedValues
     }
   }
 }

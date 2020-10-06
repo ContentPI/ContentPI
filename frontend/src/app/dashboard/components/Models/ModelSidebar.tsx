@@ -9,6 +9,9 @@ import { MODEL_LINK, ENUMERATION_LINK } from '@constants/links'
 import CreateModelModal from '@modals/CreateModelModal'
 import CreateEnumerationModal from '@modals/CreateEnumerationModal'
 
+// Components
+import Link from '@ui/Link'
+
 // Styles
 import { StyledModelSidebar } from './ModelSidebar.styled'
 
@@ -70,7 +73,7 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
 
             return (
               <div key={model.id}>
-                <a href={MODEL_LINK(router).as}>{model.modelName}</a>
+                <Link href={MODEL_LINK(router).as}>{model.modelName}</Link>
               </div>
             )
           })}
@@ -89,7 +92,7 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
 
             return (
               <div key={enumeration.id}>
-                <a href={ENUMERATION_LINK(router).as}>{enumeration.enumerationName}</a>
+                <Link href={ENUMERATION_LINK(router).as}>{enumeration.enumerationName}</Link>
               </div>
             )
           })}

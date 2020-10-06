@@ -10,7 +10,7 @@ type Entries {
   entries: JSON!
 }
 
-type DeletedEntries {
+type EntryIds {
   entryId: UUID!
 }
 
@@ -23,7 +23,11 @@ type Mutation {
   createValues(input: [CreateOrUpdateValueInput]): [Value!]
   findUniqueValues(input: [ValueInput]): [Value!]
   updateValues(entry: UUID!, input: [CreateOrUpdateValueInput]): [Value!]
-  deleteValues(entries: [EntriesInput]): [DeletedEntries!]
+  deleteValues(entries: [EntriesInput]): [EntryIds!]
+  publishOrUnpublishEntries(
+    entries: [EntriesInput]
+    action: String!
+  ): [EntryIds!]
 }
 
 input EntriesInput {

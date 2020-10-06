@@ -37,7 +37,7 @@ const ContentSidebar: FC<iProps> = ({ app, router }): ReactElement => {
 
             return (
               <div key={model.id}>
-                <a href={CONTENT_LINK(router).as}>{model.modelName}</a>
+                <Link href={CONTENT_LINK(router).as}>{model.modelName}</Link>
               </div>
             )
           })}

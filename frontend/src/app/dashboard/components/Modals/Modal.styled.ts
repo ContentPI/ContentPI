@@ -63,6 +63,7 @@ export const StyledModal = styled.div`
   .buttons {
     display: flex;
     justify-content: flex-end;
+    text-transform: capitalize;
 
     &.center {
       justify-content: space-between;
