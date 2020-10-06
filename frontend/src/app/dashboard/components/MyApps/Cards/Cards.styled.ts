@@ -60,7 +60,7 @@ export const StyledCards = styled.div`
           align-items: center;
           justify-content: center;
           padding: 8px;
-          color: $white;
+          color: ${props => props.theme.color.white};
           text-transform: uppercase;
           font-size: 18px;
           font-weight: 600;

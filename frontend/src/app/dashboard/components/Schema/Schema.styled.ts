@@ -26,7 +26,7 @@ export const StyledSchema = styled.div`
     }
 
     .name {
-      color: $tuna;
+      color: ${props => props.theme.colors.gray.tuna};
       display: inline;
       font-size: ${props => props.theme.font.size.xLarge};
       font-weight: 500;
@@ -39,7 +39,7 @@ export const StyledSchema = styled.div`
         line-height: 40px;
         padding-left: 10px;
         padding-right: 10px;
-        color: $cerulean;
+        color: ${props => props.theme.colors.blue.cerulean};
         font-size: 14px;
         border-radius: 0.25rem;
 
@@ -60,8 +60,8 @@ export const StyledSchema = styled.div`
     display: flex;
     justify-content: space-between;
 
-    @include tablet {
+    ${props => props.theme.mixins.breakpoint.md`
       flex-direction: column;
-    }
+    `};
   }
 `
