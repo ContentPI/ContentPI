@@ -5,10 +5,10 @@ export const StyledDeclarations = styled.div`
   padding: 10px;
   margin-top: -147px;
 
-  ${theme.mixins.breakpoint.sm`
+  @media ${device.tablet} {
     margin-top: 0;
     width: 97%;
-  `};
+  }
 
   h3 {
     color: ${theme.colors.gray.tuna};
@@ -24,9 +24,9 @@ export const StyledDeclarations = styled.div`
     padding: 0px;
     outline: none;
 
-    ${theme.mixins.breakpoint.sm`
+    @media ${device.tablet} {
       margin-top: 0px;
-    `};
+    }
 
     li {
       div {
@@ -44,9 +44,9 @@ export const StyledDeclarations = styled.div`
           margin-top: 10px;
           padding-top: 20px;
 
-          ${theme.mixins.breakpoint.sm`
+          @media ${device.tablet} {
             padding-top: 0;
-          `};
+          }
 
           &:first-child {
             padding: 0;

@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledFields = styled.div`
   display: flex;
@@ -6,7 +6,7 @@ export const StyledFields = styled.div`
   margin-top: 0px;
   width: 75%;
 
-  @media (min-width: 1300px) {
+  @media ${device.desktop} {
     width: 88%;
   }
 

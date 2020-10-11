@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledFooter = styled.footer`
   width: 97%;
@@ -15,9 +15,9 @@ export const StyledFooter = styled.footer`
     font-size: 14px;
     justify-content: space-between;
 
-    ${theme.mixins.breakpoint.sm`
+    @media ${device.tablet} {
       flex-direction: column-reverse;
-    `};
+    }
 
     .copyright {
       color: ${theme.color.black};

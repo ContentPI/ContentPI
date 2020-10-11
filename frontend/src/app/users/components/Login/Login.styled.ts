@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledLogin = styled.div`
   .wrapper {
@@ -11,17 +11,17 @@ export const StyledLogin = styled.div`
     position: relative;
     width: 500px;
 
-    ${theme.mixins.breakpoint.sm`
+    @media ${device.tablet} {
       margin-top: 20px;
       width: 320px;
-    `};
+    }
 
     .success {
       text-align: center;
     }
 
     .form {
-      ${theme.mixins.placeholder(props.theme.colors.gray.silverChalice)}
+      ${theme.mixins.placeholder(theme.colors.gray.silverChalice)}
       position: relative;
       margin: 0 auto;
       margin-top: 20px;
@@ -47,9 +47,9 @@ export const StyledLogin = styled.div`
             margin-right: 10px;
             width: 100px;
 
-            ${theme.mixins.breakpoint.sm`
+            @media ${device.tablet} {
               margin-right: 5px;
-            `}
+            }
           }
 
           .register {

@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledPageNotFound = styled.div`
   align-items: center;
@@ -7,52 +7,52 @@ export const StyledPageNotFound = styled.div`
   justify-content: center;
   padding: 20px;
 
-  ${theme.mixins.breakpoint.xs`
+  @media ${device.mobile} {
     align-content: flex-start;
     padding: 50px 20px;
-  `};
+  }
 
   img {
     margin-right: 50px;
     width: 250px;
 
-    ${theme.mixins.breakpoint.sm`
+    @media ${device.tablet} {
       margin-right: 0;
       width: 250px;
-    `};
+    }
 
-    ${theme.mixins.breakpoint.xs`
+    @media ${device.mobile} {
       margin-bottom: 20px;
       width: 150px;
-    `};
+    }
   }
 
   .notFound {
     font-family: Arial;
 
-    ${theme.mixins.breakpoint.xs`
+    @media ${device.mobile} {
       text-align: center;
-    `};
+    }
 
     h1 {
       font-size: 208px;
       margin: 0;
 
-      ${theme.mixins.breakpoint.sm`
+      @media ${device.tablet} {
         font-size: 160px;
-      `};
+      }
 
-      ${theme.mixins.breakpoint.xs`
+      @media ${device.mobile} {
         font-size: 112px;
-      `};
+      }
     }
 
     span {
       font-size: 29px;
 
-      ${theme.mixins.breakpoint.sm`
+      @media ${device.tablet} {
         font-size: 24px;
-      `};
+      }
     }
 
     p {
@@ -60,13 +60,13 @@ export const StyledPageNotFound = styled.div`
       margin: 30px 0 80px 0;
       max-width: 500px;
 
-      ${theme.mixins.breakpoint.sm`
+      @media ${device.tablet} {
         font-size: 16px;
-      `};
+      }
 
-      ${theme.mixins.breakpoint.xs`
+      @media ${device.mobile} {
         margin: 20px 0 80px 0;
-      `};
+      }
     }
 
     a {
@@ -76,9 +76,9 @@ export const StyledPageNotFound = styled.div`
       &:hover {
         color: ${theme.colors.blue.bondiBlue};
 
-        ${theme.mixins.breakpoint.sm`
+        @media ${device.tablet} {
           font-size: 16px;
-        `};
+        }
       }
 
       i {

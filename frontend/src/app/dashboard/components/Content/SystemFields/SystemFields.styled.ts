@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledSystemFields = styled.div`
   background-color: ${theme.colors.gray.whisper};
@@ -11,15 +11,15 @@ export const StyledSystemFields = styled.div`
   position: relative;
   width: 420px;
 
-  ${theme.mixins.breakpoint.md`
+  @media ${device.laptop} {
     width: 350px;
     margin-left: -100px;
-  `};
+  }
 
-  ${theme.mixins.breakpoint.sm`
+  @media ${device.tablet} {
     width: 300px;
     margin-left: -160px;
-  `};
+  }
 
   .wrapper {
     margin: 0 auto;
@@ -85,9 +85,9 @@ export const StyledSystemFields = styled.div`
         .id {
           width: 237px;
 
-          ${theme.mixins.breakpoint.sm`
+          @media ${device.tablet} {
             width: 100px;
-          `};
+          }
         }
 
         .status {
@@ -103,9 +103,9 @@ export const StyledSystemFields = styled.div`
         .updatedAt {
           width: 160px;
 
-          ${theme.mixins.breakpoint.sm`
+          @media ${device.tablet} {
             width: 100px;
-          `};
+          }
         }
 
         .empty {

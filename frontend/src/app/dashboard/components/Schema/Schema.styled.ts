@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledSchema = styled.div`
   padding-left: 10px;
@@ -60,8 +60,8 @@ export const StyledSchema = styled.div`
     display: flex;
     justify-content: space-between;
 
-    ${theme.mixins.breakpoint.md`
+    @media ${device.laptop} {
       flex-direction: column;
-    `};
+    }
   }
 `

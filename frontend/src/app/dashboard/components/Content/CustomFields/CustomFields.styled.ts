@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledCustomFields = styled.div`
   display: flex;
@@ -27,13 +27,13 @@ export const StyledCustomFields = styled.div`
     max-width: 800px;
     margin-top: 20px;
 
-    ${theme.mixins.breakpoint.md`
+    @media ${device.laptop} {
       max-width: 600px;
-    `};
+    }
 
-    ${theme.mixins.breakpoint.sm`
+    @media ${device.tablet} {
       max-width: 420px;
-    `};
+    }
 
     .badge {
       padding: 6px;
@@ -56,9 +56,9 @@ export const StyledCustomFields = styled.div`
       word-wrap: break-word;
       width: 550px;
 
-      ${theme.mixins.breakpoint.sm`
+      @media ${device.tablet} {
         width: 300px;
-      `};
+      }
     }
 
     .field {

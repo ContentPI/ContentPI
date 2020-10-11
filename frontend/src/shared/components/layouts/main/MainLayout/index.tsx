@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
 import Head from 'next/head'
-import { GlobalStyle } from '@styles/theme'
+import { GlobalStyle, Global, css } from '@styles/theme'
 
 // Shared components
 import Content from '../Content'
@@ -33,7 +33,7 @@ const MainLayout: FC<iProps> = ({
   router
 }): ReactElement => (
   <>
-    <GlobalStyle />
+    <Global styles={css(GlobalStyle)} />
 
     <Head>
       <title>Dashboard {title ? `- ${title}` : ''}</title>
