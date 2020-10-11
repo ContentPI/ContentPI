@@ -1,4 +1,4 @@
-import { styled } from '@styles/theme'
+import { styled, theme } from '@styles/theme'
 
 export const StyledMyApps = styled.div`
   display: flex;
@@ -7,7 +7,7 @@ export const StyledMyApps = styled.div`
   width: 100%;
 
   .header {
-    border-bottom: 1px solid ${props => props.theme.colors.gray.athensGray};
+    border-bottom: 1px solid ${theme.colors.gray.athensGray};
     width: 100%;
     height: 70px;
     background: rgb(2, 0, 36);

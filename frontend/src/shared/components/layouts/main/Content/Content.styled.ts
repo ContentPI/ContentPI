@@ -1,4 +1,4 @@
-import { styled } from '@styles/theme'
+import { styled, theme } from '@styles/theme'
 
 export const StyledContent = styled.div`
   width: 100%;
@@ -11,7 +11,7 @@ export const StyledContent = styled.div`
   flex-grow: 1;
 
   .container {
-    background-color: ${props => props.theme.color.white};
+    background-color: ${theme.color.white};
     border-radius: 0.5rem;
     display: flex;
     justify-content: space-between;

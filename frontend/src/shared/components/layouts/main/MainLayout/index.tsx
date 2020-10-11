@@ -1,6 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
 import Head from 'next/head'
+import { GlobalStyle } from '@styles/theme'
 
 // Shared components
 import Content from '../Content'
@@ -30,25 +31,24 @@ const MainLayout: FC<iProps> = ({
   title,
   noWrapper,
   router
-}): ReactElement => {
-  return (
-    <>
-      <Head>
-        <title>Dashboard {title ? `- ${title}` : ''}</title>
-        <meta name="title" content={`Dashboard ${title ? `- ${title}` : ''}`} />
-      </Head>
+}): ReactElement => (
+  <>
+    <GlobalStyle />
 
-      <StyledMainLayout>
-        {sidebar && <Sidebar router={router} />}
-        {content && (
-          <Content header={header} footer={footer} noWrapper={noWrapper} router={router}>
-            {children}
-          </Content>
-        )}
-        {!content && children}
-      </StyledMainLayout>
-    </>
-  )
-}
+    <Head>
+      <title>Dashboard {title ? `- ${title}` : ''}</title>
+      <meta name="title" content={`Dashboard ${title ? `- ${title}` : ''}`} />
+    </Head>
+    <StyledMainLayout noFlex={noFlex}>
+      {sidebar && <Sidebar router={router} />}
+      {content && (
+        <Content header={header} footer={footer} noWrapper={noWrapper} router={router}>
+          {children}
+        </Content>
+      )}
+      {!content && children}
+    </StyledMainLayout>
+  </>
+)
 
 export default memo(MainLayout)

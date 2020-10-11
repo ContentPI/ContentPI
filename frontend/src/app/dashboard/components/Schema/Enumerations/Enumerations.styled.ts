@@ -1,4 +1,4 @@
-import { styled } from '@styles/theme'
+import { styled, theme } from '@styles/theme'
 
 export const StyledEnumerations = styled.div`
   .wrapper {
@@ -7,26 +7,26 @@ export const StyledEnumerations = styled.div`
     width: 100%;
 
     .enumeration {
-      border: 1px solid ${props => props.theme.colors.gray.gallery};
+      border: 1px solid ${theme.colors.gray.gallery};
       margin-bottom: 20px;
       border-radius: 5px;
       margin-right: 10px;
       width: 400px;
 
       .information {
-        background-color: ${props => props.theme.colors.gray.alabaster};
+        background-color: ${theme.colors.gray.alabaster};
         padding: 20px 10px;
-        border-bottom: 1px solid ${props => props.theme.colors.gray.gallery};
+        border-bottom: 1px solid ${theme.colors.gray.gallery};
 
         .name {
-          color: ${props => props.theme.colors.gray.tuna};
+          color: ${theme.colors.gray.tuna};
           display: inline;
-          font-size: ${props => props.theme.font.size.large};
-          font-weight: ${props => props.theme.font.weight.semibold};
+          font-size: ${theme.font.size.large};
+          font-weight: ${theme.font.weight.semibold};
         }
 
         .identifier {
-          color: ${props => props.theme.colors.gray.frenchGray};
+          color: ${theme.colors.gray.frenchGray};
           margin-right: 10px;
         }
       }
@@ -38,9 +38,9 @@ export const StyledEnumerations = styled.div`
 
         .value {
           font-size: 14px;
-          color: ${props => props.theme.colors.gray.doveGray};
+          color: ${theme.colors.gray.doveGray};
           border-radius: 5px;
-          background-color: ${props => props.theme.colors.gray.gallery};
+          background-color: ${theme.colors.gray.gallery};
           padding: 10px;
           margin: 10px;
         }

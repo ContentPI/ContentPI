@@ -1,4 +1,4 @@
-import { styled } from '@styles/theme'
+import { styled, theme } from '@styles/theme'
 
 export const StyledPageNotFound = styled.div`
   align-items: center;
@@ -7,7 +7,7 @@ export const StyledPageNotFound = styled.div`
   justify-content: center;
   padding: 20px;
 
-  ${props => props.theme.mixins.breakpoint.xs`
+  ${theme.mixins.breakpoint.xs`
     align-content: flex-start;
     padding: 50px 20px;
   `};
@@ -16,12 +16,12 @@ export const StyledPageNotFound = styled.div`
     margin-right: 50px;
     width: 250px;
 
-    ${props => props.theme.mixins.breakpoint.sm`
+    ${theme.mixins.breakpoint.sm`
       margin-right: 0;
       width: 250px;
     `};
 
-    ${props => props.theme.mixins.breakpoint.xs`
+    ${theme.mixins.breakpoint.xs`
       margin-bottom: 20px;
       width: 150px;
     `};
@@ -30,7 +30,7 @@ export const StyledPageNotFound = styled.div`
   .notFound {
     font-family: Arial;
 
-    ${props => props.theme.mixins.breakpoint.xs`
+    ${theme.mixins.breakpoint.xs`
       text-align: center;
     `};
 
@@ -38,11 +38,11 @@ export const StyledPageNotFound = styled.div`
       font-size: 208px;
       margin: 0;
 
-      ${props => props.theme.mixins.breakpoint.sm`
+      ${theme.mixins.breakpoint.sm`
         font-size: 160px;
       `};
 
-      ${props => props.theme.mixins.breakpoint.xs`
+      ${theme.mixins.breakpoint.xs`
         font-size: 112px;
       `};
     }
@@ -50,7 +50,7 @@ export const StyledPageNotFound = styled.div`
     span {
       font-size: 29px;
 
-      ${props => props.theme.mixins.breakpoint.sm`
+      ${theme.mixins.breakpoint.sm`
         font-size: 24px;
       `};
     }
@@ -60,23 +60,23 @@ export const StyledPageNotFound = styled.div`
       margin: 30px 0 80px 0;
       max-width: 500px;
 
-      ${props => props.theme.mixins.breakpoint.sm`
+      ${theme.mixins.breakpoint.sm`
         font-size: 16px;
       `};
 
-      ${props => props.theme.mixins.breakpoint.xs`
+      ${theme.mixins.breakpoint.xs`
         margin: 20px 0 80px 0;
       `};
     }
 
     a {
-      color: ${props => props.theme.colors.blue.dodgerBlue};
+      color: ${theme.colors.blue.dodgerBlue};
       text-decoration: none;
 
       &:hover {
-        color: ${props => props.theme.colors.blue.bondiBlue};
+        color: ${theme.colors.blue.bondiBlue};
 
-        ${props => props.theme.mixins.breakpoint.sm`
+        ${theme.mixins.breakpoint.sm`
           font-size: 16px;
         `};
       }

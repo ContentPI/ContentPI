@@ -1,4 +1,4 @@
-import { styled } from '@styles/theme'
+import { styled, theme } from '@styles/theme'
 
 export const StyledCards = styled.div`
   display: flex;
@@ -23,18 +23,18 @@ export const StyledCards = styled.div`
 
     li {
       a {
-        color: ${props => props.theme.color.black};
+        color: ${theme.color.black};
 
         &:hover {
-          color: ${props => props.theme.colors.blue.denim};
+          color: ${theme.colors.blue.denim};
         }
       }
 
       .card {
         width: 210px;
         height: 260px;
-        box-shadow: ${props => props.theme.colors.gray.alto} 0px 2px 4px;
-        border-color: ${props => props.theme.color.white};
+        box-shadow: ${theme.colors.gray.alto} 0px 2px 4px;
+        border-color: ${theme.color.white};
         border-radius: 4px;
         margin: 70px 50px 50px 0px;
         display: flex;
@@ -60,14 +60,14 @@ export const StyledCards = styled.div`
           align-items: center;
           justify-content: center;
           padding: 8px;
-          color: ${props => props.theme.color.white};
+          color: ${theme.color.white};
           text-transform: uppercase;
           font-size: 18px;
           font-weight: 600;
 
           i {
             font-size: 54px;
-            color: ${props => props.theme.colors.blue.denim};
+            color: ${theme.colors.blue.denim};
             padding: 8px;
           }
         }
