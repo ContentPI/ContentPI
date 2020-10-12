@@ -1,17 +1,17 @@
-import { styled } from '@styles/theme'
+import { styled, theme } from '@styles/theme'
 
 export const StyledDeclarations = styled.div`
   width: 210px;
   padding: 10px;
   margin-top: -147px;
 
-  ${props => props.theme.mixins.breakpoint.sm`
+  @media ${device.tablet} {
     margin-top: 0;
     width: 97%;
-  `};
+  }
 
   h3 {
-    color: ${props => props.theme.colors.gray.tuna};
+    color: ${theme.colors.gray.tuna};
     display: inline-block;
     font-size: 24px;
     font-weight: 500;
@@ -24,16 +24,16 @@ export const StyledDeclarations = styled.div`
     padding: 0px;
     outline: none;
 
-    ${props => props.theme.mixins.breakpoint.sm`
+    @media ${device.tablet} {
       margin-top: 0px;
-    `};
+    }
 
     li {
       div {
         cursor: pointer;
 
         p {
-          color: ${props => props.theme.color.gray};
+          color: ${theme.color.gray};
           text-decoration: none;
           text-transform: uppercase;
           letter-spacing: 0.5px;
@@ -44,9 +44,9 @@ export const StyledDeclarations = styled.div`
           margin-top: 10px;
           padding-top: 20px;
 
-          ${props => props.theme.mixins.breakpoint.sm`
+          @media ${device.tablet} {
             padding-top: 0;
-          `};
+          }
 
           &:first-child {
             padding: 0;
@@ -57,7 +57,7 @@ export const StyledDeclarations = styled.div`
         .widgetOption {
           align-items: center;
           border-radius: 5px;
-          border: 1px solid ${props => props.theme.colors.gray.alabaster};
+          border: 1px solid ${theme.colors.gray.alabaster};
           box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 4px;
           box-sizing: border-box;
           display: flex;

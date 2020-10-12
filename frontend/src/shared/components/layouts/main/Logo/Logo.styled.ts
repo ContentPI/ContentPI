@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from '@styles/theme'
 
 export const StyledLogo = styled.div`
   text-align: center;

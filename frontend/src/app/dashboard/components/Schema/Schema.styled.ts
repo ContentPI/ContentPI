@@ -1,4 +1,4 @@
-import { styled } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledSchema = styled.div`
   padding-left: 10px;
@@ -12,7 +12,7 @@ export const StyledSchema = styled.div`
     }
 
     .identifier {
-      color: ${props => props.theme.colors.gray.frenchGray};
+      color: ${theme.colors.gray.frenchGray};
       margin-right: 10px;
     }
 
@@ -26,9 +26,9 @@ export const StyledSchema = styled.div`
     }
 
     .name {
-      color: ${props => props.theme.colors.gray.tuna};
+      color: ${theme.colors.gray.tuna};
       display: inline;
-      font-size: ${props => props.theme.font.size.xLarge};
+      font-size: ${theme.font.size.xLarge};
       font-weight: 500;
     }
 
@@ -39,13 +39,13 @@ export const StyledSchema = styled.div`
         line-height: 40px;
         padding-left: 10px;
         padding-right: 10px;
-        color: ${props => props.theme.colors.blue.cerulean};
+        color: ${theme.colors.blue.cerulean};
         font-size: 14px;
         border-radius: 0.25rem;
 
         &:hover {
-          color: ${props => props.theme.colors.blue.pacificBlue};
-          background-color: ${props => props.theme.colors.gray.gallery};
+          color: ${theme.colors.blue.pacificBlue};
+          background-color: ${theme.colors.gray.gallery};
         }
       }
     }
@@ -60,8 +60,8 @@ export const StyledSchema = styled.div`
     display: flex;
     justify-content: space-between;
 
-    ${props => props.theme.mixins.breakpoint.md`
+    @media ${device.laptop} {
       flex-direction: column;
-    `};
+    }
   }
 `

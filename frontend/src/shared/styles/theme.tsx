@@ -1,6 +1,7 @@
-import baseStyled, { ThemedStyledInterface, css, createGlobalStyle } from 'styled-components'
+import styled from '@emotion/styled'
+import { css, Global } from '@emotion/core'
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = `
   html,
   body {
     background-color: white;
@@ -11,28 +12,34 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     touch-action: none;
   }
-
   input {
     appearance: none;
     background-clip: padding-box;
     outline: none;
     border: none;
   }
-
   a {
     text-decoration: none;
   }
 `
 
-export const breakpoints: any = {
-  xs: '640px',
-  sm: '768px',
-  md: '992px',
-  lg: '1280px',
-  xl: '1400px'
+const breakpoints: any = {
+  mobile: '640px',
+  tablet: '768px',
+  laptop: '1024px',
+  laptopXl: '1440px',
+  desktop: '1441px'
 }
 
-export const theme = {
+const device = {
+  mobile: `(max-width: ${breakpoints.mobile})`,
+  tablet: `(max-width: ${breakpoints.tablet})`,
+  laptop: `(max-width: ${breakpoints.laptop})`,
+  laptopXl: `(max-width: ${breakpoints.laptopXl})`,
+  desktop: `(min-width: ${breakpoints.desktop})`
+}
+
+const theme = {
   color: {
     black: '#000',
     facebook: '#3b5998',
@@ -124,30 +131,18 @@ export const theme = {
     }
   },
   mixins: {
-    breakpoint: Object.keys(breakpoints).reduce((acc, label) => {
-      acc[label] = (literals: TemplateStringsArray, ...placeholders: any[]) =>
-        css`
-          @media (max-width: ${breakpoints[label]}) {
-            ${css(literals, ...placeholders)};
-          }
-        `.join('')
-      return acc
-    }, {} as Record<keyof typeof breakpoints, (l: TemplateStringsArray, ...p: any[]) => string>),
     placeholder: (color: string) => css`
       ::-webkit-input-placeholder {
         color: ${color};
       }
-
       :-moz-placeholder {
         color: ${color};
         opacity: 1;
       }
-
       ::-moz-placeholder {
         color: ${color};
         opacity: 1;
       }
-
       ::-ms-input-placeholder {
         color: ${color};
       }
@@ -155,5 +150,4 @@ export const theme = {
   }
 }
 
-export type Theme = typeof theme
-export const styled = baseStyled as ThemedStyledInterface<Theme>
+export { css, device, Global, GlobalStyle, styled, theme }

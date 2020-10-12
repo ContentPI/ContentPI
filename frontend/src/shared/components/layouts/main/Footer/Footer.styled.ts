@@ -1,4 +1,4 @@
-import { styled } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledFooter = styled.footer`
   width: 97%;
@@ -11,16 +11,16 @@ export const StyledFooter = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${props => props.theme.colors.gray.emperor};
+    color: ${theme.colors.gray.emperor};
     font-size: 14px;
     justify-content: space-between;
 
-    ${props => props.theme.mixins.breakpoint.sm`
+    @media ${device.tablet} {
       flex-direction: column-reverse;
-    `};
+    }
 
     .copyright {
-      color: ${props => props.theme.color.black};
+      color: ${theme.color.black};
       margin-bottom: 10px;
     }
 
@@ -38,13 +38,13 @@ export const StyledFooter = styled.footer`
           padding: 10px;
 
           a {
-            color: ${props => props.theme.color.gray};
+            color: ${theme.color.gray};
             text-decoration: none;
             letter-spacing: 0.5px;
             font-size: 14px;
 
             &:hover {
-              color: ${props => props.theme.color.black};
+              color: ${theme.color.black};
             }
           }
         }

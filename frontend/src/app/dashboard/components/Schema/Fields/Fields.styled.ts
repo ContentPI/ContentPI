@@ -1,4 +1,4 @@
-import { styled } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledFields = styled.div`
   display: flex;
@@ -6,14 +6,14 @@ export const StyledFields = styled.div`
   margin-top: 0px;
   width: 75%;
 
-  @media (min-width: 1300px) {
+  @media ${device.desktop} {
     width: 88%;
   }
 
   .field {
     box-sizing: border-box;
     box-shadow: 0px 2px 2px -1px rgba(235, 235, 235, 1);
-    border: 1px solid ${props => props.theme.colors.gray.gallery};
+    border: 1px solid ${theme.colors.gray.gallery};
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 5px;
@@ -27,20 +27,20 @@ export const StyledFields = styled.div`
       i {
         margin-right: 10px;
         font-size: 25px;
-        color: ${props => props.theme.colors.gray.gallery};
+        color: ${theme.colors.gray.gallery};
 
         &:hover {
           color: red;
 
           &:first-child {
-            color: ${props => props.theme.colors.yellow.sunglow};
+            color: ${theme.colors.yellow.sunglow};
           }
         }
       }
     }
 
     &.sys {
-      background-color: ${props => props.theme.colors.gray.gallery};
+      background-color: ${theme.colors.gray.gallery};
     }
 
     &.hideSys {
@@ -48,38 +48,38 @@ export const StyledFields = styled.div`
     }
 
     .icon {
-      color: ${props => props.theme.color.white};
+      color: ${theme.color.white};
       display: inline-block;
       border-radius: 5px;
       margin-right: 20px;
 
       &.String {
-        background-color: ${props => props.theme.colors.green.malachite};
+        background-color: ${theme.colors.green.malachite};
       }
 
       &.Text {
-        background-color: ${props => props.theme.colors.pink.hollywoodCerise};
+        background-color: ${theme.colors.pink.hollywoodCerise};
       }
 
       &.DateTime,
       &.Status {
-        background-color: ${props => props.theme.color.black};
+        background-color: ${theme.color.black};
       }
 
       &.Media {
-        background-color: ${props => props.theme.colors.blue.denim};
+        background-color: ${theme.colors.blue.denim};
       }
 
       &.Boolean {
-        background-color: ${props => props.theme.colors.gray.tuna};
+        background-color: ${theme.colors.gray.tuna};
       }
 
       &.Dropdown {
-        background-color: ${props => props.theme.colors.blue.dodgerBlue};
+        background-color: ${theme.colors.blue.dodgerBlue};
       }
 
       &.Reference {
-        background-color: ${props => props.theme.colors.purple.electricViolet};
+        background-color: ${theme.colors.purple.electricViolet};
       }
 
       i {
@@ -89,19 +89,19 @@ export const StyledFields = styled.div`
         &.id,
         &.integer,
         &.float {
-          background-color: ${props => props.theme.color.black};
-          color: ${props => props.theme.color.white};
+          background-color: ${theme.color.black};
+          color: ${theme.color.white};
           display: inline-block;
           border-radius: 5px;
           font-style: normal;
         }
 
         &.integer {
-          background-color: ${props => props.theme.colors.blue.oxfordBlue};
+          background-color: ${theme.colors.blue.oxfordBlue};
         }
 
         &.float {
-          background-color: ${props => props.theme.colors.yellow.fuelYellow};
+          background-color: ${theme.colors.yellow.fuelYellow};
         }
       }
     }
@@ -116,7 +116,7 @@ export const StyledFields = styled.div`
       .identifier {
         margin-left: 5px;
         font-weight: 100;
-        color: ${props => props.theme.colors.gray.frenchGray};
+        color: ${theme.colors.gray.frenchGray};
         font-size: 14px;
       }
 
@@ -126,9 +126,9 @@ export const StyledFields = styled.div`
         line-height: 10px;
 
         .tag {
-          background-color: ${props => props.theme.colors.gray.alabaster};
+          background-color: ${theme.colors.gray.alabaster};
           border-radius: 5px;
-          color: ${props => props.theme.colors.gray.tuna};
+          color: ${theme.colors.gray.tuna};
           font-size: 12px;
           margin-right: 5px;
           padding: 5px;
@@ -136,8 +136,8 @@ export const StyledFields = styled.div`
           width: 40px;
 
           &.system {
-            background-color: ${props => props.theme.colors.purple.logan};
-            color: ${props => props.theme.colors.gray.gallery};
+            background-color: ${theme.colors.purple.logan};
+            color: ${theme.colors.gray.gallery};
           }
         }
       }

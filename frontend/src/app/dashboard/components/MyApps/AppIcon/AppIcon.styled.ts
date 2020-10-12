@@ -1,8 +1,8 @@
-import { styled } from '@styles/theme'
+import { styled, theme } from '@styles/theme'
 
 export const StyledAppIcon = styled.div`
   .icon {
-    color: ${props => props.theme.color.white};
+    color: ${theme.color.white};
     border-radius: 5px;
     width: 40px;
     height: 40px;
@@ -11,12 +11,13 @@ export const StyledAppIcon = styled.div`
     justify-content: center;
     padding: 8px;
     text-transform: capitalize;
-    font-size: ${props => props.theme.font.size.large};
-    font-weight: ${props => props.theme.font.weight.bold};
+    font-size: ${theme.font.size.large};
+    font-weight: ${theme.font.weight.bold};
+    margin: 0 auto;
 
     i {
       font-size: 54px;
-      color: ${props => props.theme.colors.blue.denim};
+      color: ${theme.colors.blue.denim};
       padding: 8px;
     }
 

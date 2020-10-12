@@ -1,9 +1,9 @@
-import { styled } from '@styles/theme'
+import { styled, theme, device } from '@styles/theme'
 
 export const StyledLogin = styled.div`
   .wrapper {
-    background-color: ${props => props.theme.color.white};
-    color: ${props => props.theme.colors.gray.mineShaft};
+    background-color: ${theme.color.white};
+    color: ${theme.colors.gray.mineShaft};
     border-radius: 10px;
     margin: 0 auto;
     margin-top: 200px;
@@ -11,17 +11,17 @@ export const StyledLogin = styled.div`
     position: relative;
     width: 500px;
 
-    ${props => props.theme.mixins.breakpoint.sm`
+    @media ${device.tablet} {
       margin-top: 20px;
       width: 320px;
-    `};
+    }
 
     .success {
       text-align: center;
     }
 
     .form {
-      ${props => props.theme.mixins.placeholder(props.theme.colors.gray.silverChalice)}
+      ${theme.mixins.placeholder(theme.colors.gray.silverChalice)}
       position: relative;
       margin: 0 auto;
       margin-top: 20px;
@@ -47,9 +47,9 @@ export const StyledLogin = styled.div`
             margin-right: 10px;
             width: 100px;
 
-            ${props => props.theme.mixins.breakpoint.sm`
+            @media ${device.tablet} {
               margin-right: 5px;
-            `}
+            }
           }
 
           .register {

@@ -1,7 +1,7 @@
-import { styled } from '@styles/theme'
+import { styled, theme } from '@styles/theme'
 
 export const StyledHeader = styled.div`
-  background: ${props => props.theme.color.white};
+  background: ${theme.color.white};
   height: 70px;
   width: 100%;
   display: flex;
