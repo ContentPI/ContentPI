@@ -19,6 +19,7 @@ interface iProps {
   footer?: boolean
   title?: string
   noWrapper?: boolean
+  noFlex?: boolean
   router?: any
 }
 
@@ -30,6 +31,7 @@ const MainLayout: FC<iProps> = ({
   footer,
   title,
   noWrapper,
+  noFlex,
   router
 }): ReactElement => (
   <>
@@ -39,6 +41,7 @@ const MainLayout: FC<iProps> = ({
       <title>Dashboard {title ? `- ${title}` : ''}</title>
       <meta name="title" content={`Dashboard ${title ? `- ${title}` : ''}`} />
     </Head>
+
     <StyledMainLayout noFlex={noFlex}>
       {sidebar && <Sidebar router={router} />}
       {content && (

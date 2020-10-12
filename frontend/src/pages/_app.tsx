@@ -1,8 +1,6 @@
 import React from 'react'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '@lib/apolloClient'
-import { ThemeProvider } from 'styled-components'
-import { theme, GlobalStyle } from '@styles/theme'
 import Head from 'next/head'
 
 export default function App({ Component, pageProps }: { Component: any; pageProps: any }) {
@@ -15,12 +13,8 @@ export default function App({ Component, pageProps }: { Component: any; pageProp
         <meta name="viewport" content={viewport} />
       </Head>
 
-      <GlobalStyle />
-
       <ApolloProvider client={apolloClient}>
-        <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <Component {...pageProps} />
       </ApolloProvider>
     </>
   )

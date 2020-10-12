@@ -1,9 +1,17 @@
 import { styled } from '@styles/theme'
 
-export const StyledMainLayout = styled.div`
+interface StyledMainLayoutProps {
+  noFlex?: boolean
+}
+
+export const StyledMainLayout = styled.div<StyledMainLayoutProps>`
   height: 100%;
   min-height: 100%;
-  display: flex;
-  flex-direction: row;
   width: 100%;
+  ${(props: any) =>
+    !props.noFlex &&
+    `
+      display: flex;
+      flex-direction: row;
+  `}
 `

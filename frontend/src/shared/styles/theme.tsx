@@ -12,14 +12,12 @@ const GlobalStyle = `
     padding: 0;
     touch-action: none;
   }
-
   input {
     appearance: none;
     background-clip: padding-box;
     outline: none;
     border: none;
   }
-
   a {
     text-decoration: none;
   }
@@ -137,17 +135,14 @@ const theme = {
       ::-webkit-input-placeholder {
         color: ${color};
       }
-
       :-moz-placeholder {
         color: ${color};
         opacity: 1;
       }
-
       ::-moz-placeholder {
         color: ${color};
         opacity: 1;
       }
-
       ::-ms-input-placeholder {
         color: ${color};
       }
