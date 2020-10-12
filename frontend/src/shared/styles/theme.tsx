@@ -31,7 +31,7 @@ const breakpoints: any = {
   desktop: '1441px'
 }
 
-export const device = {
+const device = {
   mobile: `(max-width: ${breakpoints.mobile})`,
   tablet: `(max-width: ${breakpoints.tablet})`,
   laptop: `(max-width: ${breakpoints.laptop})`,
@@ -150,4 +150,4 @@ const theme = {
   }
 }
 
-export { css, Global, styled, GlobalStyle, theme }
+export { css, device, Global, GlobalStyle, styled, theme }
