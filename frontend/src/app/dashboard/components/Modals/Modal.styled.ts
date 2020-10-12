@@ -12,7 +12,7 @@ export const StyledModal = styled.div`
 
     .saved {
       color: ${theme.colors.yellow.mySin};
-      font-weight: 600;
+      font-weight: ${theme.font.weight.bold};
     }
 
     .published {
