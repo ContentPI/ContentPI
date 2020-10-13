@@ -5,6 +5,12 @@ export type App = {
   description: string
 }
 
+export type Content = {
+  key: string
+  value: string
+  language: string
+}
+
 export type Declaration = {
   declaration: string
   icon: string

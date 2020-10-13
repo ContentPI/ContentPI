@@ -1,4 +1,41 @@
+// Dependencies
+import { forEach } from 'fogg-utils'
+
+// Data
+import ar from './content/ar.json'
+import esMX from './content/es-MX.json'
+import jaJP from './content/ja-JP.json'
+
+// Models
 import models from '../models'
+
+// Content
+const translations: any = {
+  ar,
+  'es-MX': esMX,
+  'ja-JP': jaJP
+}
+
+async function createInitialContent(): Promise<any> {
+  const existingContent = await models.Content.findAll()
+  const content: any = []
+
+  if (existingContent.length === 0) {
+    forEach(translations, (language: string) => {
+      forEach(translations[language], (key: string) => {
+        content.push({
+          key,
+          value: translations[language][key],
+          language
+        })
+      })
+    })
+
+    await models.Content.bulkCreate(content)
+  }
+
+  return null
+}
 
 async function createFirstUser(): Promise<any> {
   const existingUsers = await models.User.findAll()
@@ -76,4 +113,5 @@ async function createDeclarations(): Promise<any> {
 export function setInitialData(): void {
   createFirstUser()
   createDeclarations()
+  createInitialContent()
 }
