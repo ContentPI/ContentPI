@@ -5,6 +5,7 @@ import { redirectTo } from 'fogg-utils'
 
 // Contexts
 import { FormContext } from '@contexts/form'
+import { ContentContext } from '@contexts/content'
 
 // Components
 import Logo from '@shared/components/layouts/main/Logo'
@@ -18,9 +19,10 @@ import { StyledLogin } from './Login.styled'
 interface iProps {
   login(input: any): any
   currentUrl: string
+  __: any
 }
 
-const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
+const Login: FC<iProps> = ({ login, currentUrl, __ }): ReactElement => {
   // States
   const [values, setValues] = useState({
     email: '',
@@ -31,6 +33,7 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
 
   // Contexts
   const { onChange } = useContext(FormContext)
+  const { t } = useContext(ContentContext)
 
   // Methods
   const _onChange = (e: any): any => {
@@ -44,7 +47,7 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
       setInvalidLogin(true)
       setErrorMessage(response.message)
     } else {
-      redirectTo(currentUrl || '/')
+      redirectTo(currentUrl || '/', true)
     }
   }
 
@@ -68,7 +71,7 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
               type="email"
               className="email"
               name="email"
-              placeholder="Email"
+              placeholder={t('Email')}
               onChange={_onChange}
               value={values.email}
             />
@@ -78,7 +81,7 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
               type="password"
               className="password"
               name="password"
-              placeholder="Password"
+              placeholder={t('Password')}
               onChange={_onChange}
               value={values.password}
             />
@@ -86,10 +89,10 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
             <div className="actions">
               <div className="left">
                 <DarkButton name="login" onClick={(): Promise<void> => handleSubmit(values)}>
-                  Login
+                  {t('Login')}
                 </DarkButton>
                 &nbsp;
-                <PrimaryButton name="register">Register</PrimaryButton>
+                <PrimaryButton name="register">{t('Register')}</PrimaryButton>
               </div>
             </div>
           </div>

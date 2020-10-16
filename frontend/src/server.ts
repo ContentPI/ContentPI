@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import session from 'express-session'
 import multer from 'multer'
-import { buildUrl, getFileInfo } from 'fogg-utils'
+import { buildUrl, getFileInfo, availableLanguages } from 'fogg-utils'
 
 // Middleware
 import { isConnected } from './shared/lib/middlewares/user'
@@ -85,8 +85,18 @@ nextApp.prepare().then(() => {
     })
   })
 
+  app.get(
+    `/:language(${availableLanguages()})/login`,
+    isConnected(false),
+    (req: Request, res: Response) => {
+      const { language = config.languages.default } = req.params
+
+      return nextApp.render(req, res, `/${language}/login`, { language })
+    }
+  )
+
   app.get('/login', isConnected(false), (req: Request, res: Response) => {
-    return nextApp.render(req, res, '/users/login')
+    res.redirect(`${config.languages.default}/login`)
   })
 
   app.get('/logout', (req: Request, res: Response) => {
@@ -96,14 +106,37 @@ nextApp.prepare().then(() => {
   })
 
   app.use(
-    `/dashboard/:appId?/:stage?/:moduleName?/:section?/:model?`,
-    isConnected(true, ['god', 'admin', 'editor'], '/login?redirectTo=/dashboard'),
+    `/:language(${availableLanguages()})/dashboard/:appId?/:stage?/:moduleName?/:section?/:model?`,
+    isConnected(
+      true,
+      ['god', 'admin', 'editor'],
+      `/${config.languages.default}/login?redirectTo=/dashboard`
+    ),
     (req: Request, res: Response) => {
-      const { appId, stage, moduleName, section, model } = req.params
+      const {
+        appId,
+        stage,
+        moduleName,
+        section,
+        model,
+        language = config.languages.default
+      } = req.params
       const entryId = req.query.entryId ? String(req.query.entryId) : ''
-      const url = buildUrl(['dashboard', appId, stage, moduleName, section, model])
+      const url = buildUrl([language, 'dashboard', appId, stage, moduleName, section, model])
 
-      return nextApp.render(req, res, `/${url}`, { entryId })
+      return nextApp.render(req, res, `/${url}`, { language, entryId })
+    }
+  )
+
+  app.get(
+    '/dashboard',
+    isConnected(
+      true,
+      ['god', 'admin', 'editor'],
+      `/${config.languages.default}/login?redirectTo=/dashboard`
+    ),
+    (req: Request, res: Response) => {
+      res.redirect(`${config.languages.default}/dashboard`)
     }
   )
 

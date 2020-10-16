@@ -7,6 +7,7 @@ import { useQuery } from '@apollo/client'
 import AppProvider from '@contexts/app'
 import UserProvider from '@contexts/user'
 import FormProvider from '@contexts/form'
+import ContentProvider from '@contexts/content'
 
 // Components
 import Schema from '@dashboard/components/Schema'
@@ -21,7 +22,11 @@ import GET_VALUES_BY_ENTRY_QUERY from '@graphql/values/getValuesByEntry.query'
 import GET_ENUMERATIONS_BY_APP_ID_QUERY from '@graphql/enumerations/getEnumerationsByAppId.query'
 import GET_ENTRIES_BY_MODEL_ID_QUERY from '@graphql/values/getEntriesByModelId.query'
 
-const Page: FC = (): ReactElement => {
+interface iProps {
+  __: any
+}
+
+const Page: FC<iProps> = ({ __ }): ReactElement => {
   // Router
   const router = useRouter()
   const { appId, section, moduleName, model, entryId } = router.query
@@ -109,11 +114,13 @@ const Page: FC = (): ReactElement => {
   }
 
   return (
-    <UserProvider>
-      <AppProvider id={appId}>
-        <FormProvider>{renderPage(moduleName)}</FormProvider>
-      </AppProvider>
-    </UserProvider>
+    <ContentProvider __={__}>
+      <UserProvider>
+        <AppProvider id={appId}>
+          <FormProvider>{renderPage(moduleName)}</FormProvider>
+        </AppProvider>
+      </UserProvider>
+    </ContentProvider>
   )
 }
 
