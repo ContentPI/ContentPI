@@ -14,6 +14,7 @@ import { useMutation } from '@apollo/client'
 // Contexts
 import { FormContext } from '@contexts/form'
 import { UserContext } from '@contexts/user'
+import { ContentContext } from '@contexts/content'
 
 // Mutation
 import CREATE_APP_MUTATION from '@graphql/apps/createApp.mutation'
@@ -29,6 +30,9 @@ interface iProps {
 }
 
 const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // States
   const [values, setValues] = useState({
     appName: '',
@@ -67,7 +71,7 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
         })
 
         if (dataCreateApp.createApp) {
-          redirectTo(`/dashboard/${dataCreateApp.createApp.id}/master`)
+          redirectTo(`/dashboard/${dataCreateApp.createApp.id}/master`, true)
         }
       })
     }
@@ -99,11 +103,11 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
       <StyledModal>
         <div>
           <label htmlFor="appName">
-            App Name {required.appName && <Badge danger>Required</Badge>}
+            {t('App Name')} {required.appName && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             name="appName"
-            placeholder="First App? Try Blog or Forums"
+            placeholder={t('First App? Try Blog or Forums')}
             hasError={required.appName}
             onChange={_onChange}
             value={values.appName}
@@ -112,7 +116,7 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
 
         <div>
           <label htmlFor="identifier">
-            Identifier {required.identifier && <Badge danger>Required</Badge>}
+            {t('Identifier')} {required.identifier && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             name="identifier"
@@ -124,7 +128,7 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
 
         <div>
           <label htmlFor="icon">
-            Icon Color <Icon type="fas fa-sync-alt" onClick={handleIconColor} />
+            {t('Icon Color')} <Icon type="fas fa-sync-alt" onClick={handleIconColor} />
           </label>
           <Input
             name="icon"
@@ -139,19 +143,23 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
         </div>
 
         <div>
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">{t('Description')}</label>
           <Input
             name="description"
-            placeholder="Small description about your new app"
+            placeholder={t('Small description about your new app')}
             onChange={_onChange}
             value={values.description}
           />
         </div>
 
         <div className="buttons">
-          <LinkButton onClick={onClose}>Cancel</LinkButton>
-          <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Creating App...">
-            Create App
+          <LinkButton onClick={onClose}>{t('Cancel')}</LinkButton>
+          <PrimaryButton
+            onClick={handleSubmit}
+            isLoading={loading}
+            loadingText={t('Creating App...')}
+          >
+            {t('Create App')}
           </PrimaryButton>
         </div>
       </StyledModal>

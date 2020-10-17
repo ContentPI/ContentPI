@@ -1,6 +1,9 @@
 // Dependencies
 import React, { FC, createContext, ReactElement } from 'react'
 
+// Configuration
+import { isLocal } from '@config'
+
 interface iContentContext {
   __: any
   t: any
@@ -18,6 +21,10 @@ export const ContentContext = createContext<iContentContext>({
 
 const ContentProvider: FC<iProps> = ({ __, children }): ReactElement => {
   const t = (key: string) => {
+    if (isLocal() && !__[key]) {
+      console.log(`"${key}": ""`) // eslint-disable-line no-console
+    }
+
     return __[key] || key
   }
 

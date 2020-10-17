@@ -1,6 +1,17 @@
 {
+  "Cancel": "إلغاء",
+  "Create App": "إنشاء التطبيق",
+  "Create New App": "إنشاء تطبيق جديد",
+  "Creating App...": "جاري إنشاء التطبيق ...",
+  "Description": "وصف",
   "Email": "البريد الإلكتروني",
+  "First App? Try Blog or Forums": "أول تطبيق؟ جرب مدونة أو منتديات",
+  "Icon Color": "لون الرمز",
+  "Identifier": "المعرف",
   "Login": "تسجيل الدخول",
+  "My Apps": "تطبيقاتي",
   "Password": "كلمه السر",
-  "Register": "تسجيل"
+  "Register": "تسجيل",
+  "Required": "مطلوب",
+  "Small description about your new app": "وصف صغير عن تطبيقك الجديد"
 }

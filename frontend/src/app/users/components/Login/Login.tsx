@@ -19,10 +19,9 @@ import { StyledLogin } from './Login.styled'
 interface iProps {
   login(input: any): any
   currentUrl: string
-  __: any
 }
 
-const Login: FC<iProps> = ({ login, currentUrl, __ }): ReactElement => {
+const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
   // States
   const [values, setValues] = useState({
     email: '',

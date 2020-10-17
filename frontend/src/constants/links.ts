@@ -1,6 +1,11 @@
+// Dependencies
+import { getCurrentLanguage } from 'fogg-utils'
+
+const currentLanguage = getCurrentLanguage()
+
 export const STAGE_LINK = (u: any) => ({
-  as: u ? `/dashboard/${u.appId}/${u.stage}` : '',
-  href: '/dashboard/[appId]/[stage]'
+  as: u ? `/${currentLanguage}/dashboard/${u.appId}/${u.stage}` : '',
+  href: '/[language]/dashboard/[appId]/[stage]'
 })
 
 export const MODEL_LINK = (u: any) => ({

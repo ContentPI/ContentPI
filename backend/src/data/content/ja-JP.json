@@ -1,6 +1,17 @@
 {
+  "Cancel": "キャンセル",
+  "Create App": "アプリを作成する",
+  "Create New App": "新しいアプリを作成する",
+  "Creating App...": "アプリを作成しています...",
+  "Description": "説明",
   "Email": "Eメール",
+  "First App? Try Blog or Forums": "最初のアプリ？ ブログやフォーラムをお試しください",
+  "Icon Color": "アイコンの色",
+  "Identifier": "識別子",
   "Login": "ログインする",
+  "My Apps": "私のアプリ",
   "Password": "パスワード",
-  "Register": "登録"
+  "Register": "登録",
+  "Required": "必須",
+  "Small description about your new app": "新しいアプリについての簡単な説明"
 }

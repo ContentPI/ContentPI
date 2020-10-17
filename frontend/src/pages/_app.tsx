@@ -61,7 +61,9 @@ App.getInitialProps = async ({ router }: { router: any }) => {
         const response = await fetch(`${config.baseUrl}/content/${language}.json`)
         __ = await response.json()
 
-        localStorage.setItem(language, JSON.stringify(__))
+        if (config.cache.enable) {
+          localStorage.setItem(language, JSON.stringify(__))
+        }
       } catch {
         error = true
       }

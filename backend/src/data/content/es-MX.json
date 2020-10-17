@@ -2,5 +2,17 @@
   "Email": "Correo electrónico",
   "Login": "Conectar",
   "Password": "Contraseña",
-  "Register": "Registro"
+  "Register": "Registro",
+  "My Apps": "Mis Aplicaciones",
+  "Create New App": "Crear Nueva Aplicación",
+  "App Name": "Nombre de la Aplicación",
+  "First App? Try Blog or Forums": "¿Primera aplicación? Prueba Blog ó Forums",
+  "Identifier": "Identificador",
+  "Icon Color": "Color del Ícono",
+  "Description": "Descripción",
+  "Small description about your new app": "Una pequeña descripción sobre tu aplicación",
+  "Cancel": "Cancelar",
+  "Creating App...": "Creando Aplicación...",
+  "Create App": "Crear Aplicación",
+  "Required": "Requerido"
 }
