@@ -22,6 +22,12 @@ const PageNotFound: FC<iProps> = ({ noLayout = false }): ReactElement => {
   const characters = ['boy', 'girl']
   const image = characters[Math.round(Math.random())]
 
+  let text = `${t('We tried really hard, but couldn&apos;t find the page you were looking for.')}`
+  text += ` ${t(
+    'You may find what you were looking for on our',
+    '<a href="/dashboard">dashboard homepage</a>.'
+  )}`
+
   const Page404 = (
     <StyledPageNotFound className={image}>
       <img alt={t('Not Found')} src={`/images/characters/${image}.png`} />
@@ -31,14 +37,7 @@ const PageNotFound: FC<iProps> = ({ noLayout = false }): ReactElement => {
 
         <span>{t('Um, yeah. This is awkward')}.</span>
 
-        <p>
-          {t('We tried really hard, but couldn&apos;t find the page you were looking for.')}{' '}
-          {t(
-            'You may find what you were looking for on our',
-            '<a href="/dashboard">dashboard homepage</a>'
-          )}
-          .
-        </p>
+        <p dangerouslySetInnerHTML={{ __html: text }} />
       </div>
     </StyledPageNotFound>
   )

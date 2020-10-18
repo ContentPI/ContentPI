@@ -1,7 +1,10 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
-import { Alert, PrimaryButton, SuccessButton } from 'fogg-ui'
+import React, { FC, ReactElement, useContext, memo } from 'react'
+import { PrimaryButton, SuccessButton } from 'fogg-ui'
 import { cx, redirectTo } from 'fogg-utils'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Shared components
 import AfterCreateOrEditEntryModal from '@modals/AfterCreateOrEditEntryModal'
@@ -28,7 +31,6 @@ interface iProps {
 
 const SystemFields: FC<iProps> = ({
   alert,
-  alertType,
   handleSubmit,
   publishLoading,
   saveLoading,
@@ -39,6 +41,9 @@ const SystemFields: FC<iProps> = ({
   router,
   values
 }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   const editUrl = `${EDIT_ENTRY_LINK(router).as}?entryId=${systemValues.id}`
   const handleEditNewEntry = (): void => redirectTo(editUrl)
   const handleCreateNewEntry = (): void => redirectTo(CREATE_ENTRY_LINK(router).as)
@@ -52,7 +57,7 @@ const SystemFields: FC<iProps> = ({
   return (
     <>
       <AfterCreateOrEditEntryModal
-        label="What's next?"
+        label={t("What's next?")}
         isOpen={isModalOpen}
         onClose={handleEditNewEntry}
         options={{
@@ -67,7 +72,7 @@ const SystemFields: FC<iProps> = ({
 
       <StyledSystemFields>
         <div className="wrapper">
-          <div className="block">Status</div>
+          <div className="block">{t('Status')}</div>
 
           <div className="row">
             {!isFile && (
@@ -75,18 +80,18 @@ const SystemFields: FC<iProps> = ({
                 onClick={(): any => handleSubmit('save', false)}
                 isLoading={saveLoading}
                 disabled={publishLoading}
-                loadingText="Saving..."
+                loadingText={t('Saving...')}
               >
-                Save
+                {t('Save')}
               </PrimaryButton>
             )}
             <SuccessButton
               onClick={(): any => handleSubmit('publish', isFile)}
               isLoading={publishLoading}
               disabled={saveLoading}
-              loadingText={`${isFile ? 'Uploading...' : 'Publishing...'}`}
+              loadingText={`${isFile ? t('Uploading...') : t('Publishing...')}`}
             >
-              {isFile ? 'Upload and publish' : 'Publish'}
+              {isFile ? t('Upload and publish') : t('Publish')}
             </SuccessButton>
 
             <p
@@ -96,11 +101,11 @@ const SystemFields: FC<iProps> = ({
                 alert === 'Published' ? 'published' : 'saved'
               )}
             >
-              {alert} successfully!
+              {t(`${alert || 'Published'} successfully!`)}
             </p>
           </div>
 
-          <div className="block">System Fields</div>
+          <div className="block">{t('System Fields')}</div>
 
           <div className="row">
             {systemFields.map((systemField: any): any => {
@@ -109,8 +114,8 @@ const SystemFields: FC<iProps> = ({
                   <div key={systemField.id} className="systemField">
                     <div>
                       {systemField.identifier === 'updatedAt'
-                        ? 'Last saved'
-                        : systemField.fieldName}
+                        ? t('Last saved')
+                        : t(systemField.fieldName)}
                     </div>
                     <div
                       className={cx(
@@ -119,7 +124,7 @@ const SystemFields: FC<iProps> = ({
                         systemValues[systemField.identifier] === '' ? 'empty' : ''
                       )}
                     >
-                      {systemValues[systemField.identifier]}
+                      {t(systemValues[systemField.identifier])}
                     </div>
                   </div>
                 )

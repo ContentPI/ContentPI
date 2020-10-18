@@ -30,9 +30,12 @@ const AfterCreateOrEditEntryModal: FC<iProps> = ({
   return (
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
-        <p className="center">
-          {t(`You ${action} correctly your entry!`, 'What do you want to do next?')}
-        </p>
+        <p
+          className="center"
+          dangerouslySetInnerHTML={{
+            __html: t(`You ${action} correctly your entry!`, 'What do you want to do next?')
+          }}
+        />
 
         <div className={cx('buttons', 'center')}>
           <PrimaryButton onClick={options.handleEditNewEntry}>

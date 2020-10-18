@@ -91,7 +91,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
       />
 
       <PublishOrUnpublishEntriesModal
-        label={t(`sssss${label}`)}
+        label={t(label)}
         isOpen={isPublishOrUnpublishModalOpen}
         onClose={() => handleEntriesModal([], action)}
         options={{

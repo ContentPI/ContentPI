@@ -6,6 +6,9 @@ import Head from 'next/head'
 import fetch from 'isomorphic-fetch'
 import { isBrowser } from 'fogg-utils'
 
+// Contexts
+import ContentProvider from '@contexts/content'
+
 // Configuration
 import config from '@config'
 
@@ -29,7 +32,11 @@ function App({
   const viewport = 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no'
 
   if (error) {
-    return <PageNotFound noLayout />
+    return (
+      <ContentProvider __={__}>
+        <PageNotFound noLayout />
+      </ContentProvider>
+    )
   }
 
   return (

@@ -75,7 +75,7 @@ const PublishOrUnpublishEntriesModal: FC<iProps> = ({
             bg={action === 'publish' ? '#dbfff3' : '#fff2d4'}
             bold
           >
-            <>{t(`${action} ${pluralify('Entry', 'Entries', entries.length)}`)}</>
+            <>{t(`${action || 'Publish'} ${pluralify('Entry', 'Entries', entries.length)}`)}</>
           </LinkButton>
         </div>
       </StyledModal>

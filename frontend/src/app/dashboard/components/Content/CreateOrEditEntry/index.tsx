@@ -13,6 +13,7 @@ import MainLayout from '@layouts/main/MainLayout'
 
 // Contexts
 import { FormContext } from '@contexts/form'
+import { ContentContext } from '@contexts/content'
 
 // Mutation
 import CREATE_VALUES_MUTATION from '@graphql/values/createValues.mutation'
@@ -129,6 +130,7 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
 
   // Contexts
   const { onChange, setValue } = useContext(FormContext)
+  const { t } = useContext(ContentContext)
 
   // Methods
   const setCurrentEntry = (entry: any) => {
@@ -204,7 +206,7 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
         }
 
         if (!isEditing && dataFindUniqueValues.findUniqueValues.length > 0) {
-          setAlert('This entry already exists')
+          setAlert(t('This entry already exists'))
           setAlertType('danger')
           setShowAlert(true)
 
@@ -271,7 +273,7 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
           if (dataCreateValues || dataUpdateValues) {
             const message = action === 'save' ? 'Saved' : 'Published'
 
-            setAlert(isFile && isUploaded ? 'Uploaded' : message)
+            setAlert(isFile && isUploaded ? t('Uploaded') : t(message))
             setShowAlert(true)
             setAlertType('success')
             setSystemValues({
@@ -300,10 +302,10 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
     }
   }, [initialSelectedEntries])
 
-  let title = 'Create new Entry'
+  let title = t('Create new Entry')
 
   if (isEditing) {
-    title = `Edit ${values.title || 'Entry'}`
+    title = `${t('Edit')} ${values.title || t('Entry')}`
   }
 
   return (
