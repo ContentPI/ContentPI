@@ -15,9 +15,10 @@ import MyApps from '@app/dashboard/components/MyApps'
 
 interface iProps {
   __: any
+  language: string
 }
 
-const Page: FC<iProps> = ({ __ }): ReactElement => {
+const Page: FC<iProps> = ({ __, language }): ReactElement => {
   const { data: dataGetApps, loading } = useQuery(GET_APPS_QUERY)
 
   if (loading) {
@@ -27,7 +28,8 @@ const Page: FC<iProps> = ({ __ }): ReactElement => {
   // Router
   const router = {
     appId: dataGetApps.getApps.length > 0 ? dataGetApps.getApps[0].id : null,
-    stage: 'master'
+    stage: 'master',
+    language
   }
 
   return (

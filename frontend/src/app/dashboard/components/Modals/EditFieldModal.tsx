@@ -9,6 +9,7 @@ import usePrevious from '@lib/usePrevious'
 
 // Contexts
 import { FormContext } from '@contexts/form'
+import { ContentContext } from '@contexts/content'
 
 // Mutation
 import EDIT_FIELD_MUTATION from '@graphql/fields/editField.mutation'
@@ -24,6 +25,9 @@ interface iProps {
 }
 
 const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // Getting data from options
   const {
     data: { id: fieldId, fields }
@@ -129,7 +133,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
       <StyledModal>
         <div>
           <label htmlFor="fieldName">
-            Field Name {required.fieldName && <Badge danger>Required</Badge>}
+            {t('Field Name')} {required.fieldName && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             id="fieldName"
@@ -143,7 +147,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
 
         <div>
           <label htmlFor="identifier">
-            Identifier {required.identifier && <Badge danger>Required</Badge>}
+            {t('Identifier')} {required.identifier && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             id="identifier"
@@ -155,7 +159,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
         </div>
 
         <div>
-          <label htmlFor="order">Order (1 to 25)</label>
+          <label htmlFor="order">{t('Order (1 to 25)')}</label>
           <Input
             type="number"
             name="order"
@@ -167,10 +171,10 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
         </div>
 
         <div>
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">{t('Description')}</label>
           <Input
             name="description"
-            placeholder="Small description about your field"
+            placeholder={t('Small description about your field')}
             onChange={_onChange}
             value={values.description}
           />
@@ -180,7 +184,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           <Toggle
             color="#42f598"
             type="round"
-            label="Make field required"
+            label={t('Make field required')}
             onChange={(): void => setValue('isRequired', !values.isRequired, setValues)}
             checked={values.isRequired}
           />
@@ -190,7 +194,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           <Toggle
             color="#42f598"
             type="round"
-            label="Set field as Primary Key"
+            label={t('Set field as Primary Key')}
             onChange={(): void => setValue('isPrimaryKey', !values.isPrimaryKey, setValues)}
             checked={values.isPrimaryKey}
           />
@@ -200,7 +204,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           <Toggle
             color="#42f598"
             type="round"
-            label="Set field as unique"
+            label={t('Set field as unique')}
             onChange={(): void => setValue('isUnique', !values.isUnique, setValues)}
             checked={values.isUnique}
           />
@@ -210,7 +214,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           <Toggle
             color="#42f598"
             type="round"
-            label="Is System Field?"
+            label={t('Is System Field?')}
             onChange={(): void => setValue('isSystem', !values.isSystem, setValues)}
             checked={values.isSystem}
           />
@@ -220,7 +224,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           <Toggle
             color="#42f598"
             type="round"
-            label="Hide field"
+            label={t('Hide field')}
             onChange={(): void => setValue('isHide', !values.isHide, setValues)}
             checked={values.isHide}
           />
@@ -230,16 +234,20 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           <Toggle
             color="#42f598"
             type="round"
-            label="Is Media (image, video or document)?"
+            label={t('Is Media (image, video or document)?')}
             onChange={(): void => setValue('isMedia', !values.isMedia, setValues)}
             checked={values.isMedia}
           />
         </div>
 
         <div className="buttons">
-          <LinkButton onClick={_onClose}>Cancel</LinkButton>
-          <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Updating Field...">
-            Update Field
+          <LinkButton onClick={_onClose}>{t('Cancel')}</LinkButton>
+          <PrimaryButton
+            onClick={handleSubmit}
+            isLoading={loading}
+            loadingText={t('Updating Field...')}
+          >
+            {t('Update Field')}
           </PrimaryButton>
         </div>
       </StyledModal>

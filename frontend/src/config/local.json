@@ -5,9 +5,7 @@
     "credentials": "same-origin"
   },
   "debug": true,
-  "cache": {
-    "enable": false
-  },
+  "cache": false,
   "session": {
     "cookieDomain": "localhost",
     "maxAge": 604800,

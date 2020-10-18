@@ -1,8 +1,11 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
+import React, { FC, ReactElement, useContext, memo } from 'react'
 import { Modal, LinkButton } from 'fogg-ui'
 import { redirectTo, pluralify } from 'fogg-utils'
 import { useMutation } from '@apollo/client'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Mutation
 import DELETE_VALUES_MUTATION from '@graphql/values/deleteValues.mutation'
@@ -18,6 +21,9 @@ interface iProps {
 }
 
 const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // Data
   const { data } = options
 
@@ -43,18 +49,22 @@ const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): Re
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         <p>
-          Are you sure you want to delete{' '}
-          {pluralify('this entry', 'these entries', data.entries.length)}? <br />
-          This cannot be reverted!
+          {t(
+            'Are you sure you want to delete',
+            pluralify('this entry', 'these entries', data.entries.length),
+            '?'
+          )}{' '}
+          <br />
+          {t('This cannot be reverted!')}!
         </p>
 
         <div className="buttons">
           <LinkButton color="#6663fd" bold onClick={onClose}>
-            Cancel
+            {t('Cancel')}
           </LinkButton>
 
           <LinkButton onClick={handleSubmit} color="red" bg="#fadad7" bold>
-            <>Delete {pluralify('Entry', 'Entries', data.entries.length)}</>
+            <>{t(`Delete ${pluralify('Entry', 'Entries', data.entries.length)}`)}</>
           </LinkButton>
         </div>
       </StyledModal>

@@ -123,7 +123,7 @@ nextApp.prepare().then(() => {
       } = req.params
       const entryId = req.query.entryId ? String(req.query.entryId) : ''
       const url = buildUrl([language, 'dashboard', appId, stage, moduleName, section, model])
-
+      console.log('URL======', url)
       return nextApp.render(req, res, `/${url}`, { language, entryId })
     }
   )

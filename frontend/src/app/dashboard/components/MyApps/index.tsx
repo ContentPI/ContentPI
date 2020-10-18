@@ -1,9 +1,13 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
+import React, { FC, ReactElement, useContext, memo } from 'react'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Shared components
 import MainLayout from '@layouts/main/MainLayout'
 import Logo from '@layouts/main/Logo'
+import Logout from '@layouts/main/Logout'
 import Cards from './Cards'
 
 // Styles
@@ -20,8 +24,11 @@ const MyApps: FC<iProps> = ({ dataGetApps, router }): ReactElement => {
     return <div />
   }
 
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   return (
-    <MainLayout title="My Apps">
+    <MainLayout title={t('My Apps')}>
       <StyledMyApps>
         <div className="header">
           <div className="logo">
@@ -30,6 +37,8 @@ const MyApps: FC<iProps> = ({ dataGetApps, router }): ReactElement => {
         </div>
 
         <Cards items={dataGetApps.getApps} router={router} />
+
+        <Logout router={router} />
       </StyledMyApps>
     </MainLayout>
   )

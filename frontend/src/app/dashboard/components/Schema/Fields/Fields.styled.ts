@@ -32,7 +32,7 @@ export const StyledFields = styled.div`
         &:hover {
           color: red;
 
-          &:first-child {
+          &:first-of-type {
             color: ${theme.colors.yellow.sunglow};
           }
         }

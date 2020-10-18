@@ -6,11 +6,16 @@ import { useRouter } from 'next/router'
 import AppProvider from '@contexts/app'
 import UserProvider from '@contexts/user'
 import FormProvider from '@contexts/form'
+import ContentProvider from '@contexts/content'
 
 // Components
 import Home from '@dashboard/components/Home'
 
-const Page: FC = (): ReactElement => {
+interface iProps {
+  __: any
+}
+
+const Page: FC<iProps> = ({ __ }): ReactElement => {
   const router = useRouter()
   const { appId } = router.query
 
@@ -19,13 +24,15 @@ const Page: FC = (): ReactElement => {
   }
 
   return (
-    <UserProvider>
-      <AppProvider id={appId}>
-        <FormProvider>
-          <Home router={router.query} />
-        </FormProvider>
-      </AppProvider>
-    </UserProvider>
+    <ContentProvider __={__}>
+      <UserProvider>
+        <AppProvider id={appId}>
+          <FormProvider>
+            <Home router={router.query} />
+          </FormProvider>
+        </AppProvider>
+      </UserProvider>
+    </ContentProvider>
   )
 }
 

@@ -76,7 +76,7 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           </li>
 
           <li>
-            <a href={`${LOGOUT_LINK()}?redirectTo=/dashboard`} title="Logout">
+            <a href={`${LOGOUT_LINK(router)}?redirectTo=/dashboard`} title="Logout">
               <Icon type="fas fa-power-off" />
             </a>
           </li>

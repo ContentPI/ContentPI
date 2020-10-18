@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '@lib/apolloClient'
 import Head from 'next/head'
 import fetch from 'isomorphic-fetch'
-import { LocalStorage } from 'node-localstorage'
+import { isBrowser } from 'fogg-utils'
 
 // Configuration
 import config from '@config'
@@ -16,12 +16,14 @@ function App({
   Component,
   pageProps,
   __,
-  error
+  error,
+  language
 }: {
   Component: any
   pageProps: any
   __: any
   error: boolean
+  language: string
 }) {
   const apolloClient = useApollo((pageProps && pageProps.initialApolloState) || {})
   const viewport = 'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no'
@@ -37,7 +39,7 @@ function App({
       </Head>
 
       <ApolloProvider client={apolloClient}>
-        <Component {...pageProps} __={__} />
+        <Component {...pageProps} __={__} language={language} />
       </ApolloProvider>
     </>
   )
@@ -46,22 +48,25 @@ function App({
 App.getInitialProps = async ({ router }: { router: any }) => {
   let localStorage
 
-  if (!localStorage) {
+  if (!localStorage && !isBrowser()) {
+    const LocalStorage = require('node-localstorage').LocalStorage // eslint-disable-line
     localStorage = new LocalStorage('./content')
+  } else if (isBrowser()) {
+    localStorage = window.localStorage
   }
 
-  const { language = config.languages.default } = router.query
+  const { language } = router.query
   let __ = {}
   let error = false
 
-  if (language !== 'en-US' && config.languages.list.includes(language)) {
+  if (language && language !== 'en-US' && config.languages.list.includes(language)) {
     if (!localStorage.getItem(language)) {
       // Fetching language content
       try {
         const response = await fetch(`${config.baseUrl}/content/${language}.json`)
         __ = await response.json()
 
-        if (config.cache.enable) {
+        if (config.cache && !isBrowser()) {
           localStorage.setItem(language, JSON.stringify(__))
         }
       } catch {

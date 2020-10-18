@@ -1,5 +1,8 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
+import React, { FC, ReactElement, useContext, memo } from 'react'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Shared components
 import MainLayout from '@layouts/main/MainLayout'
@@ -13,6 +16,9 @@ interface iProps {
 }
 
 const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // Data
   const { getEnumerationsByAppId } = data
 
@@ -23,9 +29,9 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
 
   return (
     <>
-      <MainLayout title="Enumerations" header content footer sidebar router={router}>
+      <MainLayout title={t('Enumerations')} header content footer sidebar router={router}>
         <StyledEnumerations>
-          <h2>Enumerations</h2>
+          <h2>{t('Enumerations')}</h2>
 
           <div className="wrapper">
             {getEnumerationsByAppId.map((enumeration: any) => {

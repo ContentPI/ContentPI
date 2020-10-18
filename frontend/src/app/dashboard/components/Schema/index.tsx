@@ -4,6 +4,7 @@ import { LinkButton, Menu, Toggle, Icon } from 'fogg-ui'
 
 // Contexts
 import { AppContext } from '@contexts/app'
+import { ContentContext } from '@contexts/content'
 
 // Components
 import MainLayout from '@layouts/main/MainLayout'
@@ -23,6 +24,12 @@ interface iProps {
 }
 
 const Schema: FC<iProps> = ({ data, router }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
+  // Router
+  const { language } = router
+
   // State
   const [isOpen, setIsOpen] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
@@ -65,10 +72,12 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
     return <Enumerations data={data} router={router} />
   }
 
+  const { appId, identifier } = getModel
+
   return (
     <>
       <DeleteModelModal
-        label="Delete Model"
+        label={t('Delete Model')}
         isOpen={isOpenDelete}
         onClose={handleDeleteModal}
         options={{
@@ -79,7 +88,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
       />
 
       <EditModelModal
-        label="Edit Model"
+        label={t('Edit Model')}
         isOpen={isOpenEdit}
         onClose={handleEditModal}
         options={{
@@ -89,7 +98,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
         }}
       />
 
-      <MainLayout title="Schema" header content footer sidebar router={router}>
+      <MainLayout title={t('Schema')} header content footer sidebar router={router}>
         <StyledSchema>
           <div className="model">
             <h3 className="name">{getModel.modelName}</h3>{' '}
@@ -101,23 +110,21 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
               isOpen={isOpen}
               items={[
                 {
-                  option: 'Edit Model',
+                  option: t('Edit Model'),
                   icon: 'edit',
                   onClick: (): void => handleEdit()
                 },
                 {
-                  option: 'Delete Model',
+                  option: t('Delete Model'),
                   icon: 'trash',
                   onClick: (): void => handleDelete(getModel.id)
                 }
               ]}
             />
             <div className="editContent">
-              <Link
-                href={`/dashboard/${getModel.appId}/master/content/model/${getModel.identifier}`}
-              >
+              <Link href={`/${language}/dashboard/${appId}/master/content/model/${identifier}`}>
                 <>
-                  <Icon type="fas fa-edit" /> Go to content editing
+                  <Icon type="fas fa-edit" /> {t('Go to content editing')}
                 </>
               </Link>
             </div>
@@ -127,7 +134,7 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
             <Toggle
               checked={showSystem}
               type="round"
-              label="Show system fields"
+              label={t('Show system fields')}
               onChange={(): void => setShowSystem(!showSystem)}
             />
           </div>

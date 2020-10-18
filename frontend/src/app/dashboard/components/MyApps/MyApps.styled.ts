@@ -4,6 +4,7 @@ export const StyledMyApps = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
+  min-height: 70vh;
   width: 100%;
 
   .header {

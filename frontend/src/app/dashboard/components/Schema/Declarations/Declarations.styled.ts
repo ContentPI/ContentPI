@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, device, theme } from '@styles/theme'
 
 export const StyledDeclarations = styled.div`
   width: 210px;
@@ -48,7 +48,7 @@ export const StyledDeclarations = styled.div`
             padding-top: 0;
           }
 
-          &:first-child {
+          &:first-of-type {
             padding: 0;
             margin-top: -10px;
           }

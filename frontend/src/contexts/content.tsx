@@ -20,12 +20,20 @@ export const ContentContext = createContext<iContentContext>({
 })
 
 const ContentProvider: FC<iProps> = ({ __, children }): ReactElement => {
-  const t = (key: string) => {
-    if (isLocal() && !__[key]) {
-      console.log(`"${key}": ""`) // eslint-disable-line no-console
+  const t = (key1: string, key2 = '', key3 = '') => {
+    if (key2) {
+      key1 += ` ${key2}`
     }
 
-    return __[key] || key
+    if (key3) {
+      key1 += key3 === '?' || key3 === '!' ? key3 : ` ${key3}`
+    }
+
+    if (isLocal() && !__[key1]) {
+      console.log(`"${key1}": "",`) // eslint-disable-line no-console
+    }
+
+    return __[key1] || key1
   }
 
   const context = {

@@ -39,7 +39,7 @@ const Cards: FC<iProps> = ({ items, router }): ReactElement => {
         isOpen={isOpen}
         onClose={handleModal}
         options={{
-          position: 'center',
+          position: 'top',
           width: '400px'
         }}
       />

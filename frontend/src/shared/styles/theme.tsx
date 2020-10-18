@@ -25,6 +25,7 @@ const GlobalStyle = `
 
 const breakpoints: any = {
   mobile: '640px',
+  mobileXl: '767px',
   tablet: '768px',
   laptop: '1024px',
   laptopXl: '1440px',
@@ -33,6 +34,7 @@ const breakpoints: any = {
 
 const device = {
   mobile: `(max-width: ${breakpoints.mobile})`,
+  mobileXl: `(max-width: ${breakpoints.mobileXl})`,
   tablet: `(max-width: ${breakpoints.tablet})`,
   laptop: `(max-width: ${breakpoints.laptop})`,
   laptopXl: `(max-width: ${breakpoints.laptopXl})`,

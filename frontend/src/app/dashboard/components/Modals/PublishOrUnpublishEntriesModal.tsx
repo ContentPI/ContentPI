@@ -1,8 +1,11 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
+import React, { FC, ReactElement, useContext, memo } from 'react'
 import { Modal, LinkButton } from 'fogg-ui'
 import { redirectTo, pluralify } from 'fogg-utils'
 import { useMutation } from '@apollo/client'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Mutation
 import PUBLISH_UNPUBLISH_ENTRIES_MUTATION from '@graphql/values/publishOrUnpublishEntries.mutation'
@@ -23,6 +26,9 @@ const PublishOrUnpublishEntriesModal: FC<iProps> = ({
   onClose,
   options
 }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // Data
   const {
     data: { entries, action }
@@ -51,13 +57,16 @@ const PublishOrUnpublishEntriesModal: FC<iProps> = ({
     <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         <p>
-          Are you sure you want to {action}{' '}
-          {pluralify('this entry', 'these entries', entries.length)}?
+          {t(
+            `Are you sure you want to ${action || 'publish'}`,
+            pluralify('this entry', 'these entries', entries.length),
+            '?'
+          )}
         </p>
 
         <div className="buttons">
           <LinkButton color="#6663fd" bold onClick={onClose}>
-            Cancel
+            {t('Cancel')}
           </LinkButton>
 
           <LinkButton
@@ -66,9 +75,7 @@ const PublishOrUnpublishEntriesModal: FC<iProps> = ({
             bg={action === 'publish' ? '#dbfff3' : '#fff2d4'}
             bold
           >
-            <>
-              {action} {pluralify('Entry', 'Entries', entries.length)}
-            </>
+            <>{t(`${action} ${pluralify('Entry', 'Entries', entries.length)}`)}</>
           </LinkButton>
         </div>
       </StyledModal>
