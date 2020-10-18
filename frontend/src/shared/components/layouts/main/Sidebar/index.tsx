@@ -45,7 +45,7 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
     <StyledSidebar>
       <section className="firstOptions">
         <div className="isoType">
-          <Logo />
+          <Logo language={router.language} />
         </div>
 
         <ul>

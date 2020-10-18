@@ -29,7 +29,7 @@ interface iProps {
 const Page: FC<iProps> = ({ __ }): ReactElement => {
   // Router
   const router = useRouter()
-  const { appId, section, moduleName, model, entryId } = router.query
+  const { appId, section, moduleName, model, entryId, language } = router.query
   let modelId = null
   let entries: any = []
 
@@ -114,7 +114,7 @@ const Page: FC<iProps> = ({ __ }): ReactElement => {
   }
 
   return (
-    <ContentProvider __={__}>
+    <ContentProvider __={__} language={language}>
       <UserProvider>
         <AppProvider id={appId}>
           <FormProvider>{renderPage(moduleName)}</FormProvider>

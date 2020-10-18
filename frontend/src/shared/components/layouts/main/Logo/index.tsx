@@ -1,18 +1,19 @@
 // Dependencies
-import React, { ReactElement, memo } from 'react'
-
-// Components
-import Link from '@ui/Link'
+import React, { FC, ReactElement, memo } from 'react'
 
 // Styles
 import { StyledLogo } from './Logo.styled'
 
-const Logo = (): ReactElement => {
+interface iProps {
+  language: string
+}
+
+const Logo: FC<iProps> = ({ language }): ReactElement => {
   return (
     <StyledLogo>
-      <Link href="/dashboard" as="/dashboard">
+      <a href={`/${language}/dashboard`}>
         <img alt="Logo" src="/images/logo.png" />
-      </Link>
+      </a>
     </StyledLogo>
   )
 }

@@ -17,14 +17,14 @@ interface iProps {
 
 const Page: FC<iProps> = ({ __ }): ReactElement => {
   const router = useRouter()
-  const { appId } = router.query
+  const { appId, language } = router.query
 
   if (!appId) {
     return <div />
   }
 
   return (
-    <ContentProvider __={__}>
+    <ContentProvider __={__} language={language}>
       <UserProvider>
         <AppProvider id={appId}>
           <FormProvider>

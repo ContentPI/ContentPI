@@ -33,7 +33,7 @@ function App({
 
   if (error) {
     return (
-      <ContentProvider __={__}>
+      <ContentProvider __={__} language={language}>
         <PageNotFound noLayout />
       </ContentProvider>
     )

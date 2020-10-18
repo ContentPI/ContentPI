@@ -33,7 +33,7 @@ const Page: FC<iProps> = ({ __, language }): ReactElement => {
   }
 
   return (
-    <ContentProvider __={__}>
+    <ContentProvider __={__} language={language}>
       <UserProvider>
         <FormProvider>
           <MyApps dataGetApps={dataGetApps} router={router} />

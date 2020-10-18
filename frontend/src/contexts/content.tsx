@@ -7,19 +7,22 @@ import { isLocal } from '@config'
 interface iContentContext {
   __: any
   t: any
+  language: any
 }
 
 interface iProps {
   __: any
+  language: any
   children: ReactElement
 }
 
 export const ContentContext = createContext<iContentContext>({
   __: {},
-  t: () => null
+  t: () => null,
+  language: ''
 })
 
-const ContentProvider: FC<iProps> = ({ __, children }): ReactElement => {
+const ContentProvider: FC<iProps> = ({ __, language = 'en-US', children }): ReactElement => {
   const t = (key1: string, key2 = '', key3 = '') => {
     if (key2) {
       key1 += ` ${key2}`
@@ -38,6 +41,7 @@ const ContentProvider: FC<iProps> = ({ __, children }): ReactElement => {
 
   const context = {
     __,
+    language,
     t
   }
 

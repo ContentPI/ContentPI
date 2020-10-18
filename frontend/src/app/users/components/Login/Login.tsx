@@ -32,7 +32,7 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
 
   // Contexts
   const { onChange } = useContext(FormContext)
-  const { t } = useContext(ContentContext)
+  const { t, language } = useContext(ContentContext)
 
   // Methods
   const _onChange = (e: any): any => {
@@ -62,7 +62,7 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
         <div className="wrapper">
           <div className="form">
             <div className="logo">
-              <Logo />
+              <Logo language={language} />
             </div>
 
             <Input

@@ -13,13 +13,15 @@ import LoginLayout from '@app/users/components/Login/Layout'
 interface iProps {
   currentUrl: string
   __: any
+  language: any
 }
 
 const Page: FC<iProps> = ({
   currentUrl = isBrowser() ? window.location.search.replace('?redirectTo=', '') : '',
-  __
+  __,
+  language
 }): ReactElement => (
-  <ContentProvider __={__}>
+  <ContentProvider __={__} language={language}>
     <UserProvider>
       <FormProvider>
         <LoginLayout currentUrl={currentUrl} />
