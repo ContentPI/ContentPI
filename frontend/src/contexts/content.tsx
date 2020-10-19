@@ -32,7 +32,7 @@ const ContentProvider: FC<iProps> = ({ __, language = 'en-US', children }): Reac
       key1 += key3 === '?' || key3 === '!' ? key3 : ` ${key3}`
     }
 
-    if (isLocal() && !__[key1]) {
+    if (isLocal() && !__[key1] && language !== 'en-US') {
       console.log(`"${key1}": "",`) // eslint-disable-line no-console
     }
 
