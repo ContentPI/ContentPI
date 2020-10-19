@@ -22,7 +22,7 @@ const PageNotFound: FC<iProps> = ({ noLayout = false }): ReactElement => {
   const characters = ['boy', 'girl']
   const image = characters[Math.round(Math.random())]
 
-  let text = `${t('We tried really hard, but couldn&apos;t find the page you were looking for.')}`
+  let text = `${t("We tried really hard, but couldn't find the page you were looking for.")}`
   text += ` ${t(
     'You may find what you were looking for on our',
     '<a href="/dashboard">dashboard homepage</a>.'

@@ -17,9 +17,10 @@ interface iProps {
   model: string
   fields: any
   showSystem: boolean
+  language: string
 }
 
-const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
+const Fields: FC<iProps> = ({ model, fields, showSystem, language }): ReactElement => {
   // Contexts
   const { t } = useContext(ContentContext)
 
@@ -62,7 +63,7 @@ const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
         options={{
           data,
           position: 'top',
-          height: '760px',
+          height: language === 'ja-JP' ? '800px' : '760px',
           width: '600px'
         }}
       />

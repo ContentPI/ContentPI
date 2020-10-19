@@ -23,7 +23,7 @@ interface iProps {
 
 const CreateModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Getting appId
-  const { appId, language } = getParamsFromUrl(['language', 'page', 'appId', 'stage'])
+  const { appId } = getParamsFromUrl(['language', 'page', 'appId', 'stage'])
 
   // Contexts
   const { t } = useContext(ContentContext)

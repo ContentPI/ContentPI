@@ -140,12 +140,18 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
           </div>
 
           <div className="wrapper">
-            <Fields model={getModel.identifier} fields={getModel.fields} showSystem={showSystem} />
+            <Fields
+              model={getModel.identifier}
+              fields={getModel.fields}
+              showSystem={showSystem}
+              language={language}
+            />
             <Declarations
               model={getModel}
               declarations={getDeclarations}
               enumerations={getEnumerationsByAppId}
               models={getAppById.models}
+              language={language}
             />
           </div>
         </StyledSchema>

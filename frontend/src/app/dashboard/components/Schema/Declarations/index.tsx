@@ -15,9 +15,16 @@ interface iProps {
   model: any
   enumerations: any[]
   models: any[]
+  language: string
 }
 
-const Declarations: FC<iProps> = ({ declarations, model, enumerations, models }): ReactElement => {
+const Declarations: FC<iProps> = ({
+  declarations,
+  model,
+  enumerations,
+  models,
+  language
+}): ReactElement => {
   // Contexts
   const { t } = useContext(ContentContext)
 
@@ -50,7 +57,14 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations, models })
               models
             },
             position: 'top',
-            height: fieldType === 'Dropdown' || fieldType === 'Reference' ? '790px' : '700px',
+            height:
+              fieldType === 'Dropdown' || fieldType === 'Reference'
+                ? language === 'ja-JP'
+                  ? '820px'
+                  : '790px'
+                : language === 'ja-JP'
+                ? '740px'
+                : '700px',
             width: '600px'
           }}
         />
