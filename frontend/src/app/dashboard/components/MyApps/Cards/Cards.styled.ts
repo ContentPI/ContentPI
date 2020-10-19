@@ -1,16 +1,19 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, isRtl, add } from '@styles/theme'
 
 export const StyledCards = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 40px;
   padding-top: 50px;
-  width: 100%;
+  margin: 0 auto;
+  width: 98%;
 
   h1 {
     padding: 0px;
     margin: 0px;
-    text-align: left;
+    text-align: ${isRtl ? 'right' : 'left'};
+    width: 96%;
+    margin: 0 auto;
   }
 
   ul {

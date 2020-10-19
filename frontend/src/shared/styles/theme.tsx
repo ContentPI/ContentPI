@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { css, Global } from '@emotion/core'
+import { add, getCurrentLanguage } from 'fogg-utils'
 
 const GlobalStyle = `
   html,
@@ -152,4 +153,6 @@ const theme = {
   }
 }
 
-export { css, device, Global, GlobalStyle, styled, theme }
+const isRtl = getCurrentLanguage() === 'ar'
+
+export { css, device, Global, GlobalStyle, styled, theme, isRtl, add }

@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, isRtl, add } from '@styles/theme'
 
 export const StyledLogout = styled.div`
   width: 100%;
@@ -9,7 +9,8 @@ export const StyledLogout = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-right: 20px;
+    ${add('margin-right: 20px;').if(!isRtl)}
+    ${add('margin-left: 20px;').if(isRtl)}
 
     a {
       display: block;

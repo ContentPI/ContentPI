@@ -5,10 +5,10 @@ import React, { FC, ReactElement, memo } from 'react'
 import { StyledLogo } from './Logo.styled'
 
 interface iProps {
-  language: string
+  language?: string
 }
 
-const Logo: FC<iProps> = ({ language }): ReactElement => {
+const Logo: FC<iProps> = ({ language = 'en-US' }): ReactElement => {
   return (
     <StyledLogo>
       <a href={`/${language}/dashboard`}>
