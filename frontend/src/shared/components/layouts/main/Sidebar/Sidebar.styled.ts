@@ -134,7 +134,7 @@ export const StyledSidebar = styled.aside`
             display: flex;
             justify-content: left;
 
-            &:first-child {
+            &:first-of-type {
               a {
                 color: ${theme.colors.blue.denim};
                 font-weight: 600;

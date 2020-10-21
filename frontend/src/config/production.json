@@ -5,9 +5,7 @@
     "credentials": "same-origin"
   },
   "debug": false,
-  "cache": {
-    "enable": true
-  },
+  "cache": true,
   "session": {
     "cookieDomain": "www.ContentPI.com",
     "maxAge": 604800,

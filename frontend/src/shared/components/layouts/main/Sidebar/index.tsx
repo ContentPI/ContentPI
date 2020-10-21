@@ -6,7 +6,7 @@ import { Icon } from 'fogg-ui'
 import { AppContext } from '@contexts/app'
 
 // Constants
-import { STAGE_LINK, ASSET_LINK } from '@constants/links'
+import { STAGE_LINK, ASSET_LINK, LOGOUT_LINK } from '@constants/links'
 
 // Sidebars
 import ModelSidebar from '@dashboard/components/Models/ModelSidebar'
@@ -45,7 +45,7 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
     <StyledSidebar>
       <section className="firstOptions">
         <div className="isoType">
-          <Logo />
+          <Logo language={router.language} />
         </div>
 
         <ul>
@@ -76,9 +76,9 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           </li>
 
           <li>
-            <Link href="/logout?redirectTo=/dashboard" title="Logout">
+            <a href={`${LOGOUT_LINK(router)}?redirectTo=/dashboard`} title="Logout">
               <Icon type="fas fa-power-off" />
-            </Link>
+            </a>
           </li>
         </ul>
 

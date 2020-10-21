@@ -1,9 +1,12 @@
 // Dependencies
-import React, { FC, ReactElement, useState, memo } from 'react'
+import React, { FC, ReactElement, useState, useContext, memo } from 'react'
 import { Icon } from 'fogg-ui'
 
 // Constants
 import { STAGE_LINK } from '@constants/links'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Components
 import Link from '@ui/Link'
@@ -20,6 +23,9 @@ interface iProps {
 }
 
 const Cards: FC<iProps> = ({ items, router }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // Local state
   const [isOpen, setIsOpen] = useState(false)
 
@@ -29,17 +35,17 @@ const Cards: FC<iProps> = ({ items, router }): ReactElement => {
   return (
     <>
       <CreateAppModal
-        label="Create new App"
+        label={t('Create New App')}
         isOpen={isOpen}
         onClose={handleModal}
         options={{
-          position: 'center',
+          position: 'top',
           width: '400px'
         }}
       />
 
       <StyledCards>
-        <h1>My Apps</h1>
+        <h1>{t('My Apps')}</h1>
 
         <ul>
           {items.map(app => {
@@ -62,7 +68,7 @@ const Cards: FC<iProps> = ({ items, router }): ReactElement => {
                 <Icon type="fas fa-plus" />
               </section>
 
-              <span className="createNewApp">Create New App</span>
+              <span className="createNewApp">{t('Create New App')}</span>
             </section>
           </li>
         </ul>

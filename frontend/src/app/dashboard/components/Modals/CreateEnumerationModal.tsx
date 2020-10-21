@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client'
 
 // Contexts
 import { FormContext } from '@contexts/form'
+import { ContentContext } from '@contexts/content'
 
 // Mutation
 import CREATE_ENUMERATION_MUTATION from '@graphql/enumerations/createEnumeration.mutation'
@@ -21,8 +22,11 @@ interface iProps {
 }
 
 const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // Getting appId
-  const { appId } = getParamsFromUrl(['page', 'appId', 'stage'])
+  const { appId } = getParamsFromUrl(['language', 'page', 'appId', 'stage'])
 
   // States
   const [values, setValues] = useState<any>({
@@ -74,7 +78,7 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
         })
 
         if (dataCreateEnumeration.createEnumeration) {
-          redirectTo(`/dashboard/${appId}/master/schema/enumeration/${values.identifier}`)
+          redirectTo(`/dashboard/${appId}/master/schema/enumeration/${values.identifier}`, true)
         }
       })
     }
@@ -93,11 +97,12 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
       <StyledModal>
         <div>
           <label htmlFor="modelName">
-            Enumeration Name {required.enumerationName && <Badge danger>Required</Badge>}
+            {t('Enumeration Name')}{' '}
+            {required.enumerationName && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             name="enumerationName"
-            placeholder="Enumeration Name"
+            placeholder={t('Enumeration Name')}
             hasError={required.enumerationName}
             onChange={_onChange}
             value={values.enumerationName}
@@ -106,7 +111,7 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
 
         <div>
           <label htmlFor="identifier">
-            Identifier {required.identifier && <Badge danger>Required</Badge>}
+            {t('Identifier')} {required.identifier && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             name="identifier"
@@ -117,10 +122,10 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
         </div>
 
         <div>
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">{t('Description')}</label>
           <Input
             name="description"
-            placeholder="Small description about your new app"
+            placeholder={t('Small description about your new app')}
             onChange={_onChange}
             value={values.description}
           />
@@ -128,10 +133,10 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
 
         <div className="values">
           <label htmlFor="values">
-            Values {required.enumerationValues && <Badge danger>Required</Badge>}
+            {t('Values')} {required.enumerationValues && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Tags
-            label="Add new value"
+            label={t('Add new value')}
             tags={[]}
             getTags={(eValues): void => {
               if (eValues.length > 0) {
@@ -142,13 +147,13 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
         </div>
 
         <div className="buttons">
-          <LinkButton onClick={onClose}>Cancel</LinkButton>
+          <LinkButton onClick={onClose}>{t('Cancel')}</LinkButton>
           <PrimaryButton
             onClick={handleSubmit}
             isLoading={loading}
-            loadingText="Creating Enumeration..."
+            loadingText={t('Creating Enumeration...')}
           >
-            Create Enumeration
+            {t('Create Enumeration')}
           </PrimaryButton>
         </div>
       </StyledModal>

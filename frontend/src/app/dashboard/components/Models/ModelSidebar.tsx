@@ -1,6 +1,9 @@
 // Dependencies
-import React, { FC, ReactElement, useState, memo } from 'react'
+import React, { FC, ReactElement, useState, useContext, memo } from 'react'
 import { Badge } from 'fogg-ui'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Constants
 import { MODEL_LINK, ENUMERATION_LINK } from '@constants/links'
@@ -21,6 +24,9 @@ interface iProps {
 }
 
 const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // Local state
   const [isOpenModel, setIsOpenModel] = useState(false)
   const [isOpenEnumeration, setIsOpenEnumeration] = useState(false)
@@ -35,7 +41,7 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
   return (
     <>
       <CreateEnumerationModal
-        label="Create new Enumeration"
+        label={t('Create new Enumeration')}
         isOpen={isOpenEnumeration}
         onClose={handleEnumerationModal}
         options={{
@@ -46,7 +52,7 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
       />
 
       <CreateModelModal
-        label="Create new Model"
+        label={t('Create new Model')}
         isOpen={isOpenModel}
         onClose={handleModelModal}
         options={{
@@ -57,9 +63,9 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
 
       <StyledModelSidebar>
         <div className="wrapper">
-          <span className="models">Models</span>
+          <span className="models">{t('Models')}</span>
           <span className="create">
-            <Badge onClick={handleModelModal}>+ Create</Badge>
+            <Badge onClick={handleModelModal}>+ {t('Create')}</Badge>
           </span>
         </div>
 
@@ -80,9 +86,9 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
         </div>
 
         <div className="wrapper">
-          <span className="models">Enumerations</span>
+          <span className="models">{t('Enumerations')}</span>
           <span className="create">
-            <Badge onClick={handleEnumerationModal}>+ Create</Badge>
+            <Badge onClick={handleEnumerationModal}>+ {t('Create')}</Badge>
           </span>
         </div>
 

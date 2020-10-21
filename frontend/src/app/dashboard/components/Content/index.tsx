@@ -1,7 +1,10 @@
 // Dependencies
-import React, { FC, ReactElement, useState, memo } from 'react'
+import React, { FC, ReactElement, useState, useContext, memo } from 'react'
 import { Table, PrimaryButton, Pagination } from 'fogg-ui'
 import { getValuesForTable, pluralify } from 'fogg-utils'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Configuration
 import config from '@config'
@@ -25,6 +28,9 @@ interface iProps {
 }
 
 const Content: FC<iProps> = ({ data, router }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // States
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [isPublishOrUnpublishModalOpen, setIsPublishOrUnpublishModalOpen] = useState(false)
@@ -63,10 +69,16 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
 
   const isFile = body.includes('file') && body.includes('fileUrl') && body.includes('information')
 
+  const label = `${action === 'publish' ? 'Publish' : 'Unpublish'} ${pluralify(
+    'Entry',
+    'Entries',
+    entries.length
+  )}`
+
   return (
     <>
       <DeleteEntriesModal
-        label={`Delete ${pluralify('Entry', 'Entries', entries.length)}`}
+        label={t(`Delete ${pluralify('Entry', 'Entries', entries.length)}`)}
         isOpen={isDeleteModalOpen}
         onClose={() => handleEntriesModal([], 'delete')}
         options={{
@@ -79,11 +91,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
       />
 
       <PublishOrUnpublishEntriesModal
-        label={`${action === 'publish' ? 'Publish' : 'Unpublish'} ${pluralify(
-          'Entry',
-          'Entries',
-          entries.length
-        )}`}
+        label={t(label)}
         isOpen={isPublishOrUnpublishModalOpen}
         onClose={() => handleEntriesModal([], action)}
         options={{
@@ -96,7 +104,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
         }}
       />
 
-      <MainLayout title="Content" header content footer sidebar noWrapper router={router}>
+      <MainLayout title={t('Content')} header content footer sidebar noWrapper router={router}>
         <StyledContent style={{ margin: '0 auto', width: '98%' }}>
           <div className="model">
             <PrimaryButton
@@ -104,7 +112,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
               as={CREATE_ENTRY_LINK(router).as}
               Link={Link}
             >
-              + New Entry
+              <>+ {t('New Entry')}</>
             </PrimaryButton>
           </div>
 
@@ -126,7 +134,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
             />
 
             <Pagination
-              theme="primary"
+              design="primary"
               page={page}
               total={total}
               href={`${CONTENT_LINK(router).href}?page=`}

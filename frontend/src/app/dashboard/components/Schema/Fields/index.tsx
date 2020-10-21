@@ -1,7 +1,10 @@
 // Dependencies
-import React, { FC, ReactElement, useState, memo } from 'react'
+import React, { FC, ReactElement, useState, useContext, memo } from 'react'
 import { cx } from 'fogg-utils'
 import { Icon } from 'fogg-ui'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Components
 import DeleteFieldModal from '@modals/DeleteFieldModal'
@@ -14,9 +17,13 @@ interface iProps {
   model: string
   fields: any
   showSystem: boolean
+  language: string
 }
 
-const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
+const Fields: FC<iProps> = ({ model, fields, showSystem, language }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // State
   const [isOpenDelete, setIsOpenDelete] = useState(false)
   const [isOpenEdit, setIsOpenEdit] = useState(false)
@@ -39,7 +46,7 @@ const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
   return (
     <>
       <DeleteFieldModal
-        label="Delete Field"
+        label={t('Delete Field')}
         isOpen={isOpenDelete}
         onClose={handleDeleteModal}
         options={{
@@ -50,13 +57,13 @@ const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
       />
 
       <EditFieldModal
-        label="Edit Field"
+        label={t('Edit Field')}
         isOpen={isOpenEdit}
         onClose={handleEditModal}
         options={{
           data,
           position: 'top',
-          height: '760px',
+          height: language === 'ja-JP' ? '800px' : '760px',
           width: '600px'
         }}
       />
@@ -111,25 +118,29 @@ const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
 
               <div className="information">
                 {field.type !== 'Media' && (
-                  <span className={cx('tag', field.isSystem ? 'system' : '')}>{field.type}</span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>{t(field.type)}</span>
                 )}
                 {field.isPrimaryKey && (
-                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Primary Key</span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>
+                    {t('Primary Key')}
+                  </span>
                 )}
                 {field.isRequired && (
-                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Required</span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>{t('Required')}</span>
                 )}
                 {field.isUnique && (
-                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Unique</span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>{t('Unique')}</span>
                 )}
                 {field.isMedia && (
-                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Media</span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>{t('Media')}</span>
                 )}
                 {field.isHide && (
-                  <span className={cx('tag', field.isSystem ? 'system' : '')}>Hide</span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>{t('Hide')}</span>
                 )}
                 {field.isSystem && (
-                  <span className={cx('tag', field.isSystem ? 'system' : '')}>System Field</span>
+                  <span className={cx('tag', field.isSystem ? 'system' : '')}>
+                    {t('System Field')}
+                  </span>
                 )}
               </div>
 
@@ -137,12 +148,12 @@ const Fields: FC<iProps> = ({ model, fields, showSystem }): ReactElement => {
                 <div className="actions">
                   <Icon
                     type="fas fa-edit"
-                    title="Edit"
+                    title={t('Edit')}
                     onClick={(): void => handleEdit(field.id)}
                   />
                   <Icon
                     type="fas fa-trash"
-                    title="Delete"
+                    title={t('Delete')}
                     onClick={(): void => handleDelete(field.id)}
                   />
                 </div>

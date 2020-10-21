@@ -1,5 +1,8 @@
 // Dependencies
-import React, { FC, ReactElement, useState, memo } from 'react'
+import React, { FC, ReactElement, useState, useContext, memo } from 'react'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Modals
 import CreateFieldModal from '@modals/CreateFieldModal'
@@ -12,9 +15,19 @@ interface iProps {
   model: any
   enumerations: any[]
   models: any[]
+  language: string
 }
 
-const Declarations: FC<iProps> = ({ declarations, model, enumerations, models }): ReactElement => {
+const Declarations: FC<iProps> = ({
+  declarations,
+  model,
+  enumerations,
+  models,
+  language
+}): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // Local state
   const [isOpen, setIsOpen] = useState(false)
   const [fieldType, setFieldType] = useState('')
@@ -30,7 +43,7 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations, models })
     <>
       {fieldType && (
         <CreateFieldModal
-          label={`Create new ${fieldType} Field`}
+          label={t(`Create new ${fieldType} Field`)}
           isOpen={isOpen}
           onClose={handleModal}
           options={{
@@ -44,14 +57,21 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations, models })
               models
             },
             position: 'top',
-            height: fieldType === 'Dropdown' || fieldType === 'Reference' ? '790px' : '700px',
+            height:
+              fieldType === 'Dropdown' || fieldType === 'Reference'
+                ? language === 'ja-JP'
+                  ? '820px'
+                  : '790px'
+                : language === 'ja-JP'
+                ? '740px'
+                : '700px',
             width: '600px'
           }}
         />
       )}
 
       <StyledDeclarations>
-        <h3>Fields</h3>
+        <h3>{t('Fields')}</h3>
 
         <ul>
           {declarations.map((field: any) => {
@@ -68,7 +88,7 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations, models })
             return (
               <li key={field.id}>
                 <div>
-                  <p>{field.declaration}</p>
+                  <p>{t(field.declaration)}</p>
 
                   <div
                     className="widgetOption"
@@ -79,7 +99,7 @@ const Declarations: FC<iProps> = ({ declarations, model, enumerations, models })
                     }}
                   >
                     <i className={field.icon} style={{ color: field.color }} />
-                    <span>{field.declaration}</span>
+                    <span>{t(field.declaration)}</span>
                   </div>
                 </div>
               </li>

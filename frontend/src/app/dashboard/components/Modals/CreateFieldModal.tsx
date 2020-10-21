@@ -6,6 +6,7 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 
 // Contexts
 import { FormContext } from '@contexts/form'
+import { ContentContext } from '@contexts/content'
 
 // Hooks
 import usePrevious from '@lib/usePrevious'
@@ -25,7 +26,10 @@ interface iProps {
 }
 
 const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
-  const { appId } = getParamsFromUrl(['page', 'appId', 'stage'])
+  // Contexts
+  const { t } = useContext(ContentContext)
+
+  const { appId } = getParamsFromUrl(['language', 'page', 'appId', 'stage'])
 
   const {
     data: { enumerations = [], fieldsCount = 0, models }
@@ -160,11 +164,11 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
     return (
       <div>
         <label htmlFor="enumeration">
-          Enumeration {required.enumeration && <Badge danger>Required</Badge>}
+          {t('Enumeration')} {required.enumeration && <Badge danger>{t('Required')}</Badge>}
         </label>
         <Select
           name="enumeration"
-          label="Select Enumeration"
+          label={t('Select Enumeration')}
           onClick={({ value }: { value: any }): void => {
             if (value) {
               setEnumeration(value)
@@ -188,7 +192,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
     return (
       <div>
         <label htmlFor="reference">
-          Reference {required.reference && <Badge danger>Required</Badge>}
+          {t('Reference')} {required.reference && <Badge danger>{t('Required')}</Badge>}
         </label>
 
         <Select
@@ -217,12 +221,12 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
       <StyledModal>
         <div>
           <label htmlFor="fieldName">
-            Field Name {required.fieldName && <Badge danger>Required</Badge>}
+            {t('Field Name')} {required.fieldName && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             id="fieldName"
             name="fieldName"
-            placeholder="First Field? Try Title"
+            placeholder={t('First Field? Try Title')}
             hasError={required.fieldName}
             onChange={_onChange}
             value={values.fieldName}
@@ -231,7 +235,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
         <div>
           <label htmlFor="identifier">
-            Identifier {required.identifier && <Badge danger>Required</Badge>}
+            {t('Identifier')} {required.identifier && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             id="identifier"
@@ -243,7 +247,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
         </div>
 
         <div>
-          <label htmlFor="order">Order (1 to 25)</label>
+          <label htmlFor="order">{t('Order (1 to 25)')}</label>
           <Input
             type="number"
             name="order"
@@ -258,10 +262,10 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
         {options.data.type === 'Reference' && renderReference()}
 
         <div>
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">{t('Description')}</label>
           <Input
             name="description"
-            placeholder="Small description about your field"
+            placeholder={t('Small description about your field')}
             onChange={_onChange}
             value={values.description}
           />
@@ -271,7 +275,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           <Toggle
             color="#42f598"
             type="round"
-            label="Make field required"
+            label={t('Make field required')}
             onChange={(): void => setValue('isRequired', !values.isRequired, setValues)}
             checked={values.isRequired}
           />
@@ -281,7 +285,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           <Toggle
             color="#42f598"
             type="round"
-            label="Set field as Primary Key"
+            label={t('Set field as Primary Key')}
             onChange={(): void => setValue('isPrimaryKey', !values.isPrimaryKey, setValues)}
             checked={values.isPrimaryKey}
           />
@@ -291,7 +295,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           <Toggle
             color="#42f598"
             type="round"
-            label="Set field as unique"
+            label={t('Set field as unique')}
             onChange={(): void => setValue('isUnique', !values.isUnique, setValues)}
             checked={values.isUnique}
           />
@@ -301,7 +305,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           <Toggle
             color="#42f598"
             type="round"
-            label="Hide field"
+            label={t('Hide field')}
             onChange={(): void => setValue('isHide', !values.isHide, setValues)}
             checked={values.isHide}
           />
@@ -311,16 +315,20 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           <Toggle
             color="#42f598"
             type="round"
-            label="Is Media (image, video or document)?"
+            label={t('Is Media (image, video or document)?')}
             onChange={(): void => setValue('isMedia', !values.isMedia, setValues)}
             checked={values.isMedia}
           />
         </div>
 
         <div className="buttons">
-          <LinkButton onClick={_onClose}>Cancel</LinkButton>
-          <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Creating Field...">
-            Create Field
+          <LinkButton onClick={_onClose}>{t('Cancel')}</LinkButton>
+          <PrimaryButton
+            onClick={handleSubmit}
+            isLoading={loading}
+            loadingText={t('Creating Field...')}
+          >
+            {t('Create Field')}
           </PrimaryButton>
         </div>
       </StyledModal>

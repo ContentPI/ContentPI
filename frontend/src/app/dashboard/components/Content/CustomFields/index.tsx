@@ -1,5 +1,5 @@
 // Dependencies
-import React, { FC, ReactElement, useState, memo } from 'react'
+import React, { FC, ReactElement, useState, useContext, memo } from 'react'
 import { Badge, Icon, Input, TextArea, Select, File, EntryBlock } from 'fogg-ui'
 import {
   cx,
@@ -10,6 +10,9 @@ import {
   getRandomCode,
   getReferenceTitle
 } from 'fogg-utils'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Configuration
 import config from '@config'
@@ -63,6 +66,9 @@ const CustomFields: FC<iProps> = ({
   handleReferenceModal,
   isReferenceModalOpen
 }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   const [selectedFile, setSelectedFile] = useState({})
 
   // Methods
@@ -127,7 +133,7 @@ const CustomFields: FC<iProps> = ({
             ))}
 
           <a className="reference" onClick={() => handleReferenceModal(modelEntries)}>
-            <Icon type="fas fa-link" /> Link existing {modelName}
+            <Icon type="fas fa-link" /> {t('Link existing')} {modelName}
           </a>
         </div>
       )
@@ -139,10 +145,10 @@ const CustomFields: FC<iProps> = ({
       <File
         name={field.identifier}
         selectedFile={selectedFile}
-        label="Choose a file"
+        label={t('Choose a file')}
         onChange={handleSelectedFile}
         maxFileSize={config.files.maxFileSize}
-        theme="success"
+        design="success"
         allowedExtensions={config.files.allowedExtensions}
       />
     )
@@ -184,7 +190,7 @@ const CustomFields: FC<iProps> = ({
   return (
     <>
       <ReferenceModal
-        label="Inserting existing entry"
+        label={t('Inserting existing entry')}
         isOpen={isReferenceModalOpen}
         onClose={() => handleReferenceModal(null)}
         options={{
@@ -200,12 +206,18 @@ const CustomFields: FC<iProps> = ({
       <StyledCustomFields>
         <div className="fields">
           <div className="goBack">
-            <Link href={CONTENT_LINK(router).as} title={`Go back to ${getModel.modelName}`}>
+            <Link href={CONTENT_LINK(router).as} title={`${t('Go back to')} ${getModel.modelName}`}>
               <Icon type="fas fa-chevron-left" />
             </Link>
             &nbsp;&nbsp;&nbsp;
             <Badge className="badge">{getModel.modelName}</Badge>
-            <div className="entryTitle">{values.title || <>New {getModel.modelName}</>}</div>
+            <div className="entryTitle">
+              {values.title || (
+                <>
+                  {t('New')} {getModel.modelName}
+                </>
+              )}
+            </div>
           </div>
 
           {customFields.map((field: any) => (
@@ -223,7 +235,7 @@ const CustomFields: FC<iProps> = ({
                   {field.fieldName}{' '}
                   {field.isRequired && (
                     <span className={cx('tag', required[field.identifier] ? 'red' : '')}>
-                      Required
+                      {t('Required')}
                     </span>
                   )}
                 </label>

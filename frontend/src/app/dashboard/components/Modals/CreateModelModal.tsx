@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client'
 
 // Contexts
 import { FormContext } from '@contexts/form'
+import { ContentContext } from '@contexts/content'
 
 // Mutation
 import CREATE_MODEL_MUTATION from '@graphql/models/createModel.mutation'
@@ -22,7 +23,10 @@ interface iProps {
 
 const CreateModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Getting appId
-  const { appId } = getParamsFromUrl(['page', 'appId', 'stage'])
+  const { appId } = getParamsFromUrl(['language', 'page', 'appId', 'stage'])
+
+  // Contexts
+  const { t } = useContext(ContentContext)
 
   // States
   const [values, setValues] = useState({
@@ -60,7 +64,7 @@ const CreateModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
         })
 
         if (dataCreateModel.createModel) {
-          redirectTo(`/dashboard/${appId}/master/schema/model/${values.identifier}`)
+          redirectTo(`/dashboard/${appId}/master/schema/model/${values.identifier}`, true)
         }
       })
     }
@@ -79,11 +83,11 @@ const CreateModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
       <StyledModal>
         <div>
           <label htmlFor="modelName">
-            Model Name {required.modelName && <Badge danger>Required</Badge>}
+            {t('Model Name')} {required.modelName && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             name="modelName"
-            placeholder="First Model? Try Post"
+            placeholder={t('First Model? Try Post')}
             hasError={required.modelName}
             onChange={_onChange}
             value={values.modelName}
@@ -92,7 +96,7 @@ const CreateModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
         <div>
           <label htmlFor="identifier">
-            Identifier {required.identifier && <Badge danger>Required</Badge>}
+            {t('Identifier')} {required.identifier && <Badge danger>{t('Required')}</Badge>}
           </label>
           <Input
             name="identifier"
@@ -103,19 +107,23 @@ const CreateModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
         </div>
 
         <div>
-          <label htmlFor="description">Description</label>
+          <label htmlFor="description">{t('Description')}</label>
           <Input
             name="description"
-            placeholder="Small description about your new app"
+            placeholder={t('Small description about your new app')}
             onChange={_onChange}
             value={values.description}
           />
         </div>
 
         <div className="buttons">
-          <LinkButton onClick={onClose}>Cancel</LinkButton>
-          <PrimaryButton onClick={handleSubmit} isLoading={loading} loadingText="Creating Model...">
-            Create Model
+          <LinkButton onClick={onClose}>{t('Cancel')}</LinkButton>
+          <PrimaryButton
+            onClick={handleSubmit}
+            isLoading={loading}
+            loadingText={t('Creating Model...')}
+          >
+            {t('Create Model')}
           </PrimaryButton>
         </div>
       </StyledModal>

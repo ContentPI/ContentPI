@@ -99,7 +99,7 @@ nextApp.prepare().then(() => {
     res.redirect(`${config.languages.default}/login`)
   })
 
-  app.get('/logout', (req: Request, res: Response) => {
+  app.get(`/:language(${availableLanguages()})/logout`, (req: Request, res: Response) => {
     const redirect: any = req.query.redirectTo || '/'
     res.clearCookie('at')
     res.redirect(redirect)

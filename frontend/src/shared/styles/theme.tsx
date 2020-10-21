@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { css, Global } from '@emotion/core'
+import { add, getCurrentLanguage } from 'fogg-utils'
 
 const GlobalStyle = `
   html,
@@ -25,6 +26,7 @@ const GlobalStyle = `
 
 const breakpoints: any = {
   mobile: '640px',
+  mobileXl: '767px',
   tablet: '768px',
   laptop: '1024px',
   laptopXl: '1440px',
@@ -33,6 +35,7 @@ const breakpoints: any = {
 
 const device = {
   mobile: `(max-width: ${breakpoints.mobile})`,
+  mobileXl: `(max-width: ${breakpoints.mobileXl})`,
   tablet: `(max-width: ${breakpoints.tablet})`,
   laptop: `(max-width: ${breakpoints.laptop})`,
   laptopXl: `(max-width: ${breakpoints.laptopXl})`,
@@ -150,4 +153,6 @@ const theme = {
   }
 }
 
-export { css, device, Global, GlobalStyle, styled, theme }
+const isRtl = getCurrentLanguage() === 'ar'
+
+export { css, device, Global, GlobalStyle, styled, theme, isRtl, add }

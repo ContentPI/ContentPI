@@ -17,9 +17,7 @@ interface iConfig {
     credentials: string
   }
   debug: boolean
-  cache: {
-    enable: boolean
-  }
+  cache: boolean
   session: {
     cookieDomain: string
     maxAge: number

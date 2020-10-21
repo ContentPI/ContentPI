@@ -1,29 +1,37 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
+import React, { FC, ReactElement, useContext, memo } from 'react'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Styles
 import { StyledFooter } from './Footer.styled'
 
-const Footer: FC = (): ReactElement => (
-  <StyledFooter>
-    <div className="content">
-      <div className="copyright">&copy; {new Date().getFullYear()} ContentPI.com</div>
+const Footer: FC = (): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
 
-      <nav className="rightOptions">
-        <ul>
-          <li>
-            <a href="#">Blog</a>
-          </li>
-          <li>
-            <a href="#">Documentation</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </StyledFooter>
-)
+  return (
+    <StyledFooter>
+      <div className="content">
+        <div className="copyright">&copy; {new Date().getFullYear()} ContentPI.com</div>
+
+        <nav className="rightOptions">
+          <ul>
+            <li>
+              <a href="#">{t('Blog')}</a>
+            </li>
+            <li>
+              <a href="#">{t('Documentation')}</a>
+            </li>
+            <li>
+              <a href="#">{t('Contact')}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </StyledFooter>
+  )
+}
 
 export default memo(Footer)
