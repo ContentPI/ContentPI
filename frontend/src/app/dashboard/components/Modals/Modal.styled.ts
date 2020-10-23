@@ -1,9 +1,6 @@
 import { styled, theme, device } from '@styles/theme'
 
 export const StyledModal = styled.div`
-  .label {
-    border: 1px solid red;
-  }
   p {
     font-size: 14px;
     line-height: 25px;
