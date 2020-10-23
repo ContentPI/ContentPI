@@ -90,7 +90,7 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
       <section className={`closed ${open ? `secondOptions` : ''}`}>
         <div className="close" onClick={(): void => handleOpen('', false)}>
           <span>
-            <Icon type="fas fa-arrow-left" />
+            <Icon type={`fas fa-arrow-${router.language === 'ar' ? 'right' : 'left'}`} />
           </span>
         </div>
 

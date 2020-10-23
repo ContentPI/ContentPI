@@ -99,6 +99,7 @@ const Declarations: FC<iProps> = ({
                     }}
                   >
                     <i className={field.icon} style={{ color: field.color }} />
+                    &nbsp;
                     <span>{t(field.declaration)}</span>
                   </div>
                 </div>

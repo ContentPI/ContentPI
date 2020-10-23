@@ -7,25 +7,25 @@ import { getSelectLanguages, getCurrentLanguage, redirectTo } from 'fogg-utils'
 import config from '@config'
 
 // Styles
-import { StyledSwitchLanguage } from './SwitchLanguage.styled'
+import { StyledLanguageSwitcher } from './LanguageSwitcher.styled'
 
 const currentLanguage = getCurrentLanguage()
 
-const SwitchLanguage: FC = (): ReactElement => (
-  <StyledSwitchLanguage>
+const LanguageSwitcher: FC = (): ReactElement => (
+  <StyledLanguageSwitcher>
     <Select
       top="160px"
       type="white"
       name="language"
       label="Select language"
-      onClick={({ option, value }: { option: string; value: any }): void => {
+      onClick={({ value }: { value: any }): void => {
         if (value && value !== currentLanguage) {
-          redirectTo(`/${value}/dashboard`)
+          redirectTo('_self', value)
         }
       }}
       options={getSelectLanguages(config.languages.list)}
     />
-  </StyledSwitchLanguage>
+  </StyledLanguageSwitcher>
 )
 
-export default memo(SwitchLanguage)
+export default memo(LanguageSwitcher)

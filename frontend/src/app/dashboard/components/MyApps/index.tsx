@@ -8,7 +8,7 @@ import { ContentContext } from '@contexts/content'
 import MainLayout from '@layouts/main/MainLayout'
 import Logo from '@layouts/main/Logo'
 import Logout from '@layouts/main/Logout'
-import SwitchLanguage from '@layouts/main/SwitchLanguage'
+import LanguageSwitcher from '@layouts/main/LanguageSwitcher'
 import Cards from './Cards'
 
 // Styles
@@ -40,7 +40,7 @@ const MyApps: FC<iProps> = ({ dataGetApps, router }): ReactElement => {
         <Cards items={dataGetApps.getApps} router={router} />
 
         <div className="flexFooter">
-          <SwitchLanguage />
+          <LanguageSwitcher />
           <Logout router={router} />
         </div>
       </StyledMyApps>
