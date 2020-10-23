@@ -59,10 +59,10 @@ const Declarations: FC<iProps> = ({
             position: 'top',
             height:
               fieldType === 'Dropdown' || fieldType === 'Reference'
-                ? language === 'ja-JP'
+                ? language === 'ja-JP' || language === 'ar'
                   ? '820px'
                   : '790px'
-                : language === 'ja-JP'
+                : language === 'ja-JP' || language === 'ar'
                 ? '740px'
                 : '700px',
             width: '600px'

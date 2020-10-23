@@ -71,7 +71,7 @@
     "dotenv-webpack": "^2.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "fogg-ui": "^3.1.7",
+    "fogg-ui": "^3.1.9",
     "fogg-utils": "2.6.5",
     "graphql": "^15.3.0",
     "isomorphic-fetch": "^3.0.0",

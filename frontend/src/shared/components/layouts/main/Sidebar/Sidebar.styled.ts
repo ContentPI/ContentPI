@@ -1,4 +1,4 @@
-import { styled, theme } from '@styles/theme'
+import { styled, theme, isRtl, add } from '@styles/theme'
 
 export const StyledSidebar = styled.aside`
   background: ${theme.color.white};
@@ -18,6 +18,7 @@ export const StyledSidebar = styled.aside`
       rgba(9, 9, 121, 1) 35%,
       rgba(0, 212, 255, 1) 100%
     );
+    height: 101%;
     color: ${theme.color.white};
 
     .isoType {
@@ -87,6 +88,14 @@ export const StyledSidebar = styled.aside`
     &.secondOptions {
       width: 225px;
       display: block;
+      position: absolute;
+      z-index: 9999;
+      background: white;
+      height: 100%;
+      ${add('left: 75px;').if(!isRtl)}
+      ${add('right: 75px;').if(isRtl)}
+      ${add('border-right: 3px solid #f9f9f9;').if(!isRtl)}
+      ${add('border-left: 3px solid #f9f9f9;').if(isRtl)}
 
       .logoContainer {
         height: 70px;
@@ -105,6 +114,7 @@ export const StyledSidebar = styled.aside`
           background-color: ${theme.colors.gray.wildSand};
           border-radius: 0.5rem;
           margin-right: 1rem;
+          ${add('margin-left: 10px;').if(isRtl)}
 
           i {
             color: ${theme.colors.gray.emperor};
@@ -189,6 +199,7 @@ export const StyledSidebar = styled.aside`
     position: absolute;
     bottom: 0;
     left: 19px;
+    ${add('right: 15px;').if(isRtl)}
     margin-bottom: 10px;
 
     span {
