@@ -8,6 +8,6 @@ export const StyledContent = styled.div`
   }
 
   .rows {
-    min-height: 740px;
+    min-height: 77vh;
   }
 `
