@@ -4,6 +4,7 @@ import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
 import Dotenv from 'dotenv-webpack'
 
 export default {
+  reactStrictMode: true,
   devIndicators: {
     autoPrerender: false
   },
