@@ -1,4 +1,4 @@
-import { styled, theme, device } from '@styles/theme'
+import { styled, theme, device, add, isRtl } from '@styles/theme'
 
 export const StyledSchema = styled.div`
   padding-left: 10px;
@@ -22,7 +22,8 @@ export const StyledSchema = styled.div`
 
     div {
       top: 160px;
-      left: 205px;
+      ${add('left: 205px;').if(!isRtl)}
+      ${add('right: 205px;').if(isRtl)}
     }
 
     .name {

@@ -55,7 +55,7 @@ const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): Re
             '?'
           )}{' '}
           <br />
-          {t('This cannot be reverted!')}!
+          {t('This cannot be reverted!')}
         </p>
 
         <div className="buttons">

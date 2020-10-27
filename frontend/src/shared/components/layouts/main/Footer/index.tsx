@@ -4,6 +4,9 @@ import React, { FC, ReactElement, useContext, memo } from 'react'
 // Contexts
 import { ContentContext } from '@contexts/content'
 
+// Components
+import LanguageSwitcher from '@layouts/main/LanguageSwitcher'
+
 // Styles
 import { StyledFooter } from './Footer.styled'
 
@@ -14,6 +17,8 @@ const Footer: FC = (): ReactElement => {
   return (
     <StyledFooter>
       <div className="content">
+        <LanguageSwitcher />
+
         <div className="copyright">&copy; {new Date().getFullYear()} ContentPI.com</div>
 
         <nav className="rightOptions">

@@ -1,4 +1,4 @@
-import { styled, theme, device } from '@styles/theme'
+import { styled, theme, device, isRtl, add } from '@styles/theme'
 
 export const StyledFields = styled.div`
   display: flex;
@@ -22,7 +22,8 @@ export const StyledFields = styled.div`
     .actions {
       position: absolute;
       top: 6px;
-      right: 10px;
+      ${add('right: 10px;').if(!isRtl)}
+      ${add('left: 20px;').if(isRtl)}
 
       i {
         margin-right: 10px;
@@ -112,6 +113,7 @@ export const StyledFields = styled.div`
       margin-top: -47px;
       vertical-align: text-top;
       line-height: 80px;
+      ${add('margin-right: 15px;').if(isRtl)}
 
       .identifier {
         margin-left: 5px;
