@@ -118,6 +118,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
 
           <div className="rows">
             <Table
+              t={t}
               url={EDIT_ENTRY_LINK(router).as}
               query="?entryId="
               data={{

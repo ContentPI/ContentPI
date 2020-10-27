@@ -63,7 +63,7 @@ const Fields: FC<iProps> = ({ model, fields, showSystem, language }): ReactEleme
         options={{
           data,
           position: 'top',
-          height: language === 'ja-JP' ? '800px' : '760px',
+          height: language === 'ja-JP' || language === 'ar' ? '800px' : '760px',
           width: '600px'
         }}
       />

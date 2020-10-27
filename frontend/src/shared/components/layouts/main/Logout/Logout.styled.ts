@@ -2,7 +2,6 @@ import { styled, theme, isRtl, add } from '@styles/theme'
 
 export const StyledLogout = styled.div`
   width: 100%;
-  position: absolute;
   bottom: 50px;
 
   .logout {

@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
 import { Modal, LinkButton } from 'fogg-ui'
-import { redirectTo, pluralify } from 'fogg-utils'
+import { redirectTo, pluralify, capitalize } from 'fogg-utils'
 import { useMutation } from '@apollo/client'
 
 // Contexts
@@ -75,7 +75,15 @@ const PublishOrUnpublishEntriesModal: FC<iProps> = ({
             bg={action === 'publish' ? '#dbfff3' : '#fff2d4'}
             bold
           >
-            <>{t(`${action || 'Publish'} ${pluralify('Entry', 'Entries', entries.length)}`)}</>
+            <>
+              {t(
+                `${capitalize(action) || 'Publish'} ${pluralify(
+                  'Entry',
+                  'Entries',
+                  entries.length
+                )}`
+              )}
+            </>
           </LinkButton>
         </div>
       </StyledModal>

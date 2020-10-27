@@ -29,4 +29,9 @@ export const StyledMyApps = styled.div`
       }
     }
   }
+
+  .flexFooter {
+    display: flex;
+    margin-top: 350px;
+  }
 `

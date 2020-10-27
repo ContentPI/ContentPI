@@ -6,4 +6,8 @@ export const StyledContent = styled.div`
     display: flex;
     justify-content: space-between;
   }
+
+  .rows {
+    min-height: 80vh;
+  }
 `

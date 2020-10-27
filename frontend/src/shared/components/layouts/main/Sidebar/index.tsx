@@ -1,6 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, useState, memo } from 'react'
 import { Icon } from 'fogg-ui'
+import { getDirection } from 'fogg-utils'
 
 // Contexts
 import { AppContext } from '@contexts/app'
@@ -87,10 +88,10 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
         </section>
       </section>
 
-      <section className={`closed ${open ? `secondOptions` : ''}`}>
+      <section className={`closed ${open ? `secondOptions` : ''} ${getDirection(router.language)}`}>
         <div className="close" onClick={(): void => handleOpen('', false)}>
           <span>
-            <Icon type="fas fa-arrow-left" />
+            <Icon type={`fas fa-arrow-${getDirection(router.language, 'right', 'left')}`} />
           </span>
         </div>
 

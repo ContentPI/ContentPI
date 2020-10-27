@@ -1,5 +1,8 @@
 // Dependencies
-import React, { FC, ReactElement, memo } from 'react'
+import React, { FC, ReactElement, useContext, memo } from 'react'
+
+// Contexts
+import { ContentContext } from '@contexts/content'
 
 // Constants
 import { CONTENT_LINK } from '@constants/links'
@@ -16,6 +19,9 @@ interface iProps {
 }
 
 const ContentSidebar: FC<iProps> = ({ app, router }): ReactElement => {
+  // Contexts
+  const { t } = useContext(ContentContext)
+
   // Models
   const { models = [] } = app
 
@@ -23,7 +29,7 @@ const ContentSidebar: FC<iProps> = ({ app, router }): ReactElement => {
     <>
       <StyledContentSidebar>
         <div className="wrapper">
-          <span className="models">Content</span>
+          <span className="models">{t('Content')}</span>
         </div>
 
         <div className="modelsWrapper">
