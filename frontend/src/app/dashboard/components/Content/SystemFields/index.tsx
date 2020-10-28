@@ -4,7 +4,7 @@ import { PrimaryButton, SuccessButton } from 'fogg-ui'
 import { cx, redirectTo } from 'fogg-utils'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Shared components
 import AfterCreateOrEditEntryModal from '@modals/AfterCreateOrEditEntryModal'
@@ -42,7 +42,7 @@ const SystemFields: FC<iProps> = ({
   values
 }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   const editUrl = `${EDIT_ENTRY_LINK(router).as}?entryId=${systemValues.id}`
   const handleEditNewEntry = (): void => redirectTo(editUrl)

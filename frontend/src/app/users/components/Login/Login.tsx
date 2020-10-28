@@ -5,7 +5,7 @@ import { redirectTo } from 'fogg-utils'
 
 // Contexts
 import { FormContext } from '@contexts/form'
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Components
 import Logo from '@shared/components/layouts/main/Logo'
@@ -32,7 +32,7 @@ const Login: FC<iProps> = ({ login, currentUrl }): ReactElement => {
 
   // Contexts
   const { onChange } = useContext(FormContext)
-  const { t, language } = useContext(ContentContext)
+  const { t, language } = useContext(I18nContext)
 
   // Methods
   const _onChange = (e: any): any => {

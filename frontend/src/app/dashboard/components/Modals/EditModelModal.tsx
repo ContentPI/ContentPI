@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client'
 
 // Contexts
 import { FormContext } from '@contexts/form'
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Mutation
 import EDIT_MODEL_MUTATION from '@graphql/models/editModel.mutation'
@@ -23,7 +23,7 @@ interface iProps {
 
 const EditModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Getting data from options
   const {

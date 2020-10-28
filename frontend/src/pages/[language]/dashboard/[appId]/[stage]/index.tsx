@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import AppProvider from '@contexts/app'
 import UserProvider from '@contexts/user'
 import FormProvider from '@contexts/form'
-import ContentProvider from '@contexts/content'
+import ContentProvider from '@contexts/i18n'
 
 // Components
 import Home from '@dashboard/components/Home'

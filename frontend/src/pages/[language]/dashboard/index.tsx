@@ -8,7 +8,7 @@ import GET_APPS_QUERY from '@graphql/apps/getApps.query'
 // Contexts
 import UserProvider from '@contexts/user'
 import FormProvider from '@contexts/form'
-import ContentProvider from '@contexts/content'
+import ContentProvider from '@contexts/i18n'
 
 // Components
 import MyApps from '@app/dashboard/components/MyApps'

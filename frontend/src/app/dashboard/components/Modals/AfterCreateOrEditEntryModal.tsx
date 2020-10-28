@@ -4,7 +4,7 @@ import { Modal, PrimaryButton, SuccessButton, DarkButton, Icon } from 'fogg-ui'
 import { cx } from 'fogg-utils'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Styles
 import { StyledModal } from './Modal.styled'
@@ -23,7 +23,7 @@ const AfterCreateOrEditEntryModal: FC<iProps> = ({
   options
 }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   const action = `<span class="${options.action}">${options.action}</span>`
 

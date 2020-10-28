@@ -5,7 +5,7 @@ import { isBrowser } from 'fogg-utils'
 // Contexts
 import FormProvider from '@contexts/form'
 import UserProvider from '@contexts/user'
-import ContentProvider from '@contexts/content'
+import ContentProvider from '@contexts/i18n'
 
 // Components
 import LoginLayout from '@app/users/components/Login/Layout'

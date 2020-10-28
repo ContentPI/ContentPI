@@ -2,7 +2,7 @@
 import React, { FC, ReactElement, useContext, memo } from 'react'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Shared components
 import MainLayout from '@layouts/main/MainLayout'
@@ -26,7 +26,7 @@ const MyApps: FC<iProps> = ({ dataGetApps, router }): ReactElement => {
   }
 
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   return (
     <MainLayout title={t('My Apps')}>

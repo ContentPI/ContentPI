@@ -2,7 +2,7 @@
 import React, { FC, ReactElement, useContext, memo } from 'react'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Constants
 import { CONTENT_LINK } from '@constants/links'
@@ -10,7 +10,7 @@ import { CONTENT_LINK } from '@constants/links'
 // Component
 import Link from '@ui/Link'
 
-// Styles
+// Style
 import { StyledContentSidebar } from './ContentSidebar.styled'
 
 interface iProps {
@@ -20,7 +20,7 @@ interface iProps {
 
 const ContentSidebar: FC<iProps> = ({ app, router }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Models
   const { models = [] } = app

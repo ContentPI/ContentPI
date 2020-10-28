@@ -13,7 +13,7 @@ import MainLayout from '@layouts/main/MainLayout'
 
 // Contexts
 import { FormContext } from '@contexts/form'
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Mutation
 import CREATE_VALUES_MUTATION from '@graphql/values/createValues.mutation'
@@ -130,7 +130,7 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
 
   // Contexts
   const { onChange, setValue } = useContext(FormContext)
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Methods
   const setCurrentEntry = (entry: any) => {

@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client'
 
 // Contexts
 import { FormContext } from '@contexts/form'
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Mutation
 import CREATE_MODEL_MUTATION from '@graphql/models/createModel.mutation'
@@ -26,7 +26,7 @@ const CreateModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   const { appId } = getParamsFromUrl(['language', 'page', 'appId', 'stage'])
 
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // States
   const [values, setValues] = useState({

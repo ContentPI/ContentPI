@@ -3,7 +3,7 @@ import React, { FC, ReactElement, useState, useContext, memo } from 'react'
 import { Badge } from 'fogg-ui'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Constants
 import { MODEL_LINK, ENUMERATION_LINK } from '@constants/links'
@@ -25,7 +25,7 @@ interface iProps {
 
 const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Local state
   const [isOpenModel, setIsOpenModel] = useState(false)

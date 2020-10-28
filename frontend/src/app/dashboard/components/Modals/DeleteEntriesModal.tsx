@@ -5,7 +5,7 @@ import { redirectTo, pluralify } from 'fogg-utils'
 import { useMutation } from '@apollo/client'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Mutation
 import DELETE_VALUES_MUTATION from '@graphql/values/deleteValues.mutation'
@@ -22,7 +22,7 @@ interface iProps {
 
 const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Data
   const { data } = options

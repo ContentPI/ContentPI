@@ -8,6 +8,7 @@ export const StyledLogout = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-top: -25px;
     ${add('margin-right: 20px;').if(!isRtl)}
     ${add('margin-left: 20px;').if(isRtl)}
 

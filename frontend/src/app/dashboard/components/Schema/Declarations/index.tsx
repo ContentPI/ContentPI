@@ -2,7 +2,7 @@
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Modals
 import CreateFieldModal from '@modals/CreateFieldModal'
@@ -26,7 +26,7 @@ const Declarations: FC<iProps> = ({
   language
 }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Local state
   const [isOpen, setIsOpen] = useState(false)

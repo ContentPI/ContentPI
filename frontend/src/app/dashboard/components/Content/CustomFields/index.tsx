@@ -12,7 +12,7 @@ import {
 } from 'fogg-utils'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Configuration
 import config from '@config'
@@ -67,7 +67,7 @@ const CustomFields: FC<iProps> = ({
   isReferenceModalOpen
 }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   const [selectedFile, setSelectedFile] = useState({})
 

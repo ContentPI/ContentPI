@@ -14,7 +14,7 @@ import { useMutation } from '@apollo/client'
 // Contexts
 import { FormContext } from '@contexts/form'
 import { UserContext } from '@contexts/user'
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Mutation
 import CREATE_APP_MUTATION from '@graphql/apps/createApp.mutation'
@@ -31,7 +31,7 @@ interface iProps {
 
 const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // States
   const [values, setValues] = useState({

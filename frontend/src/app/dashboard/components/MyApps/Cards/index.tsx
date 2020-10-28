@@ -6,7 +6,7 @@ import { Icon } from 'fogg-ui'
 import { STAGE_LINK } from '@constants/links'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Components
 import Link from '@ui/Link'
@@ -24,7 +24,7 @@ interface iProps {
 
 const Cards: FC<iProps> = ({ items, router }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Local state
   const [isOpen, setIsOpen] = useState(false)

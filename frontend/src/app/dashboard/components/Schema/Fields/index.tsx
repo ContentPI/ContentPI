@@ -4,7 +4,7 @@ import { cx } from 'fogg-utils'
 import { Icon } from 'fogg-ui'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Components
 import DeleteFieldModal from '@modals/DeleteFieldModal'
@@ -22,7 +22,7 @@ interface iProps {
 
 const Fields: FC<iProps> = ({ model, fields, showSystem, language }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // State
   const [isOpenDelete, setIsOpenDelete] = useState(false)

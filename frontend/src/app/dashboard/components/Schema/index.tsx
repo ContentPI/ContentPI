@@ -4,7 +4,7 @@ import { LinkButton, Menu, Toggle, Icon } from 'fogg-ui'
 
 // Contexts
 import { AppContext } from '@contexts/app'
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Components
 import MainLayout from '@layouts/main/MainLayout'
@@ -25,7 +25,7 @@ interface iProps {
 
 const Schema: FC<iProps> = ({ data, router }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Router
   const { language } = router

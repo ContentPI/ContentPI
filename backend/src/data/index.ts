@@ -2,9 +2,9 @@
 import { forEach } from 'fogg-utils'
 
 // Data
-import ar from './content/ar.json'
-import esMX from './content/es-MX.json'
-import jaJP from './content/ja-JP.json'
+import ar from './i18n/ar.json'
+import esMX from './i18n/es-MX.json'
+import jaJP from './i18n/ja-JP.json'
 
 // Models
 import models from '../models'

@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/client'
 import AppProvider from '@contexts/app'
 import UserProvider from '@contexts/user'
 import FormProvider from '@contexts/form'
-import ContentProvider from '@contexts/content'
+import ContentProvider from '@contexts/i18n'
 
 // Components
 import Schema from '@dashboard/components/Schema'

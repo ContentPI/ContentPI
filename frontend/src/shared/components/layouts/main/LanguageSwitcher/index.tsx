@@ -4,7 +4,7 @@ import { Select } from 'fogg-ui'
 import { getSelectLanguages, getCurrentLanguage, redirectTo } from 'fogg-utils'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Config
 import config from '@config'
@@ -14,7 +14,7 @@ import { StyledLanguageSwitcher } from './LanguageSwitcher.styled'
 
 const LanguageSwitcher: FC = (): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   const currentLanguage = getCurrentLanguage()
   const options = getSelectLanguages(config.languages.list)

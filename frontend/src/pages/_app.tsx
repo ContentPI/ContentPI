@@ -7,7 +7,7 @@ import fetch from 'isomorphic-fetch'
 import { isBrowser } from 'fogg-utils'
 
 // Contexts
-import ContentProvider from '@contexts/content'
+import ContentProvider from '@contexts/i18n'
 
 // Configuration
 import config from '@config'
@@ -70,7 +70,7 @@ App.getInitialProps = async ({ router }: { router: any }) => {
     if (!localStorage.getItem(language)) {
       // Fetching language content
       try {
-        const response = await fetch(`${config.baseUrl}/content/${language}.json`)
+        const response = await fetch(`${config.baseUrl}/i18n/${language}.json`)
         __ = await response.json()
 
         if (config.cache && !isBrowser()) {

@@ -9,7 +9,7 @@ import usePrevious from '@lib/usePrevious'
 
 // Contexts
 import { FormContext } from '@contexts/form'
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Mutation
 import EDIT_FIELD_MUTATION from '@graphql/fields/editField.mutation'
@@ -26,7 +26,7 @@ interface iProps {
 
 const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Getting data from options
   const {

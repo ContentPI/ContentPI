@@ -2,7 +2,7 @@
 import React, { FC, ReactElement, useContext, memo } from 'react'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Components
 import LanguageSwitcher from '@layouts/main/LanguageSwitcher'
@@ -12,7 +12,7 @@ import { StyledFooter } from './Footer.styled'
 
 const Footer: FC = (): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   return (
     <StyledFooter>

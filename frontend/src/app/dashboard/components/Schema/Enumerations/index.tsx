@@ -2,7 +2,7 @@
 import React, { FC, ReactElement, useContext, memo } from 'react'
 
 // Contexts
-import { ContentContext } from '@contexts/content'
+import { I18nContext } from '@contexts/i18n'
 
 // Shared components
 import MainLayout from '@layouts/main/MainLayout'
@@ -17,7 +17,7 @@ interface iProps {
 
 const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
   // Contexts
-  const { t } = useContext(ContentContext)
+  const { t } = useContext(I18nContext)
 
   // Data
   const { getEnumerationsByAppId } = data
