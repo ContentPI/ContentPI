@@ -1,7 +1,7 @@
 // Types
 import {
   App,
-  Content,
+  I18n,
   Declaration,
   Enumeration,
   Field,
@@ -32,14 +32,12 @@ export interface iApp extends App, Sequelize {
 
 export interface iCreateAppInput extends App {}
 
-// Content
-export interface iContent extends Content, Sequelize {
+// I18n
+export interface iI18n extends I18n, Sequelize {
   id: string
   createdAt: Date
   updatedAt: Date
 }
-
-export interface iCreateContentInput extends Content {}
 
 // Declaration
 export interface iDeclaration extends Declaration, Sequelize {
@@ -111,10 +109,10 @@ export interface iAuthPayload {
 // Models
 export interface iModels {
   App: any
-  Content: any
   Declaration: any
   Enumeration: any
   Field: any
+  I18n: any
   Model: any
   Reference: any
   User: any

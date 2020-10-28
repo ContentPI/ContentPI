@@ -1,8 +1,8 @@
 // Interface
-import { iContent, iDataTypes } from '../interfaces'
+import { iI18n, iDataTypes } from '../interfaces'
 
-export default (sequelize: any, DataTypes: iDataTypes): iContent => {
-  const Content = sequelize.define('Content', {
+export default (sequelize: any, DataTypes: iDataTypes): iI18n => {
+  const I18n = sequelize.define('I18n', {
     id: {
       primaryKey: true,
       allowNull: false,
@@ -23,5 +23,5 @@ export default (sequelize: any, DataTypes: iDataTypes): iContent => {
     }
   })
 
-  return Content
+  return I18n
 }

@@ -19,14 +19,14 @@ const sequelize = new Sequelize(uri)
 // Models
 const models: iModels = {
   App: sequelize.import('./App'),
-  Content: sequelize.import('./Content'),
   Declaration: sequelize.import('./Declaration'),
   Enumeration: sequelize.import('./Enumeration'),
   Field: sequelize.import('./Field'),
-  Value: sequelize.import('./Value'),
+  I18n: sequelize.import('./I18n'),
   Model: sequelize.import('./Model'),
   Reference: sequelize.import('./Reference'),
   User: sequelize.import('./User'),
+  Value: sequelize.import('./Value'),
   sequelize
 }
 

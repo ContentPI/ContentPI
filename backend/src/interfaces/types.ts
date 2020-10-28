@@ -5,7 +5,7 @@ export type App = {
   description: string
 }
 
-export type Content = {
+export type I18n = {
   key: string
   value: string
   language: string

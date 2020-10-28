@@ -71,7 +71,13 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           </li>
 
           <li>
-            <Link href={ASSET_LINK(router).as} title="Assets">
+            <Link href={ASSET_LINK(router).as} title="I18n">
+              <Icon type="fas fa-globe-americas" />
+            </Link>
+          </li>
+
+          <li>
+            <Link href={ASSET_LINK(router).as} title="Content">
               <Icon type="fas fa-photo-video" />
             </Link>
           </li>

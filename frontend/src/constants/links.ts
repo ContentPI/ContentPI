@@ -34,7 +34,7 @@ export const ASSET_LINK = (u: any) => ({
 })
 
 export const I18N_LINK = (u: any) => ({
-  as: u ? `${STAGE_LINK(u).as}/content/model/asset` : '',
+  as: u ? `${STAGE_LINK(u).as}/i18n/model/i18n` : '',
   href: `${STAGE_LINK(u).href}/[moduleName]/[section]/[model]`
 })
 
