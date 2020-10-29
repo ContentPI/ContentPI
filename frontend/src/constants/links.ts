@@ -34,8 +34,14 @@ export const ASSET_LINK = (u: any) => ({
 })
 
 export const I18N_LINK = (u: any) => ({
-  as: u ? `${STAGE_LINK(u).as}/i18n/model/i18n` : '',
+  as: u ? `${STAGE_LINK(u).as}/content/model/i18n` : '',
   href: `${STAGE_LINK(u).href}/[moduleName]/[section]/[model]`
 })
 
-export const LOGOUT_LINK = (u: any) => `/${u.language}/logout`
+export const LOGOUT_LINK = (u: any) => {
+  if (!u) {
+    return ''
+  }
+
+  return u ? `/${u.language}/logout` : ''
+}

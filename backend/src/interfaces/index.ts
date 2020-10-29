@@ -39,6 +39,8 @@ export interface iI18n extends I18n, Sequelize {
   updatedAt: Date
 }
 
+export interface iCreateI18nInput extends Declaration {}
+
 // Declaration
 export interface iDeclaration extends Declaration, Sequelize {
   id: string

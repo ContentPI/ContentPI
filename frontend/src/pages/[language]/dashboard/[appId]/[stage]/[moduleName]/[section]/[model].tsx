@@ -21,6 +21,7 @@ import GET_DECLARATIONS_QUERY from '@graphql/declarations/getDeclarations.query'
 import GET_VALUES_BY_ENTRY_QUERY from '@graphql/values/getValuesByEntry.query'
 import GET_ENUMERATIONS_BY_APP_ID_QUERY from '@graphql/enumerations/getEnumerationsByAppId.query'
 import GET_ENTRIES_BY_MODEL_ID_QUERY from '@graphql/values/getEntriesByModelId.query'
+import GET_I18N_QUERY from '@graphql/i18n/getI18n.query'
 
 interface iProps {
   __: any
@@ -39,23 +40,29 @@ const Page: FC<iProps> = ({ __ }): ReactElement => {
       identifier: model,
       appId
     },
-    skip: section !== 'model'
+    skip: section !== 'model' || model === 'i18n'
   })
 
-  const { data: getDeclarationsQueryData } = useQuery(GET_DECLARATIONS_QUERY)
+  const { data: getDeclarationsQueryData } = useQuery(GET_DECLARATIONS_QUERY, {
+    skip: model === 'i18n'
+  })
 
   const { data: getValuesByEntryQueryData } = useQuery(GET_VALUES_BY_ENTRY_QUERY, {
     variables: {
       entry: entryId
     },
-    skip: !entryId
+    skip: !entryId || model === 'i18n'
   })
 
   const { data: getEnumerationsByAppIdQueryData } = useQuery(GET_ENUMERATIONS_BY_APP_ID_QUERY, {
     variables: {
       appId
     },
-    skip: !appId
+    skip: !appId || model === 'i18n'
+  })
+
+  const { data: getI18nQueryData } = useQuery(GET_I18N_QUERY, {
+    skip: model !== 'i18n'
   })
 
   if (getModelQueryData) {
@@ -66,7 +73,7 @@ const Page: FC<iProps> = ({ __ }): ReactElement => {
     variables: {
       modelId
     },
-    skip: !modelId
+    skip: !modelId || model === 'i18n'
   })
 
   // Blocking render if dataValues is not ready
@@ -74,11 +81,11 @@ const Page: FC<iProps> = ({ __ }): ReactElement => {
     return <div />
   }
 
-  if (section === 'model' && !getModelQueryData) {
+  if (model !== 'i18n' && section === 'model' && !getModelQueryData) {
     return <div />
   }
 
-  if (!getEnumerationsByAppIdQueryData) {
+  if (model !== 'i18n' && !getEnumerationsByAppIdQueryData) {
     return <div />
   }
 
@@ -102,6 +109,7 @@ const Page: FC<iProps> = ({ __ }): ReactElement => {
           entryId,
           section,
           entries,
+          ...getI18nQueryData,
           ...getModelQueryData,
           ...getDeclarationsQueryData,
           ...getValuesByEntryQueryData,

@@ -38,12 +38,86 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
   const [action, setAction] = useState('')
 
   // Data
-  const { getModel, getDeclarations } = data
+  const { getModel, getDeclarations, getI18n } = data
   const { page = 1 } = router
+  const rowsPerPage = getI18n ? 50 : 10
+  let fields: any = []
+  let values: any = null
 
   // First render
-  if (!getModel && !getDeclarations) {
+  if (!getI18n && !getModel && !getDeclarations) {
     return <div />
+  }
+
+  if (getModel) {
+    fields = getModel.fields
+  } else {
+    fields = [
+      {
+        id: '7a99ff36-6b39-4cd6-a4a4-83b6660fe881',
+        type: 'ID',
+        fieldName: 'ID',
+        identifier: 'id',
+        isHide: false,
+        isMedia: false,
+        isPrimaryKey: true,
+        isRequired: true,
+        isSystem: true,
+        isUnique: true,
+        order: '-1',
+        values: []
+      },
+      {
+        id: '1dfb72c4-f863-4932-b5e7-f25480574a35',
+        defaultValue: '',
+        description: '',
+        fieldName: 'Key',
+        identifier: 'key',
+        isHide: false,
+        isMedia: false,
+        isPrimaryKey: false,
+        isRequired: true,
+        isSystem: false,
+        isUnique: false,
+        order: '1',
+        type: 'String',
+        values: []
+      },
+      {
+        id: '1dfb72c4-f863-4932-b5e7-f25480574a36',
+        defaultValue: '',
+        description: '',
+        fieldName: 'Value',
+        identifier: 'value',
+        isHide: false,
+        isMedia: false,
+        isPrimaryKey: false,
+        isRequired: true,
+        isSystem: false,
+        isUnique: false,
+        order: '2',
+        type: 'String',
+        values: []
+      },
+      {
+        id: '1dfb72c4-f863-4932-b5e7-f25480574a37',
+        defaultValue: '',
+        description: '',
+        fieldName: 'Language',
+        identifier: 'language',
+        isHide: false,
+        isMedia: false,
+        isPrimaryKey: false,
+        isRequired: true,
+        isSystem: false,
+        isUnique: false,
+        order: '3',
+        type: 'String',
+        values: []
+      }
+    ]
+
+    values = getI18n
   }
 
   // Methods
@@ -60,7 +134,13 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
     }
   }
 
-  const { body, head, rows, total } = getValuesForTable(getModel.fields, null, 'createdAt', 'desc')
+  const { body, head, rows, total } = getValuesForTable(
+    { fields, values },
+    null,
+    'createdAt',
+    'desc',
+    rowsPerPage
+  )
 
   // If page does not exists we display 404 error page
   if (!rows[page - 1]) {
@@ -138,6 +218,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
               design="primary"
               page={page}
               total={total}
+              rowsPerPage={rowsPerPage}
               href={`${CONTENT_LINK(router).href}?page=`}
               as={`${CONTENT_LINK(router).as}?page=`}
               Link={Link}
