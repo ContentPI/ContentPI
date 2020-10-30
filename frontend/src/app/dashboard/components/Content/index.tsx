@@ -134,7 +134,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
     }
   }
 
-  const { body, head, rows, total } = getValuesForTable(
+  const { body, head, rows, total, raw } = getValuesForTable(
     { fields, values },
     null,
     'createdAt',
@@ -205,7 +205,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
                 body,
                 head,
                 rows: rows[page - 1],
-                count: total,
+                raw,
                 fileTypes: config.files.types,
                 isFile
               }}

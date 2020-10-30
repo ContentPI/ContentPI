@@ -9,5 +9,6 @@ export const StyledContent = styled.div`
 
   .rows {
     min-height: 80vh;
+    margin-top: 20px;
   }
 `
