@@ -39,9 +39,5 @@ export const I18N_LINK = (u: any) => ({
 })
 
 export const LOGOUT_LINK = (u: any) => {
-  if (!u) {
-    return ''
-  }
-
   return u ? `/${u.language}/logout` : ''
 }
