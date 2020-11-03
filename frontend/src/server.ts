@@ -105,6 +105,12 @@ nextApp.prepare().then(() => {
     res.redirect(redirect)
   })
 
+  app.get(`/logout`, (req: Request, res: Response) => {
+    const redirect: any = req.query.redirectTo || '/'
+    res.clearCookie('at')
+    res.redirect(redirect)
+  })
+
   app.use(
     `/:language(${availableLanguages()})/dashboard/:appId?/:stage?/:moduleName?/:section?/:model?`,
     isConnected(

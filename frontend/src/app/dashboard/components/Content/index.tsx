@@ -19,6 +19,9 @@ import DeleteEntriesModal from '@modals/DeleteEntriesModal'
 import PublishOrUnpublishEntriesModal from '@modals/PublishOrUnpublishEntriesModal'
 import PageNotFound from '../PageNotFound'
 
+// Data
+import i18nFields from './i18nFields'
+
 // Styles
 import { StyledContent } from './Content.styled'
 
@@ -38,12 +41,22 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
   const [action, setAction] = useState('')
 
   // Data
-  const { getModel, getDeclarations } = data
+  const { getModel, getDeclarations, getI18n } = data
   const { page = 1 } = router
+  const rowsPerPage = getI18n ? 50 : 10
+  let fields: any = []
+  let values: any = null
 
   // First render
-  if (!getModel && !getDeclarations) {
+  if (!getI18n && !getModel && !getDeclarations) {
     return <div />
+  }
+
+  if (getModel) {
+    fields = getModel.fields
+  } else {
+    fields = i18nFields
+    values = getI18n
   }
 
   // Methods
@@ -60,7 +73,13 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
     }
   }
 
-  const { body, head, rows, total } = getValuesForTable(getModel.fields, null, 'createdAt', 'desc')
+  const { body, head, rows, total, raw } = getValuesForTable(
+    { fields, values },
+    null,
+    'createdAt',
+    'desc',
+    rowsPerPage
+  )
 
   // If page does not exists we display 404 error page
   if (!rows[page - 1]) {
@@ -125,7 +144,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
                 body,
                 head,
                 rows: rows[page - 1],
-                count: total,
+                raw,
                 fileTypes: config.files.types,
                 isFile
               }}
@@ -138,6 +157,7 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
               design="primary"
               page={page}
               total={total}
+              rowsPerPage={rowsPerPage}
               href={`${CONTENT_LINK(router).href}?page=`}
               as={`${CONTENT_LINK(router).as}?page=`}
               Link={Link}

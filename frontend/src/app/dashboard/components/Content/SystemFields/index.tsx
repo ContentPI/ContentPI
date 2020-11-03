@@ -62,7 +62,7 @@ const SystemFields: FC<iProps> = ({
         onClose={handleEditNewEntry}
         options={{
           position: 'center',
-          width: '620px',
+          width: '630px',
           action: alert === 'Saved' ? 'saved' : 'published',
           handleEditNewEntry,
           handleCreateNewEntry,

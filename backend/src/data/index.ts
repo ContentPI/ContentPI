@@ -17,7 +17,7 @@ const translations: any = {
 }
 
 async function createInitialContent(): Promise<any> {
-  const existingContent = await models.Content.findAll()
+  const existingContent = await models.I18n.findAll()
   const content: any = []
 
   if (existingContent.length === 0) {
@@ -31,7 +31,7 @@ async function createInitialContent(): Promise<any> {
       })
     })
 
-    await models.Content.bulkCreate(content)
+    await models.I18n.bulkCreate(content)
   }
 
   return null

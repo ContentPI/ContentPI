@@ -7,7 +7,7 @@ import { getDirection } from 'fogg-utils'
 import { AppContext } from '@contexts/app'
 
 // Constants
-import { STAGE_LINK, ASSET_LINK, LOGOUT_LINK } from '@constants/links'
+import { STAGE_LINK, ASSET_LINK, LOGOUT_LINK, I18N_LINK } from '@constants/links'
 
 // Sidebars
 import ModelSidebar from '@dashboard/components/Models/ModelSidebar'
@@ -46,7 +46,7 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
     <StyledSidebar>
       <section className="firstOptions">
         <div className="isoType">
-          <Logo language={router.language} />
+          <Logo language={router && router.language} />
         </div>
 
         <ul>
@@ -71,7 +71,13 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           </li>
 
           <li>
-            <Link href={ASSET_LINK(router).as} title="Assets">
+            <Link href={I18N_LINK(router).as} title="I18n">
+              <Icon type="fas fa-globe-americas" />
+            </Link>
+          </li>
+
+          <li>
+            <Link href={ASSET_LINK(router).as} title="Content">
               <Icon type="fas fa-photo-video" />
             </Link>
           </li>
@@ -88,10 +94,16 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
         </section>
       </section>
 
-      <section className={`closed ${open ? `secondOptions` : ''} ${getDirection(router.language)}`}>
+      <section
+        className={`closed ${open ? `secondOptions` : ''} ${getDirection(
+          router && router.language
+        )}`}
+      >
         <div className="close" onClick={(): void => handleOpen('', false)}>
           <span>
-            <Icon type={`fas fa-arrow-${getDirection(router.language, 'right', 'left')}`} />
+            <Icon
+              type={`fas fa-arrow-${getDirection(router && router.language, 'right', 'left')}`}
+            />
           </span>
         </div>
 
