@@ -1,0 +1,15 @@
+scalar UUID
+scalar Datetime
+scalar JSON
+
+type Post {
+  id: UUID!
+  title: String!
+  slug: String!
+  content: String!
+  status: String!
+}
+
+type Query {
+  getAllPosts: [Post!]
+}
