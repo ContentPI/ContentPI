@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
-import { Select } from 'fogg-ui'
-import { getSelectLanguages, getCurrentLanguage, redirectTo } from 'fogg-utils'
+import { Select } from '@contentpi/ui'
+import { getSelectLanguages, getCurrentLanguage, redirectTo } from '@contentpi/utils'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'

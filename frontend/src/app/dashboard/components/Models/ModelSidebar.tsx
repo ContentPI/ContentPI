@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { Badge } from 'fogg-ui'
+import { Badge } from '@contentpi/ui'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'

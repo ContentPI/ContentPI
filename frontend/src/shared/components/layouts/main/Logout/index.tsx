@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
-import { Icon } from 'fogg-ui'
+import { Icon } from '@contentpi/ui'
 
 // Constants
 import { LOGOUT_LINK } from '@constants/links'

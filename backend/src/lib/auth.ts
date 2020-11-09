@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import { AuthenticationError } from 'apollo-server'
 
 // Utils
-import { encrypt, setBase64, isPasswordMatch } from 'fogg-utils'
+import { encrypt, setBase64, isPasswordMatch } from '@contentpi/utils'
 
 // Interface
 import { iUser, iModels, iAuthPayload } from '../interfaces'

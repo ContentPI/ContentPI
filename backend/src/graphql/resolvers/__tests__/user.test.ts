@@ -1,4 +1,4 @@
-import { isFunction } from 'fogg-utils'
+import { isFunction } from '@contentpi/utils'
 import user from '../user'
 
 describe('#Query', () => {

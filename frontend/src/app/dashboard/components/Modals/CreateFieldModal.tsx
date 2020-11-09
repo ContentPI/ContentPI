@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, useState, useEffect, memo } from 'react'
-import { Modal, Badge, Input, PrimaryButton, LinkButton, Toggle, Select } from 'fogg-ui'
-import { camelCase, getEmptyValues, redirectTo, getParamsFromUrl, waitFor } from 'fogg-utils'
+import { Modal, Badge, Input, PrimaryButton, LinkButton, Toggle, Select } from '@contentpi/ui'
+import { camelCase, getEmptyValues, redirectTo, getParamsFromUrl, waitFor } from '@contentpi/utils'
 import { useLazyQuery, useMutation } from '@apollo/client'
 
 // Contexts

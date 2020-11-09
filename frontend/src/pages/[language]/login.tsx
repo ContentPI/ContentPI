@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement } from 'react'
-import { isBrowser } from 'fogg-utils'
+import { isBrowser } from '@contentpi/utils'
 
 // Contexts
 import FormProvider from '@contexts/form'

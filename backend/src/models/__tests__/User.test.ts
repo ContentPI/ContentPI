@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize-mock'
-import { isFunction } from 'fogg-utils'
+import { isFunction } from '@contentpi/utils'
 import User from '../User'
 
 const sequelize = new Sequelize()

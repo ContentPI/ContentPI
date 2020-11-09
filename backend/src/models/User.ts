@@ -1,5 +1,5 @@
 // Dependencies
-import { encrypt } from 'fogg-utils'
+import { encrypt } from '@contentpi/utils'
 
 // Interface
 import { iUser, iModels, iDataTypes } from '../interfaces'

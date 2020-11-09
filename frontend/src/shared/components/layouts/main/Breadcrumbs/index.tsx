@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
-import { Icon } from 'fogg-ui'
+import { Icon } from '@contentpi/ui'
 
 // Styles
 import { StyledBreadcrumbs } from './Breadcrumbs.styled'
