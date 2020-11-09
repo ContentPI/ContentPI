@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
-import { Modal, EntryBlock } from 'fogg-ui'
-import { getReferenceTitle } from 'fogg-utils'
+import { Modal, EntryBlock } from '@contentpi/ui'
+import { getReferenceTitle } from '@contentpi/utils'
 
 // Styles
 import { StyledModal } from './Modal.styled'

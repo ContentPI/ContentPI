@@ -1,5 +1,5 @@
 // Dependencies
-import { forEach } from 'fogg-utils'
+import { forEach } from '@contentpi/utils'
 
 // Data
 import ar from './i18n/ar.json'

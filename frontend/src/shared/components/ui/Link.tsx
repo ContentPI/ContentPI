@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
 import NextLink from 'next/link'
-import { isString } from 'fogg-utils'
+import { isString } from '@contentpi/utils'
 
 // Interfaces
 interface iProps {

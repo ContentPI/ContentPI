@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { LinkButton, Menu, Toggle, Icon } from 'fogg-ui'
+import { LinkButton, Menu, Toggle, Icon } from '@contentpi/ui'
 
 // Contexts
 import { AppContext } from '@contexts/app'

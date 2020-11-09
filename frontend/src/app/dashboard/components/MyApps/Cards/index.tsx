@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { Icon } from 'fogg-ui'
+import { Icon } from '@contentpi/ui'
 
 // Constants
 import { STAGE_LINK } from '@constants/links'

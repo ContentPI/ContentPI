@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '@lib/apolloClient'
 import Head from 'next/head'
 import fetch from 'isomorphic-fetch'
-import { isBrowser } from 'fogg-utils'
+import { isBrowser } from '@contentpi/utils'
 
 // Contexts
 import ContentProvider from '@contexts/i18n'

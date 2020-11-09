@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { Alert, DarkButton, PrimaryButton, Input, RenderIf } from 'fogg-ui'
-import { redirectTo } from 'fogg-utils'
+import { Alert, DarkButton, PrimaryButton, Input, RenderIf } from '@contentpi/ui'
+import { redirectTo } from '@contentpi/utils'
 
 // Contexts
 import { FormContext } from '@contexts/form'

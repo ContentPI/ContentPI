@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, createContext, ReactElement, useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
-import { getGraphQlError, redirectTo, getDebug } from 'fogg-utils'
+import { getGraphQlError, redirectTo, getDebug } from '@contentpi/utils'
 import { useQuery, useMutation } from '@apollo/client'
 
 // Mutations

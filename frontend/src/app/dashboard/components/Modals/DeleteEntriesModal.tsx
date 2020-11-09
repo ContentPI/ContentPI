@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
-import { Modal, LinkButton } from 'fogg-ui'
-import { redirectTo, pluralify } from 'fogg-utils'
+import { Modal, LinkButton } from '@contentpi/ui'
+import { redirectTo, pluralify } from '@contentpi/utils'
 import { useMutation } from '@apollo/client'
 
 // Contexts

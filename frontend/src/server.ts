@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import session from 'express-session'
 import multer from 'multer'
-import { buildUrl, getFileInfo, availableLanguages } from 'fogg-utils'
+import { buildUrl, getFileInfo, availableLanguages } from '@contentpi/utils'
 
 // Middleware
 import { isConnected } from './shared/lib/middlewares/user'
