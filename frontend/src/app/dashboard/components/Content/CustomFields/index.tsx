@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { Badge, Icon, Input, TextArea, Select, File, EntryBlock } from 'fogg-ui'
+import { Badge, Icon, Input, TextArea, Select, File, EntryBlock } from '@contentpi/ui'
 import {
   cx,
   slugFn,
@@ -9,7 +9,7 @@ import {
   getImageData,
   getRandomCode,
   getReferenceTitle
-} from 'fogg-utils'
+} from '@contentpi/utils'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'

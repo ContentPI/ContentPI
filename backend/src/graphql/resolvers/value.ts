@@ -1,6 +1,6 @@
 // Dependencies
 import { Op } from 'sequelize'
-import { getEntries } from 'fogg-utils'
+import { getEntries } from '@contentpi/utils'
 
 // Interfaces
 import {

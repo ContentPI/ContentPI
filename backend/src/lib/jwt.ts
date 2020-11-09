@@ -1,6 +1,6 @@
 // Dependencies
 import jwt from 'jsonwebtoken'
-import { getBase64 } from 'fogg-utils'
+import { getBase64 } from '@contentpi/utils'
 
 // Configuration
 import { $security } from '../../config'

@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { Table, PrimaryButton, Pagination } from 'fogg-ui'
-import { getValuesForTable, pluralify } from 'fogg-utils'
+import { Table, PrimaryButton, Pagination } from '@contentpi/ui'
+import { getValuesForTable, pluralify } from '@contentpi/utils'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'

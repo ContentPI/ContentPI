@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, useEffect, memo } from 'react'
-import { slugFn, getEmptyValues, waitFor, uploadFile, keys, hasOwnProperty } from 'fogg-utils'
+import { slugFn, getEmptyValues, waitFor, uploadFile, keys, hasOwnProperty } from '@contentpi/utils'
 import { v4 as uuidv4 } from 'uuid'
 import moment from 'moment'
 import { useMutation } from '@apollo/client'

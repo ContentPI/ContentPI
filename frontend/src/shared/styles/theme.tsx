@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { css, Global } from '@emotion/core'
-import { add, getCurrentLanguage } from 'fogg-utils'
+import { add, getCurrentLanguage } from '@contentpi/utils'
 
 const GlobalStyle = `
   html,

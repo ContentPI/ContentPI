@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
-import { PrimaryButton, SuccessButton } from 'fogg-ui'
-import { cx, redirectTo } from 'fogg-utils'
+import { PrimaryButton, SuccessButton } from '@contentpi/ui'
+import { cx, redirectTo } from '@contentpi/utils'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'

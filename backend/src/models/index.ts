@@ -2,7 +2,7 @@
 import { Sequelize } from 'sequelize'
 
 // Utils
-import { hasKey, keys } from 'fogg-utils'
+import { hasKey, keys } from '@contentpi/utils'
 
 // Configuration
 import { $db } from '../../config'
