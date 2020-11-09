@@ -11,6 +11,7 @@ export const StyledEnumerations = styled.div`
       margin-bottom: 20px;
       border-radius: 5px;
       margin-right: 10px;
+      max-height: 300px;
       width: 400px;
 
       .information {
