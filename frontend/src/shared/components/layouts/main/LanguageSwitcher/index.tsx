@@ -1,7 +1,8 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
 import { Select } from '@contentpi/ui'
-import { getSelectLanguages, getCurrentLanguage, redirectTo } from '@contentpi/utils'
+import { getCurrentLanguage, redirectTo } from '@contentpi/utils'
+import { getSelectLanguages } from '@contentpi/core'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'

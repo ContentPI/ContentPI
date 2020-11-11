@@ -1,14 +1,8 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, useState, useEffect, memo } from 'react'
 import { Modal, Badge, Input, PrimaryButton, LinkButton, Icon } from '@contentpi/ui'
-import {
-  generateHexCode,
-  invertHexCode,
-  redirectTo,
-  slugFn,
-  getEmptyValues,
-  waitFor
-} from '@contentpi/utils'
+import { redirectTo, slugFn, waitFor } from '@contentpi/utils'
+import { generateHexCode, invertHexCode, getEmptyValues } from '@contentpi/core'
 import { useMutation } from '@apollo/client'
 
 // Contexts

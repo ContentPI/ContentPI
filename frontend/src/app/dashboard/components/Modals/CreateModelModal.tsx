@@ -1,7 +1,8 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, useState, memo } from 'react'
 import { Modal, Badge, Input, PrimaryButton, LinkButton } from '@contentpi/ui'
-import { redirectTo, getParamsFromUrl, camelCase, getEmptyValues, waitFor } from '@contentpi/utils'
+import { redirectTo, getParamsFromUrl, camelCase, waitFor } from '@contentpi/utils'
+import { getEmptyValues } from '@contentpi/core'
 import { useMutation } from '@apollo/client'
 
 // Contexts

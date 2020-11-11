@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, useState, memo } from 'react'
 import { Icon } from '@contentpi/ui'
-import { getDirection } from '@contentpi/utils'
+import { getDirection } from '@contentpi/core'
 
 // Contexts
 import { AppContext } from '@contexts/app'

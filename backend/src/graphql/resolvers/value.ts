@@ -1,6 +1,6 @@
 // Dependencies
 import { Op } from 'sequelize'
-import { getEntries } from '@contentpi/utils'
+import { getEntries } from '@contentpi/core'
 
 // Interfaces
 import {
