@@ -7,7 +7,8 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import session from 'express-session'
 import multer from 'multer'
-import { buildUrl, getFileInfo, availableLanguages } from '@contentpi/utils'
+import { buildUrl } from '@contentpi/utils'
+import { getFileInfo, availableLanguages } from '@contentpi/core'
 
 // Middleware
 import { isConnected } from './shared/lib/middlewares/user'

@@ -1,7 +1,8 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { Table, PrimaryButton, Pagination } from '@contentpi/ui'
-import { getValuesForTable, pluralify } from '@contentpi/utils'
+import { Table, PrimaryButton } from '@contentpi/ui'
+import { pluralify } from '@contentpi/utils'
+import { getValuesForTable } from '@contentpi/core'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'
