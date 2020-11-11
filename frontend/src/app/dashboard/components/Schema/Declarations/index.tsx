@@ -75,14 +75,16 @@ const Declarations: FC<iProps> = ({
 
         <ul>
           {declarations.map((field: any) => {
-            // Only displaying Dropdown declaration when we have enumerations
-            if (field.declaration === 'Dropdown' && enumerations.length === 0) {
-              return <li key={field.id} />
+            const disableDropdown = field.declaration === 'Dropdown' && enumerations.length === 0
+            const disableReference = field.declaration === 'Reference' && models.length - 1 <= 1
+            let disabledMessage = field.description
+
+            if (disableDropdown) {
+              disabledMessage = t('You should create at least 1 enumeration')
             }
 
-            // Only displaying Reference declaration if we have at least 2 custom models.
-            if (field.declaration === 'Reference' && models.length - 1 <= 1) {
-              return <li key={field.id} />
+            if (disableReference) {
+              disabledMessage = t('You should have at least 2 models to create a Reference')
             }
 
             return (
@@ -91,14 +93,21 @@ const Declarations: FC<iProps> = ({
                   <p>{t(field.declaration)}</p>
 
                   <div
-                    className="widgetOption"
-                    title={field.description}
+                    className={`widgetOption ${
+                      disableDropdown || disableReference ? 'disabled' : ''
+                    }`}
+                    title={disabledMessage}
                     onClick={(): void => {
-                      setFieldType(field.declaration)
-                      handleModal()
+                      if (!disableDropdown && !disableReference) {
+                        setFieldType(field.declaration)
+                        handleModal()
+                      }
                     }}
                   >
-                    <i className={field.icon} style={{ color: field.color }} />
+                    <i
+                      className={field.icon}
+                      style={{ color: disableDropdown || disableReference ? 'gray' : field.color }}
+                    />
                     &nbsp;
                     <span>{t(field.declaration)}</span>
                   </div>

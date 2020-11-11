@@ -53,7 +53,7 @@ export default {
               ]
             }).then((fields: any) => {
               const [{ modelName }] = fields
-              const { entries } = getEntries(fields)
+              const { entries } = getEntries({ fields })
 
               resolve({
                 modelId: reference.targetModel,

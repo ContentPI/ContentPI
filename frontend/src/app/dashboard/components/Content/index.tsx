@@ -146,21 +146,20 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
                 rows: rows[page - 1],
                 raw,
                 fileTypes: config.files.types,
-                isFile
+                isFile,
+                pagination: {
+                  design: 'primary',
+                  page,
+                  total,
+                  rowsPerPage,
+                  href: `${CONTENT_LINK(router).href}?page=`,
+                  as: `${CONTENT_LINK(router).as}?page=`,
+                  Link
+                }
               }}
               onDelete={(ids: any): any => handleEntriesModal(ids, 'delete')}
               onPublish={(ids: any): void => handleEntriesModal(ids, 'publish')}
               onUnpublish={(ids: any): void => handleEntriesModal(ids, 'unpublish')}
-            />
-
-            <Pagination
-              design="primary"
-              page={page}
-              total={total}
-              rowsPerPage={rowsPerPage}
-              href={`${CONTENT_LINK(router).href}?page=`}
-              as={`${CONTENT_LINK(router).as}?page=`}
-              Link={Link}
             />
           </div>
         </StyledContent>
