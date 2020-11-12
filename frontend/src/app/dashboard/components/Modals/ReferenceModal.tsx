@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
 import { Modal, EntryBlock } from '@contentpi/ui'
-import { getReferenceTitle } from '@contentpi/utils'
+import { getReferenceTitle } from '@contentpi/core'
 
 // Styles
 import { StyledModal } from './Modal.styled'
