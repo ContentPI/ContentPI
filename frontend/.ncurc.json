@@ -1,4 +1,4 @@
 {
   "upgrade": true,
-  "reject": ["dotenv-webpack"]
+  "reject": ["dotenv-webpack", "@emotion/core", "@emotion/styled"]
 }

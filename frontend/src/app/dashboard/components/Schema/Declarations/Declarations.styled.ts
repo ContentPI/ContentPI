@@ -66,6 +66,10 @@ export const StyledDeclarations = styled.div`
           margin-bottom: 40px;
           width: 100%;
 
+          &.disabled {
+            background: ${theme.colors.gray.almostWhite};
+          }
+
           i {
             margin-right: 10px;
             font-size: 32px;

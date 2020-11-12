@@ -1,6 +1,6 @@
 // Dependencies
 import { Op } from 'sequelize'
-import { getEntries } from '@contentpi/utils'
+import { getEntries } from '@contentpi/core'
 
 // Interfaces
 import {
@@ -53,7 +53,7 @@ export default {
               ]
             }).then((fields: any) => {
               const [{ modelName }] = fields
-              const { entries } = getEntries(fields)
+              const { entries } = getEntries({ fields })
 
               resolve({
                 modelId: reference.targetModel,

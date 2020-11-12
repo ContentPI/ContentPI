@@ -1,15 +1,8 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
 import { Badge, Icon, Input, TextArea, Select, File, EntryBlock } from '@contentpi/ui'
-import {
-  cx,
-  slugFn,
-  bytesToSize,
-  getFileInfo,
-  getImageData,
-  getRandomCode,
-  getReferenceTitle
-} from '@contentpi/utils'
+import { getReferenceTitle, bytesToSize, getFileInfo, getImageData } from '@contentpi/core'
+import { cx, getRandomCode, slugFn } from '@contentpi/utils'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'

@@ -1,7 +1,8 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useContext, memo } from 'react'
-import { Table, PrimaryButton, Pagination } from '@contentpi/ui'
-import { getValuesForTable, pluralify } from '@contentpi/utils'
+import { Table, PrimaryButton } from '@contentpi/ui'
+import { pluralify } from '@contentpi/utils'
+import { getValuesForTable } from '@contentpi/core'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'
@@ -146,21 +147,20 @@ const Content: FC<iProps> = ({ data, router }): ReactElement => {
                 rows: rows[page - 1],
                 raw,
                 fileTypes: config.files.types,
-                isFile
+                isFile,
+                pagination: {
+                  design: 'primary',
+                  page,
+                  total,
+                  rowsPerPage,
+                  href: `${CONTENT_LINK(router).href}?page=`,
+                  as: `${CONTENT_LINK(router).as}?page=`,
+                  Link
+                }
               }}
               onDelete={(ids: any): any => handleEntriesModal(ids, 'delete')}
               onPublish={(ids: any): void => handleEntriesModal(ids, 'publish')}
               onUnpublish={(ids: any): void => handleEntriesModal(ids, 'unpublish')}
-            />
-
-            <Pagination
-              design="primary"
-              page={page}
-              total={total}
-              rowsPerPage={rowsPerPage}
-              href={`${CONTENT_LINK(router).href}?page=`}
-              as={`${CONTENT_LINK(router).as}?page=`}
-              Link={Link}
             />
           </div>
         </StyledContent>
