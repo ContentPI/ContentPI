@@ -63,8 +63,8 @@
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@contentpi/core": "^1.0.3",
-    "@contentpi/ui": "^1.0.4",
-    "@contentpi/utils": "^1.0.5",
+    "@contentpi/ui": "^1.0.5",
+    "@contentpi/utils": "^1.0.6",
     "@emotion/core": "^10.1.1",
     "@emotion/styled": "^10.0.27",
     "body-parser": "^1.19.0",
