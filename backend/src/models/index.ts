@@ -18,15 +18,15 @@ const sequelize = new Sequelize(uri)
 
 // Models
 const models: iModels = {
-  App: sequelize.import('./App'),
-  Declaration: sequelize.import('./Declaration'),
-  Enumeration: sequelize.import('./Enumeration'),
-  Field: sequelize.import('./Field'),
-  I18n: sequelize.import('./I18n'),
-  Model: sequelize.import('./Model'),
-  Reference: sequelize.import('./Reference'),
-  User: sequelize.import('./User'),
-  Value: sequelize.import('./Value'),
+  App: require('./App').default(sequelize, Sequelize),
+  Declaration: require('./Declaration').default(sequelize, Sequelize),
+  Enumeration: require('./Enumeration').default(sequelize, Sequelize),
+  Field: require('./Field').default(sequelize, Sequelize),
+  I18n: require('./I18n').default(sequelize, Sequelize),
+  Model: require('./Model').default(sequelize, Sequelize),
+  Reference: require('./Reference').default(sequelize, Sequelize),
+  User: require('./User').default(sequelize, Sequelize),
+  Value: require('./Value').default(sequelize, Sequelize),
   sequelize
 }
 
