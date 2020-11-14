@@ -60,6 +60,20 @@ export const StyledModal = styled.div`
     }
   }
 
+  .toggles {
+    display: flex;
+    justify-content: space-between;
+    max-width: 570px;
+
+    @media ${device.mobileXl} {
+      max-width: 450px;
+    }
+
+    span {
+      font-size: 13px;
+    }
+  }
+
   .buttons {
     display: flex;
     justify-content: flex-end;

@@ -80,36 +80,32 @@ const Fields: FC<iProps> = ({ model, fields, showSystem, language }): ReactEleme
           >
             <div className={cx('icon', field.type)}>
               {field.type === 'ID' && (
-                <Icon title={field.description} className="id">
+                <Icon title={t(field.description)} className="id">
                   ID
                 </Icon>
               )}
               {field.type === 'Integer' && (
-                <Icon title={field.description} className="integer">
+                <Icon title={t(field.type)} className="integer">
                   10
                 </Icon>
               )}
               {field.type === 'Float' && (
-                <Icon title={field.description} className="float">
+                <Icon title={t(field.type)} className="float">
                   1.0
                 </Icon>
               )}
               {field.type === 'DateTime' && <Icon title={field.description} type="fas fa-clock" />}
               {field.type === 'Status' && (
-                <Icon title={field.description} type="fas fa-low-vision" />
+                <Icon title={t(field.description)} type="fas fa-low-vision" />
               )}
-              {field.type === 'String' && <Icon title={field.description} type="fas fa-font" />}
-              {field.type === 'Text' && (
-                <Icon title={field.description} type="fas fa-quote-right" />
-              )}
-              {field.type === 'Media' && <Icon title={field.description} type="fas fa-image" />}
-              {field.type === 'Boolean' && (
-                <Icon title={field.description} type="fas fa-toggle-on" />
-              )}
+              {field.type === 'String' && <Icon title={t(field.type)} type="fas fa-font" />}
+              {field.type === 'Text' && <Icon title={t(field.type)} type="fas fa-quote-right" />}
+              {field.type === 'Media' && <Icon title={t(field.type)} type="fas fa-image" />}
+              {field.type === 'Boolean' && <Icon title={t(field.type)} type="fas fa-toggle-on" />}
               {field.type === 'Dropdown' && (
-                <Icon title={field.description} type="fas fa-caret-square-down" />
+                <Icon title={t(field.type)} type="fas fa-caret-square-down" />
               )}
-              {field.type === 'Reference' && <Icon title={field.description} type="fas fa-link" />}
+              {field.type === 'Reference' && <Icon title={t(field.type)} type="fas fa-link" />}
             </div>
 
             <div className="name">

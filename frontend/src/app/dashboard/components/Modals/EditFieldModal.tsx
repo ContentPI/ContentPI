@@ -235,7 +235,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           <Toggle
             color="#42f598"
             type="round"
-            label={t('Is Media (image, video or document)?')}
+            label={t('Is Media?')}
             onChange={(): void => setValue('isMedia', !values.isMedia, setValues)}
             checked={values.isMedia}
           />

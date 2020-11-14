@@ -60,11 +60,11 @@ const Declarations: FC<iProps> = ({
             height:
               fieldType === 'Dropdown' || fieldType === 'Reference'
                 ? language === 'ja-JP' || language === 'ar'
-                  ? '820px'
-                  : '790px'
+                  ? '655px'
+                  : '610px'
                 : language === 'ja-JP' || language === 'ar'
-                ? '740px'
-                : '700px',
+                ? '566px'
+                : '520px',
             width: '600px'
           }}
         />

@@ -3,10 +3,18 @@ import { css, Global } from '@emotion/core'
 import { add, getCurrentLanguage } from '@contentpi/utils'
 
 const GlobalStyle = `
+  @font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter/font.woff2') format('woff2'),
+        url('/fonts/Inter/font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   html,
   body {
     background-color: white;
-    font-family: BlinkMacSystemFont, Helvetica, sans-serif;
+    font-family: Inter, Helvetica, sans-serif;
     height: 100%;
     margin: 0;
     overflow-x: hidden;
