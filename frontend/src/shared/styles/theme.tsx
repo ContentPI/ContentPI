@@ -109,7 +109,8 @@ const theme = {
     },
     purple: {
       electricViolet: '#760aff',
-      logan: '#9ea7c7'
+      logan: '#9ea7c7',
+      kimberly: '#6e6299'
     },
     yellow: {
       fuelYellow: '#e9aa28',

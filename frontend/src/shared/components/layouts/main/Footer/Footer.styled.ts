@@ -5,6 +5,9 @@ export const StyledFooter = styled.footer`
   text-align: center;
   height: 54px;
   background-color: transparent;
+  @media ${device.mobileXl} {
+    margin-top: 80px;
+  }
 
   .content {
     height: 100%;
