@@ -6,6 +6,10 @@ export const StyledFooter = styled.footer`
   height: 54px;
   background-color: transparent;
 
+  @media ${device.mobileXl} {
+    margin-top: 80px;
+  }
+
   .content {
     height: 100%;
     display: flex;

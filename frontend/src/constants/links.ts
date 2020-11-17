@@ -41,3 +41,8 @@ export const I18N_LINK = (u: any) => ({
 export const LOGOUT_LINK = (u: any) => {
   return u ? `/${u.language}/logout` : ''
 }
+
+export const SLACK_LINK = () => {
+  const code = 'zt-eatjcqlw-dRtII6skC9oxT_Fpth_Qlg'
+  return `https://join.slack.com/t/developereducation/shared_invite/${code}`
+}
