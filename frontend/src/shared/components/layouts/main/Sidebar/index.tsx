@@ -89,7 +89,7 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           </li>
         </ul>
 
-        <section className="profile">
+        <section className={`profile ${getDirection(router && router.language)}`}>
           <span title="Carlos Santana">CS</span>
         </section>
       </section>

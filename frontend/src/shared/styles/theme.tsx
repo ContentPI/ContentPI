@@ -3,10 +3,18 @@ import { css, Global } from '@emotion/core'
 import { add, getCurrentLanguage } from '@contentpi/utils'
 
 const GlobalStyle = `
+  @font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter/font.woff2') format('woff2'),
+        url('/fonts/Inter/font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
   html,
   body {
     background-color: white;
-    font-family: BlinkMacSystemFont, Helvetica, sans-serif;
+    font-family: Inter, BlinkMacSystemFont, Helvetica, sans-serif;
     height: 100%;
     margin: 0;
     overflow-x: hidden;
@@ -61,7 +69,10 @@ const theme = {
       dodgerBlue: '#2ea1f8',
       oxfordBlue: '#3b4058',
       pacificBlue: '#0099CC',
-      pictonBlue: '#4bc0f3'
+      pictonBlue: '#4bc0f3',
+      zodiac: '#0f1c41',
+      onahau: '#c9f9ff',
+      cyan: '#00e5ff'
     },
     gray: {
       codGray: '#111',
@@ -100,10 +111,15 @@ const theme = {
       fairPink: '#ffe9e9'
     },
     purple: {
+      blueChalk: '#EAD6FF',
+      heliotrope: '#a047ff',
       electricViolet: '#760aff',
-      logan: '#9ea7c7'
+      logan: '#9ea7c7',
+      kimberly: '#6e6299'
     },
     yellow: {
+      buttermilk: '#fff4ba',
+      gold: '#ffd400',
       fuelYellow: '#e9aa28',
       mySin: '#ffb914',
       sunglow: '#ffbb33'

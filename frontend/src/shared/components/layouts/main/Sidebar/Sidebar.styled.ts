@@ -205,8 +205,11 @@ export const StyledSidebar = styled.aside`
     position: absolute;
     bottom: 0;
     left: 19px;
-    ${add('right: 15px;').if(isRtl)}
     margin-bottom: 10px;
+
+    &.rtl {
+      right: 15px;
+    }
 
     span {
       display: inline-block;
