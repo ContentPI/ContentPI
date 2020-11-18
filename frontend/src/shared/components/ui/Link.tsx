@@ -5,18 +5,28 @@ import { isString } from '@contentpi/utils'
 
 // Interfaces
 interface iProps {
-  children: ReactElement
+  children: ReactElement | string
   href: string
   as?: string
   className?: string
   onClick?(): any
   title?: any
+  target?: '_blank' | '_self' | '_parent' | '_top'
 }
 
-const Link: FC<iProps> = ({ href, as, children, className, onClick, title }): ReactElement => {
+const Link: FC<iProps> = ({
+  href,
+  as,
+  children,
+  className,
+  onClick,
+  title = undefined,
+  target = undefined
+}): ReactElement => {
   const linkProps = {
     onClick,
-    className
+    className,
+    target
   }
 
   const props: any = {
@@ -33,7 +43,7 @@ const Link: FC<iProps> = ({ href, as, children, className, onClick, title }): Re
 
   return (
     <NextLink {...props}>
-      <a {...linkProps} title={title || ''}>
+      <a {...linkProps} title={title}>
         {children}
       </a>
     </NextLink>
