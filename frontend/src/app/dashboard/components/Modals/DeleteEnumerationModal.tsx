@@ -25,7 +25,7 @@ const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement =>
   const { t } = useContext(I18nContext)
 
   // Mutations
-  const [deleteEnumerationMutation] = useMutation(DELETE_ENUMERATION_MUTATION)
+  const [deleteMutation] = useMutation(DELETE_ENUMERATION_MUTATION)
 
   // Methods
   const handleSubmit = async (): Promise<void> => {
@@ -35,7 +35,7 @@ const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement =>
       id: data.id
     }
 
-    const deleted = await deleteEnumerationMutation({
+    const deleted = await deleteMutation({
       variables
     })
 
