@@ -23,6 +23,20 @@ export default {
       _: any,
       { input }: { input: iCreateOrEditEnumerationInput },
       { models }: { models: iModels }
-    ): iEnumeration => models.Enumeration.create({ ...input })
+    ): iEnumeration => models.Enumeration.create({ ...input }),
+    deleteEnumeration: async (
+      _: any,
+      { id }: { id: string },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const enumerationToRemove = await models.Enumeration.findByPk(id)
+
+      if (enumerationToRemove) {
+        await enumerationToRemove.destroy({ where: { id } })
+        return enumerationToRemove
+      }
+
+      return null
+    }
   }
 }
