@@ -104,7 +104,8 @@ const theme = {
     },
     green: {
       malachite: '#1bb935',
-      mountainMeadow: '#0eb87f'
+      mountainMeadow: '#0eb87f',
+      screaminGreen: '#42f598'
     },
     pink: {
       hollywoodCerise: '#ff0098',

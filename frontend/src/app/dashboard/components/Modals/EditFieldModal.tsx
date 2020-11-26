@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useEffect, useContext, memo } from 'react'
-import { Modal, Badge, Input, PrimaryButton, LinkButton, Toggle } from '@contentpi/ui'
+import { Modal as ModalUI, Badge, Input, PrimaryButton, LinkButton, Toggle } from '@contentpi/ui'
 import { camelCase, redirectTo, waitFor } from '@contentpi/utils'
 import { getEmptyValues } from '@contentpi/core'
 import { useMutation } from '@apollo/client'
@@ -16,6 +16,7 @@ import { I18nContext } from '@contexts/i18n'
 import EDIT_FIELD_MUTATION from '@graphql/fields/editField.mutation'
 
 // Styles
+import { theme } from '@styles/theme'
 import { StyledModal } from './Modal.styled'
 
 interface iProps {
@@ -25,7 +26,7 @@ interface iProps {
   onClose(): void
 }
 
-const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -129,7 +130,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={_onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={_onClose}>
       <StyledModal>
         <div>
           <label htmlFor="fieldName">
@@ -174,7 +175,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           <div className="left">
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Make field required')}
                 onChange={(): void => setValue('isRequired', !values.isRequired, setValues)}
@@ -184,7 +185,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
 
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Set field as Primary Key')}
                 onChange={(): void => setValue('isPrimaryKey', !values.isPrimaryKey, setValues)}
@@ -194,7 +195,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
 
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Is Media?')}
                 onChange={(): void => setValue('isMedia', !values.isMedia, setValues)}
@@ -206,7 +207,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           <div className="right">
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Set field as unique')}
                 onChange={(): void => setValue('isUnique', !values.isUnique, setValues)}
@@ -216,7 +217,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
 
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Hide field')}
                 onChange={(): void => setValue('isHide', !values.isHide, setValues)}
@@ -237,8 +238,8 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           </PrimaryButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(EditFieldModal)
+export default memo(Modal)

@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
-import { Modal, LinkButton } from '@contentpi/ui'
+import { Modal as ModalUI, LinkButton } from '@contentpi/ui'
 import { redirectTo } from '@contentpi/utils'
 import { useMutation } from '@apollo/client'
 
@@ -20,12 +20,12 @@ interface iProps {
   onClose(): void
 }
 
-const DeleteFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
   // Mutations
-  const [deleteFieldMutation] = useMutation(DELETE_FIELD_MUTATION)
+  const [deleteMutation] = useMutation(DELETE_FIELD_MUTATION)
 
   // Methods
   const handleSubmit = async (): Promise<void> => {
@@ -35,7 +35,7 @@ const DeleteFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
       id: data.id
     }
 
-    const deleted = await deleteFieldMutation({
+    const deleted = await deleteMutation({
       variables
     })
 
@@ -45,7 +45,7 @@ const DeleteFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         <p>
           {t('Are you sure you want to delete the field?')} <br />
@@ -62,8 +62,8 @@ const DeleteFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           </LinkButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(DeleteFieldModal)
+export default memo(Modal)

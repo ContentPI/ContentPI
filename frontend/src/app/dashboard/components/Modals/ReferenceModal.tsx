@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, memo } from 'react'
-import { Modal, EntryBlock } from '@contentpi/ui'
+import { Modal as ModalUI, EntryBlock } from '@contentpi/ui'
 import { getReferenceTitle } from '@contentpi/core'
 
 // Styles
@@ -24,7 +24,7 @@ const ReferenceModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         {referenceEntries.entries.map((entry: any) => {
           entry.modelName = referenceEntries.modelName
@@ -40,7 +40,7 @@ const ReferenceModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           )
         })}
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 

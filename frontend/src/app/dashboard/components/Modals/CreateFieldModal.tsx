@@ -1,6 +1,14 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, useState, useEffect, memo } from 'react'
-import { Modal, Badge, Input, PrimaryButton, LinkButton, Toggle, Select } from '@contentpi/ui'
+import {
+  Modal as ModalUI,
+  Badge,
+  Input,
+  PrimaryButton,
+  LinkButton,
+  Toggle,
+  Select
+} from '@contentpi/ui'
 import { camelCase, redirectTo, getParamsFromUrl, waitFor } from '@contentpi/utils'
 import { getEmptyValues } from '@contentpi/core'
 import { useLazyQuery, useMutation } from '@apollo/client'
@@ -17,6 +25,7 @@ import CREATE_FIELD_MUTATION from '@graphql/fields/createField.mutation'
 import GET_MODEL_QUERY from '@graphql/models/getModel.query'
 
 // Styles
+import { theme } from '@styles/theme'
 import { StyledModal } from './Modal.styled'
 
 interface iProps {
@@ -26,7 +35,7 @@ interface iProps {
   onClose(): void
 }
 
-const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -67,7 +76,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   const { onChange, setValue } = useContext(FormContext)
 
   // Mutations
-  const [createFieldMutation] = useMutation(CREATE_FIELD_MUTATION)
+  const [createMutation] = useMutation(CREATE_FIELD_MUTATION)
 
   // Queries
   const [getModelQueryThenCreateField] = useLazyQuery(GET_MODEL_QUERY, {
@@ -113,7 +122,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
         values.defaultValue = reference
       }
 
-      const { data: dataField } = await createFieldMutation({
+      const { data: dataField } = await createMutation({
         variables: values
       })
 
@@ -218,7 +227,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   }, [prevProps, options])
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={_onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={_onClose}>
       <StyledModal>
         <div>
           <label htmlFor="fieldName">
@@ -266,7 +275,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           <div className="left">
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Make field required')}
                 onChange={(): void => setValue('isRequired', !values.isRequired, setValues)}
@@ -276,7 +285,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Set field as Primary Key')}
                 onChange={(): void => setValue('isPrimaryKey', !values.isPrimaryKey, setValues)}
@@ -286,7 +295,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Is Media?')}
                 onChange={(): void => setValue('isMedia', !values.isMedia, setValues)}
@@ -298,7 +307,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           <div className="right">
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Set field as unique')}
                 onChange={(): void => setValue('isUnique', !values.isUnique, setValues)}
@@ -308,7 +317,7 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
 
             <div style={{ marginBottom: '20px' }}>
               <Toggle
-                color="#42f598"
+                color={theme.colors.green.screaminGreen}
                 type="round"
                 label={t('Hide field')}
                 onChange={(): void => setValue('isHide', !values.isHide, setValues)}
@@ -329,8 +338,8 @@ const CreateFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           </PrimaryButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(CreateFieldModal)
+export default memo(Modal)

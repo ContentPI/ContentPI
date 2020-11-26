@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, useState, memo } from 'react'
-import { Modal, Badge, Input, PrimaryButton, LinkButton, Tags } from '@contentpi/ui'
+import { Modal as ModalUI, Badge, Input, PrimaryButton, LinkButton, Tags } from '@contentpi/ui'
 import { redirectTo, getParamsFromUrl, camelCase, waitFor } from '@contentpi/utils'
 import { getEmptyValues } from '@contentpi/core'
 import { useMutation } from '@apollo/client'
@@ -22,7 +22,7 @@ interface iProps {
   onClose(): void
 }
 
-const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -45,7 +45,7 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
   const [loading, setLoading] = useState(false)
 
   // Mutations
-  const [createEnumerationMutation] = useMutation(CREATE_ENUMERATION_MUTATION)
+  const [createMutation] = useMutation(CREATE_ENUMERATION_MUTATION)
 
   // Contexts
   const { onChange, setValue } = useContext(FormContext)
@@ -74,7 +74,7 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
 
         values.values = JSON.stringify(enumValues)
 
-        const { data: dataCreateEnumeration } = await createEnumerationMutation({
+        const { data: dataCreateEnumeration } = await createMutation({
           variables: values
         })
 
@@ -94,7 +94,7 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         <div>
           <label htmlFor="modelName">
@@ -158,8 +158,8 @@ const CreateEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options })
           </PrimaryButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(CreateEnumerationModal)
+export default memo(Modal)
