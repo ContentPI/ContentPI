@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, useState, useEffect, memo } from 'react'
-import { Modal, Badge, Input, PrimaryButton, LinkButton, Icon } from '@contentpi/ui'
+import { Modal as ModalUI, Badge, Input, PrimaryButton, LinkButton, Icon } from '@contentpi/ui'
 import { redirectTo, slugFn, waitFor } from '@contentpi/utils'
 import { generateHexCode, invertHexCode, getEmptyValues } from '@contentpi/core'
 import { useMutation } from '@apollo/client'
@@ -23,7 +23,7 @@ interface iProps {
   onClose(): void
 }
 
-const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -42,7 +42,7 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
   const [loading, setLoading] = useState(false)
 
   // Mutations
-  const [createAppMutation] = useMutation(CREATE_APP_MUTATION)
+  const [createMutation] = useMutation(CREATE_APP_MUTATION)
 
   // Contexts
   const { user } = useContext(UserContext)
@@ -60,7 +60,7 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
       waitFor(2).then(async () => {
         setLoading(false)
 
-        const { data: dataCreateApp } = await createAppMutation({
+        const { data: dataCreateApp } = await createMutation({
           variables: values
         })
 
@@ -93,7 +93,7 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
   }, [user])
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         <div>
           <label htmlFor="appName">
@@ -157,8 +157,8 @@ const CreateAppModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           </PrimaryButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(CreateAppModal)
+export default memo(Modal)

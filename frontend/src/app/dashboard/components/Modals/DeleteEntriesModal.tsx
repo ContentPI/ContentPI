@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
-import { Modal, LinkButton } from '@contentpi/ui'
+import { Modal as ModalUI, LinkButton } from '@contentpi/ui'
 import { redirectTo, pluralify } from '@contentpi/utils'
 import { useMutation } from '@apollo/client'
 
@@ -20,7 +20,7 @@ interface iProps {
   onClose(): void
 }
 
-const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -28,7 +28,7 @@ const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): Re
   const { data } = options
 
   // Mutations
-  const [deleteValuesMutation] = useMutation(DELETE_VALUES_MUTATION)
+  const [deleteMutation] = useMutation(DELETE_VALUES_MUTATION)
 
   // Methods
   const handleSubmit = async (): Promise<void> => {
@@ -36,7 +36,7 @@ const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): Re
       entries: data.entries
     }
 
-    const deleted = await deleteValuesMutation({
+    const deleted = await deleteMutation({
       variables
     })
 
@@ -46,7 +46,7 @@ const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): Re
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         <p>
           {t(
@@ -68,8 +68,8 @@ const DeleteEntriesModal: FC<iProps> = ({ isOpen, label, onClose, options }): Re
           </LinkButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(DeleteEntriesModal)
+export default memo(Modal)
