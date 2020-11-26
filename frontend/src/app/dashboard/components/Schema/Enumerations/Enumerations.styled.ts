@@ -15,6 +15,8 @@ export const StyledEnumerations = styled.div`
       width: 400px;
 
       .information {
+        display: flex;
+        justify-content: space-between;
         background-color: ${theme.colors.gray.alabaster};
         padding: 20px 10px;
         border-bottom: 1px solid ${theme.colors.gray.gallery};

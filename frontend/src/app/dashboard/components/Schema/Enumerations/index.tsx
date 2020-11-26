@@ -1,5 +1,7 @@
 // Dependencies
-import React, { FC, ReactElement, useContext, memo } from 'react'
+import React, { FC, ReactElement, useContext, memo, useState } from 'react'
+import { Icon } from '@contentpi/ui'
+import DeleteEnumerationModal from '@modals/DeleteEnumerationModal'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'
@@ -19,6 +21,10 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
+  // State
+  const [isOpenDelete, setIsOpenDelete] = useState(false)
+  const [id, setId] = useState('')
+
   // Data
   const { getEnumerationsByAppId } = data
 
@@ -27,8 +33,25 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
     return <div />
   }
 
+  // Methods
+  const handleDeleteModal = (): void => setIsOpenDelete(!isOpenDelete)
+  const handleDelete = (idx: string): void => {
+    handleDeleteModal()
+    setId(idx)
+  }
+
   return (
     <>
+      <DeleteEnumerationModal
+        label={t('Delete Enumeration')}
+        isOpen={isOpenDelete}
+        onClose={handleDeleteModal}
+        options={{
+          data: { id },
+          position: 'center',
+          width: '600px'
+        }}
+      />
       <MainLayout title={t('Enumerations')} header content footer sidebar router={router}>
         <StyledEnumerations>
           <h2>{t('Enumerations')}</h2>
@@ -40,8 +63,17 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
               return (
                 <div key={enumeration.id} className="enumeration">
                   <div className="information">
-                    <h3 className="name">{enumeration.enumerationName}</h3>{' '}
-                    <span className="identifier">#{enumeration.identifier}</span>
+                    <div>
+                      <h3 className="name">{enumeration.enumerationName}</h3>{' '}
+                      <span className="identifier">#{enumeration.identifier}</span>
+                    </div>
+                    <div>
+                      <Icon
+                        type="far fa-trash-alt"
+                        title={t('Delete Enumeration')}
+                        onClick={() => handleDelete(enumeration.id)}
+                      />
+                    </div>
                   </div>
 
                   <div className="values">

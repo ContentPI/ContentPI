@@ -1,6 +1,7 @@
 {
   "Add new value": "新しい価値を追加する",
   "App Name": "アプリ名",
+  "Are you sure you want to delete the enumeration?": "列挙を削除してもよろしいですか？",
   "Are you sure you want to delete the field?": "フィールドを削除してもよろしいですか？",
   "Are you sure you want to delete the model?": "モデルを削除してもよろしいですか？",
   "Are you sure you want to delete these entries?": "これらのエントリを削除してもよろしいですか？",
@@ -32,6 +33,7 @@
   "Create a new entry": "新しいエントリを作成します",
   "Create new Boolean Field": "新しいブールフィールドを作成する",
   "Create new Entry": "新しいエントリを作成する",
+  "Create new Enumeration": "新しい列挙を作成する",
   "Create new Float Field": "新しいフロートフィールドを作成する",
   "Create new Integer Field": "新しい整数フィールドを作成する",
   "Create new Model": "新しいモデルを作成する",
@@ -49,6 +51,7 @@
   "Define the schema of your content that will shape your editing interface and API.": "編集インターフェースとAPIを形作るコンテンツのスキーマを定義します。",
   "Delete Entries": "エントリを削除する",
   "Delete Entry": "記入を消す",
+  "Delete Enumeration": "列挙を削除する",
   "Delete Field": "フィールドを削除",
   "Delete Model": "モデルの削除",
   "Delete": "削除",
