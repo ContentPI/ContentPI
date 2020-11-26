@@ -60,31 +60,31 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
 
           <li onClick={(): void => handleOpen('model', true)}>
             <a title="Models">
-              <Icon type="fas fa-cubes" />
+              <Icon type="layers" library="feather" />
             </a>
           </li>
 
           <li onClick={(): void => handleOpen('content', true)}>
             <a title="Content">
-              <Icon type="fas fa-pencil-alt" />
+              <Icon type="edit" library="feather" />
             </a>
           </li>
 
           <li>
             <Link href={I18N_LINK(router).as} title="I18n">
-              <Icon type="fas fa-globe-americas" />
+              <Icon type="globe" library="feather" />
             </Link>
           </li>
 
           <li>
             <Link href={ASSET_LINK(router).as} title="Content">
-              <Icon type="fas fa-photo-video" />
+              <Icon type="image" library="feather" />
             </Link>
           </li>
 
           <li>
             <a href={`${LOGOUT_LINK(router)}?redirectTo=/dashboard`} title="Logout">
-              <Icon type="fas fa-power-off" />
+              <Icon type="power" library="feather" />
             </a>
           </li>
         </ul>
