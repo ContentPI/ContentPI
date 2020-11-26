@@ -1,4 +1,4 @@
-import { styled, theme, isRtl, add } from '@styles/theme'
+import { styled, theme, isRtl } from '@styles/theme'
 
 export const StyledCards = styled.div`
   display: flex;
