@@ -37,6 +37,24 @@ export default {
       }
 
       return null
+    },
+    editEnumeration: async (
+      _: any,
+      { id, input }: { id: string; input: iCreateOrEditEnumerationInput },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const enumerationToEdit = await models.Enumeration.findByPk(id)
+
+      if (enumerationToEdit) {
+        const updatedEnumeration = await enumerationToEdit.update(
+          { ...input },
+          { where: { id } }
+        )
+
+        return updatedEnumeration
+      }
+
+      return null
     }
   }
 }
