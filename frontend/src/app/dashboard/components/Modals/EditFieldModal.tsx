@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useState, useEffect, useContext, memo } from 'react'
-import { Modal, Badge, Input, PrimaryButton, LinkButton, Toggle } from '@contentpi/ui'
+import { Modal as ModalUI, Badge, Input, PrimaryButton, LinkButton, Toggle } from '@contentpi/ui'
 import { camelCase, redirectTo, waitFor } from '@contentpi/utils'
 import { getEmptyValues } from '@contentpi/core'
 import { useMutation } from '@apollo/client'
@@ -16,6 +16,7 @@ import { I18nContext } from '@contexts/i18n'
 import EDIT_FIELD_MUTATION from '@graphql/fields/editField.mutation'
 
 // Styles
+import { theme } from '@styles/theme'
 import { StyledModal } from './Modal.styled'
 
 interface iProps {
@@ -25,7 +26,7 @@ interface iProps {
   onClose(): void
 }
 
-const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -130,7 +131,7 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={_onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={_onClose}>
       <StyledModal>
         <div>
           <label htmlFor="fieldName">
@@ -252,8 +253,8 @@ const EditFieldModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           </PrimaryButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(EditFieldModal)
+export default memo(Modal)

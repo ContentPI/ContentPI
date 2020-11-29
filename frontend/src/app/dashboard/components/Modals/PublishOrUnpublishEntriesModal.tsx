@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
-import { Modal, LinkButton } from '@contentpi/ui'
+import { Modal as ModalUI, LinkButton } from '@contentpi/ui'
 import { redirectTo, pluralify, capitalize } from '@contentpi/utils'
 import { useMutation } from '@apollo/client'
 
@@ -20,12 +20,7 @@ interface iProps {
   onClose(): void
 }
 
-const PublishOrUnpublishEntriesModal: FC<iProps> = ({
-  isOpen,
-  label,
-  onClose,
-  options
-}): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -54,7 +49,7 @@ const PublishOrUnpublishEntriesModal: FC<iProps> = ({
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         <p>
           {t(
@@ -87,8 +82,8 @@ const PublishOrUnpublishEntriesModal: FC<iProps> = ({
           </LinkButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(PublishOrUnpublishEntriesModal)
+export default memo(Modal)

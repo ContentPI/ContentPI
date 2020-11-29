@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, useState, memo } from 'react'
-import { Modal, Badge, Input, PrimaryButton, LinkButton } from '@contentpi/ui'
+import { Modal as ModalUI, Badge, Input, PrimaryButton, LinkButton } from '@contentpi/ui'
 import { redirectTo, getParamsFromUrl, camelCase, waitFor } from '@contentpi/utils'
 import { getEmptyValues } from '@contentpi/core'
 import { useMutation } from '@apollo/client'
@@ -22,7 +22,7 @@ interface iProps {
   onClose(): void
 }
 
-const EditModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -96,7 +96,7 @@ const EditModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={_onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={_onClose}>
       <StyledModal>
         <div>
           <label htmlFor="modelName">
@@ -144,8 +144,8 @@ const EditModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactE
           </PrimaryButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(EditModelModal)
+export default memo(Modal)
