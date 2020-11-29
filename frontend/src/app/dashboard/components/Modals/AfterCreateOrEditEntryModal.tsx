@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
-import { Modal, PrimaryButton, SuccessButton, DarkButton, Icon } from '@contentpi/ui'
+import { Modal as ModalUI, PrimaryButton, SuccessButton, DarkButton, Icon } from '@contentpi/ui'
 import { cx } from '@contentpi/utils'
 
 // Contexts
@@ -16,19 +16,14 @@ interface iProps {
   onClose(): void
 }
 
-const AfterCreateOrEditEntryModal: FC<iProps> = ({
-  isOpen,
-  label,
-  onClose,
-  options
-}): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
   const action = `<span class="${options.action}">${options.action}</span>`
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         <p
           className="center"
@@ -55,8 +50,8 @@ const AfterCreateOrEditEntryModal: FC<iProps> = ({
           </DarkButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(AfterCreateOrEditEntryModal)
+export default memo(Modal)

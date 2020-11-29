@@ -1,6 +1,6 @@
 // Dependencies
 import React, { FC, ReactElement, useContext, memo } from 'react'
-import { Modal, LinkButton } from '@contentpi/ui'
+import { Modal as ModalUI, LinkButton } from '@contentpi/ui'
 import { redirectTo } from '@contentpi/utils'
 import { useMutation } from '@apollo/client'
 
@@ -20,7 +20,7 @@ interface iProps {
   onClose(): void
 }
 
-const DeleteModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -45,7 +45,7 @@ const DeleteModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={onClose}>
       <StyledModal>
         <p>
           {t('Are you sure you want to delete the model?')} <br />
@@ -62,8 +62,8 @@ const DeleteModelModal: FC<iProps> = ({ isOpen, label, onClose, options }): Reac
           </LinkButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(DeleteModelModal)
+export default memo(Modal)
