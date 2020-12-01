@@ -2,6 +2,7 @@
 import React, { FC, ReactElement, useContext, memo, useState } from 'react'
 import { Icon } from '@contentpi/ui'
 import DeleteEnumerationModal from '@modals/DeleteEnumerationModal'
+import EditEnumerationModal from '@modals/EditEnumerationModal'
 
 // Contexts
 import { I18nContext } from '@contexts/i18n'
@@ -23,6 +24,7 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
 
   // State
   const [isOpenDelete, setIsOpenDelete] = useState(false)
+  const [isOpenEdit, setIsOpenEdit] = useState(false)
   const [id, setId] = useState('')
 
   // Data
@@ -35,8 +37,15 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
 
   // Methods
   const handleDeleteModal = (): void => setIsOpenDelete(!isOpenDelete)
+  const handleEditModal = (): void => setIsOpenEdit(!isOpenEdit)
+
   const handleDelete = (idx: string): void => {
     handleDeleteModal()
+    setId(idx)
+  }
+
+  const handleEdit = (idx: any): any => {
+    handleEditModal()
     setId(idx)
   }
 
@@ -52,6 +61,19 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
           width: '600px'
         }}
       />
+      {id && (
+        <EditEnumerationModal
+          label={t('Edit Enumeration')}
+          isOpen={isOpenEdit}
+          onClose={handleEditModal}
+          options={{
+            data: { id, getEnumerationsByAppId },
+            position: 'top',
+            width: '600px',
+            height: '600px'
+          }}
+        />
+      )}
       <MainLayout title={t('Enumerations')} header content footer sidebar router={router}>
         <StyledEnumerations>
           <h2>{t('Enumerations')}</h2>
@@ -68,6 +90,11 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
                       <span className="identifier">#{enumeration.identifier}</span>
                     </div>
                     <div>
+                      <Icon
+                        type="far fa-edit"
+                        title={t('Edit Enumeration')}
+                        onClick={() => handleEdit(enumeration.id)}
+                      />{' '}
                       <Icon
                         type="far fa-trash-alt"
                         title={t('Delete Enumeration')}
