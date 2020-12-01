@@ -1,12 +1,9 @@
 // Dependencies
-import React, { FC, ReactElement, useState, useEffect, useContext, memo } from 'react'
-import { Modal, Badge, Input, PrimaryButton, LinkButton, Tags } from '@contentpi/ui'
+import React, { FC, ReactElement, useState, useContext, memo } from 'react'
+import { Modal as ModalUI, Badge, Input, PrimaryButton, LinkButton, Tags } from '@contentpi/ui'
 import { camelCase, redirectTo, waitFor } from '@contentpi/utils'
 import { getEmptyValues } from '@contentpi/core'
 import { useMutation } from '@apollo/client'
-
-// Hooks
-import usePrevious from '@lib/usePrevious'
 
 // Contexts
 import { FormContext } from '@contexts/form'
@@ -25,7 +22,7 @@ interface iProps {
   onClose(): void
 }
 
-const EditEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
+const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement => {
   // Contexts
   const { t } = useContext(I18nContext)
 
@@ -34,18 +31,15 @@ const EditEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options }): 
     data: { id: enumerationId, getEnumerationsByAppId: enumerations }
   } = options
 
-  // Previous Props
-  const prevProps: any = usePrevious({ options })
+  const currentEnum = enumerations
+    ? enumerations.filter((enumeration: any) => enumeration.id === enumerationId)
+    : []
 
   // States
-  const initialValues = {
-    enumerationName: '',
-    identifier: '',
-    description: '',
-    values: '',
-    appId: ''
-  }
-  const [enumValues, setEnumValues] = useState<any>([])
+  const initialValues = currentEnum.length > 0 ? currentEnum[0] : null
+  const initialEnumValues = currentEnum.length > 0 ? JSON.parse(currentEnum[0].values) : []
+
+  const [enumValues, setEnumValues] = useState<any>(initialEnumValues)
   const [values, setValues] = useState(initialValues)
   const [required, setRequired] = useState<any>({
     appName: false,
@@ -66,7 +60,7 @@ const EditEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options }): 
   }
 
   const _onChange = (e: any): any => {
-    if (e.target.name === 'EnumerationName') {
+    if (e.target.name === 'enumerationName') {
       setValue('identifier', camelCase(e.target.value), setValues)
     }
 
@@ -93,10 +87,11 @@ const EditEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options }): 
 
       waitFor(2).then(async () => {
         setLoading(false)
-        const obj = { ...values, values: JSON.stringify(enumValues) }
-        // values.values = JSON.stringify(enumValues)
+
+        values.values = JSON.stringify(enumValues)
+
         const { data: dataEditEnumeration } = await editEnumerationMutation({
-          variables: { id: enumerationId, ...obj }
+          variables: values
         })
 
         if (dataEditEnumeration.editEnumeration) {
@@ -106,28 +101,13 @@ const EditEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options }): 
     }
   }
 
-  // Effects
-  useEffect(() => {
-    const currentEnumeration = enumerations
-      ? enumerations.filter((enumeration: any) => enumeration.id === enumerationId)
-      : []
-
-    if (prevProps && prevProps.options !== options && currentEnumeration.length > 0) {
-      setValues(currentEnumeration[0])
-      setEnumValues(JSON.parse(currentEnumeration[0].values))
-    } else if (currentEnumeration.length > 0) {
-      setValues(currentEnumeration[0])
-      setEnumValues(JSON.parse(currentEnumeration[0].values))
-    }
-  }, [enumerations, options])
-
   // Wait until we set our form context
   if (!values) {
     return <div />
   }
 
   return (
-    <Modal isOpen={isOpen} label={label} options={options} onClose={_onClose}>
+    <ModalUI isOpen={isOpen} label={label} options={options} onClose={_onClose}>
       <StyledModal>
         <div>
           <label htmlFor="modelName">
@@ -191,8 +171,8 @@ const EditEnumerationModal: FC<iProps> = ({ isOpen, label, onClose, options }): 
           </PrimaryButton>
         </div>
       </StyledModal>
-    </Modal>
+    </ModalUI>
   )
 }
 
-export default memo(EditEnumerationModal)
+export default memo(Modal)

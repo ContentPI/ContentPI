@@ -61,17 +61,19 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
           width: '600px'
         }}
       />
-      <EditEnumerationModal
-        label={t('Edit Enumeration')}
-        isOpen={isOpenEdit}
-        onClose={handleEditModal}
-        options={{
-          data: { id, getEnumerationsByAppId },
-          position: 'top',
-          width: '600px',
-          height: '600px'
-        }}
-      />
+      {id && (
+        <EditEnumerationModal
+          label={t('Edit Enumeration')}
+          isOpen={isOpenEdit}
+          onClose={handleEditModal}
+          options={{
+            data: { id, getEnumerationsByAppId },
+            position: 'top',
+            width: '600px',
+            height: '600px'
+          }}
+        />
+      )}
       <MainLayout title={t('Enumerations')} header content footer sidebar router={router}>
         <StyledEnumerations>
           <h2>{t('Enumerations')}</h2>
