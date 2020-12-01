@@ -94,7 +94,7 @@ const Enumerations: FC<iProps> = ({ data, router }): ReactElement => {
                         type="far fa-edit"
                         title={t('Edit Enumeration')}
                         onClick={() => handleEdit(enumeration.id)}
-                      />
+                      />{' '}
                       <Icon
                         type="far fa-trash-alt"
                         title={t('Delete Enumeration')}

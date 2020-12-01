@@ -88,10 +88,10 @@ const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement =>
       waitFor(2).then(async () => {
         setLoading(false)
 
-        values.values = JSON.stringify(enumValues)
+        const newValues = { ...values, values: JSON.stringify(enumValues) }
 
         const { data: dataEditEnumeration } = await editEnumerationMutation({
-          variables: values
+          variables: newValues
         })
 
         if (dataEditEnumeration.editEnumeration) {
