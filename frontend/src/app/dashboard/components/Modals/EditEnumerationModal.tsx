@@ -10,7 +10,7 @@ import { FormContext } from '@contexts/form'
 import { I18nContext } from '@contexts/i18n'
 
 // Mutation
-import EDIT_ENUMERATION_MUTATION from '@graphql/enumerations/editEnumerations.mutation'
+import EDIT_ENUMERATION_MUTATION from '@graphql/enumerations/editEnumeration.mutation'
 
 // Styles
 import { StyledModal } from './Modal.styled'
@@ -43,7 +43,7 @@ const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement =>
   const [enumValues, setEnumValues] = useState<any>(initialEnumValues)
   const [values, setValues] = useState(initialValues)
   const [required, setRequired] = useState<any>({
-    appName: false,
+    enumerationName: false,
     identifier: false
   })
   const [loading, setLoading] = useState(false)
