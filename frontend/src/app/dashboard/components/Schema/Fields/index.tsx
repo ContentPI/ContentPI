@@ -39,6 +39,7 @@ const Fields: FC<iProps> = ({ model, fields, showSystem, language }): ReactEleme
   }
 
   const handleEdit = (id: any): any => {
+    console.log(fields)
     handleEditModal()
     setData({ id, fields })
   }

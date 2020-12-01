@@ -55,6 +55,7 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
   const initialSelectedEntries: any = {}
 
   const getValue = (fieldId: string) => {
+    console.log('Algo', fieldId)
     if (isEditing && getValuesByEntry) {
       const value = getValuesByEntry.find((valueEntry: any) => valueEntry.fieldId === fieldId)
       return value || { value: '' }

@@ -7,6 +7,7 @@ export default gql`
       id
       enumerationName
       identifier
+      description
       values
       appId
     }
