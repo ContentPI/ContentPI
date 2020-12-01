@@ -31,6 +31,7 @@ const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement =>
     data: { id: enumerationId, getEnumerationsByAppId: enumerations }
   } = options
 
+  // Getting current enumeration
   const currentEnum = enumerations
     ? enumerations.filter((enumeration: any) => enumeration.id === enumerationId)
     : []
@@ -48,7 +49,7 @@ const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement =>
   const [loading, setLoading] = useState(false)
 
   // Mutations
-  const [editEnumerationMutation] = useMutation(EDIT_ENUMERATION_MUTATION)
+  const [editMutation] = useMutation(EDIT_ENUMERATION_MUTATION)
 
   // Contexts
   const { onChange, setValue } = useContext(FormContext)
@@ -90,7 +91,7 @@ const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement =>
 
         const newValues = { ...values, values: JSON.stringify(enumValues) }
 
-        const { data: dataEditEnumeration } = await editEnumerationMutation({
+        const { data: dataEditEnumeration } = await editMutation({
           variables: newValues
         })
 
