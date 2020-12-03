@@ -1,0 +1,21 @@
+{
+  "name": "contentpi",
+  "version": "1.0.0",
+  "description": "CPI - Headless CMS",
+  "scripts": {
+    "docker:start": "docker-compose up",
+    "docker:build": "docker-compose build",
+    "docker:stop": "docker-compose down",
+    "docker:clean": "docker system prune -af",
+    "docker:clean:volumes": "docker volume prune -f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ContentPI/ContentPI.git"
+  },
+  "author": "Emmanuel Villegas Gonzalez <emmanuelvillegasgonzalez@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/ContentPI/ContentPI/issues"
+  },
+  "homepage": "https://github.com/ContentPI/ContentPI#readme"
+}

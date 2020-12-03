@@ -3,7 +3,9 @@ import path from 'path'
 import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
 import Dotenv from 'dotenv-webpack'
 
-export default {
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
+
+const config = {
   reactStrictMode: true,
   devIndicators: {
     autoPrerender: false
@@ -47,4 +49,27 @@ export default {
 
     return config
   }
+}
+
+export default (phase, { defaultConfig }) => {
+  const customConfig = {
+    ...defaultConfig,
+    ...config
+  }
+
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    return {
+      ...customConfig,
+      webpackDevMiddleware: config => {
+        config.watchOptions = {
+          poll: 1000,
+          aggregateTimeout: 300
+        }
+
+        return config
+      }
+    }
+  }
+
+  return customConfig
 }

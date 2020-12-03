@@ -1,0 +1,71 @@
+version: "3.8"
+
+services:
+  # DB SERVICES
+  ${DB_SERVICES_NAME}:
+    container_name: ${DB_SERVICES_NAME}
+    image: ${DB_IMAGE}
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - ${DB_SERVICES_NAME}:/var/lib/${DB_SERVICES_NAME}
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:4.27
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_USER}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+    ports:
+      - ${PGADMIN_LISTEN_PORT}:${PGADMIN_LISTEN_PORT}
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    links:
+      - "${DB_SERVICES_NAME}:pgsql-server"
+  backend:
+    links:
+      - ${DB_SERVICES_NAME}
+    depends_on:
+      - ${DB_SERVICES_NAME}
+    container_name: backend
+    image: apollo
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    environment:
+      DB_DIALECT: ${DB_SERVICES_NAME}
+      DB_PORT: ${POSTGRES_PORT}
+      DB_HOST: ${DB_SERVICES_NAME}
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USERNAME: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      SECURITY_SECRET_KEY: ${POSTGRES_SECURITY_SECRET_KEY}
+    volumes:
+      - ./backend:/usr/src/app/backend
+      - /usr/src/app/backend/node_modules
+  frontend:
+    container_name: frontend
+    image: nextjs
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    # environment:
+    #   BACKEND_URL: ${BACKEND_URL}
+    volumes:
+      - ./frontend:/usr/src/app/frontend
+      - /usr/src/app/frontend/node_modules
+      - /usr/src/app/frontend/.next
+
+volumes: #define our postgresql volume used above
+  postgresql:
+  pgadmin-data:
