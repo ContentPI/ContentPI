@@ -281,54 +281,60 @@ const Modal: FC<iProps> = ({ isOpen, label, onClose, options }): ReactElement =>
           />
         </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <Toggle
-            color="#42f598"
-            type="round"
-            label={t('Make field required')}
-            onChange={(): void => setValue('isRequired', !values.isRequired, setValues)}
-            checked={values.isRequired}
-          />
-        </div>
+        <div className="toggles">
+          <div className="left">
+            <div style={{ marginBottom: '20px' }}>
+              <Toggle
+                color={theme.colors.green.screaminGreen}
+                type="round"
+                label={t('Make field required')}
+                onChange={(): void => setValue('isRequired', !values.isRequired, setValues)}
+                checked={values.isRequired}
+              />
+            </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <Toggle
-            color="#42f598"
-            type="round"
-            label={t('Set field as Primary Key')}
-            onChange={(): void => setValue('isPrimaryKey', !values.isPrimaryKey, setValues)}
-            checked={values.isPrimaryKey}
-          />
-        </div>
+            <div style={{ marginBottom: '20px' }}>
+              <Toggle
+                color={theme.colors.green.screaminGreen}
+                type="round"
+                label={t('Set field as Primary Key')}
+                onChange={(): void => setValue('isPrimaryKey', !values.isPrimaryKey, setValues)}
+                checked={values.isPrimaryKey}
+              />
+            </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <Toggle
-            color="#42f598"
-            type="round"
-            label={t('Set field as unique')}
-            onChange={(): void => setValue('isUnique', !values.isUnique, setValues)}
-            checked={values.isUnique}
-          />
-        </div>
+            <div style={{ marginBottom: '20px' }}>
+              <Toggle
+                color={theme.colors.green.screaminGreen}
+                type="round"
+                label={t('Is Media (image, video or document)?')}
+                onChange={(): void => setValue('isMedia', !values.isMedia, setValues)}
+                checked={values.isMedia}
+              />
+            </div>
+          </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <Toggle
-            color="#42f598"
-            type="round"
-            label={t('Hide field')}
-            onChange={(): void => setValue('isHide', !values.isHide, setValues)}
-            checked={values.isHide}
-          />
-        </div>
+          <div className="right">
+            <div style={{ marginBottom: '20px' }}>
+              <Toggle
+                color={theme.colors.green.screaminGreen}
+                type="round"
+                label={t('Set field as unique')}
+                onChange={(): void => setValue('isUnique', !values.isUnique, setValues)}
+                checked={values.isUnique}
+              />
+            </div>
 
-        <div style={{ marginBottom: '20px' }}>
-          <Toggle
-            color="#42f598"
-            type="round"
-            label={t('Is Media (image, video or document)?')}
-            onChange={(): void => setValue('isMedia', !values.isMedia, setValues)}
-            checked={values.isMedia}
-          />
+            <div style={{ marginBottom: '20px' }}>
+              <Toggle
+                color={theme.colors.green.screaminGreen}
+                type="round"
+                label={t('Hide field')}
+                onChange={(): void => setValue('isHide', !values.isHide, setValues)}
+                checked={values.isHide}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="buttons">

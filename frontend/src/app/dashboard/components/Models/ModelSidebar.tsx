@@ -46,7 +46,7 @@ const ModelSidebar: FC<iProps> = ({ app, router }): ReactElement => {
         onClose={handleEnumerationModal}
         options={{
           position: 'top',
-          height: '600px',
+          height: router.language === 'ja-JP' || router.language === 'ar' ? '627px' : '610px',
           width: '600px'
         }}
       />
