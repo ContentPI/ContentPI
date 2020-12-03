@@ -5,6 +5,7 @@ import { getDirection } from '@contentpi/core'
 
 // Contexts
 import { AppContext } from '@contexts/app'
+import { I18nContext } from '@contexts/i18n'
 
 // Constants
 import { STAGE_LINK, ASSET_LINK, LOGOUT_LINK, I18N_LINK } from '@constants/links'
@@ -36,6 +37,8 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
     state: { getAppById }
   } = useContext(AppContext)
 
+  const { t } = useContext(I18nContext)
+
   // Methods
   const handleOpen = (side: string, isOpen: boolean): void => {
     setSidebar(side)
@@ -59,32 +62,32 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           )}
 
           <li onClick={(): void => handleOpen('model', true)}>
-            <a title="Models">
-              <Icon type="fas fa-cubes" />
+            <a title={t('Models')}>
+              <Icon type="layers" library="feather" />
             </a>
           </li>
 
           <li onClick={(): void => handleOpen('content', true)}>
-            <a title="Content">
-              <Icon type="fas fa-pencil-alt" />
+            <a title={t('Content')}>
+              <Icon type="edit" library="feather" />
             </a>
           </li>
 
           <li>
-            <Link href={I18N_LINK(router).as} title="I18n">
-              <Icon type="fas fa-globe-americas" />
+            <Link href={I18N_LINK(router).as} title={t('I18n')}>
+              <Icon type="g-translate" library="material" fill="white" />
             </Link>
           </li>
 
           <li>
-            <Link href={ASSET_LINK(router).as} title="Content">
-              <Icon type="fas fa-photo-video" />
+            <Link href={ASSET_LINK(router).as} title={t('Assets')}>
+              <Icon type="image" library="feather" />
             </Link>
           </li>
 
           <li>
-            <a href={`${LOGOUT_LINK(router)}?redirectTo=/dashboard`} title="Logout">
-              <Icon type="fas fa-power-off" />
+            <a href={`${LOGOUT_LINK(router)}?redirectTo=/dashboard`} title={t('Logout')}>
+              <Icon type="power" library="feather" />
             </a>
           </li>
         </ul>
