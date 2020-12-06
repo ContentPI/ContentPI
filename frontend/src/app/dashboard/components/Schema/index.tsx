@@ -11,6 +11,8 @@ import MainLayout from '@layouts/main/MainLayout'
 import DeleteModelModal from '@modals/DeleteModelModal'
 import EditModelModal from '@modals/EditModelModal'
 import Link from '@ui/Link'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import Fields from './Fields'
 import Declarations from './Declarations'
 import Enumerations from './Enumerations'
@@ -140,12 +142,15 @@ const Schema: FC<iProps> = ({ data, router }): ReactElement => {
           </div>
 
           <div className="wrapper">
-            <Fields
-              model={getModel.identifier}
-              fields={getModel.fields}
-              showSystem={showSystem}
-              language={language}
-            />
+            <DndProvider backend={HTML5Backend}>
+              <Fields
+                model={getModel.identifier}
+                fields={getModel.fields}
+                showSystem={showSystem}
+                language={language}
+              />
+            </DndProvider>
+
             <Declarations
               model={getModel}
               declarations={getDeclarations}
