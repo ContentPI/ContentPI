@@ -1,0 +1,25 @@
+# Sellect node image
+FROM node:14-alpine
+
+# Set app directory
+WORKDIR /usr/src/app/contentpi
+
+# Copying source files
+COPY . .
+
+EXPOSE 6000
+
+RUN sh
+# # Installing dependencies from Backend
+# ADD package.json .
+# RUN npm install
+
+# # Installing dependencies from Frontend
+# ADD package.json .
+# RUN npm install
+
+# # Copying source files
+# ADD . .
+
+# Running app
+# CMD [ "npm", "run", "dev" ]

@@ -1,0 +1,25 @@
+#  GIT
+.git
+.gitignore
+*/gitignore
+
+#  VS Code
+.vscode
+
+# Docker
+docker*
+.dockerignore
+
+# Node
+package*.json
+*/package-*.json
+*/node_modules
+*/dist
+
+# Others
+.DS_Store
+*/.DS_Store
+*.md
+*/.md
+*.env*
+*/.env*

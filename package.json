@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "CPI - Headless CMS",
   "scripts": {
+    "build": "docker build . -t contentpi:1.0 -f docker/dockerfile.development",
     "docker:start": "docker-compose up",
     "docker:build": "docker-compose build",
     "docker:stop": "docker-compose down",
