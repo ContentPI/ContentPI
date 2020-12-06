@@ -1,11 +1,11 @@
 // Dependencies
-import path from 'path'
-import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
-import Dotenv from 'dotenv-webpack'
+const path = require('path')
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
+const Dotenv = require('dotenv-webpack')
 
-import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 
-const config = {
+const myCustomConfig = {
   reactStrictMode: true,
   devIndicators: {
     autoPrerender: false
@@ -51,10 +51,10 @@ const config = {
   }
 }
 
-export default (phase, { defaultConfig }) => {
+module.exports = (phase, { defaultConfig }) => {
   const customConfig = {
     ...defaultConfig,
-    ...config
+    ...myCustomConfig
   }
 
   if (phase === PHASE_DEVELOPMENT_SERVER) {
