@@ -3,7 +3,7 @@ import { styled, theme, device } from '@styles/theme'
 export const StyledFooter = styled.footer`
   width: 97%;
   text-align: center;
-  height: 54px;
+  height: max-content;
   background-color: transparent;
 
   @media ${device.mobileXl} {
