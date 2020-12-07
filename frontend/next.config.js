@@ -47,6 +47,16 @@ const myCustomConfig = {
       })
     )
 
+    config.module.rules.push({
+      test: /\.(jpg|png|svg)$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 25000
+        }
+      }
+    })
+
     return config
   }
 }

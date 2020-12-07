@@ -14,6 +14,11 @@ export default class MyDocument extends Document {
       <Html lang={language} dir={language === 'ar' ? 'rtl' : 'ltr'}>
         <Head>
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" />
+          <link
+            // eslint-disable-next-line max-len
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Source+Code+Pro:400,700"
+            rel="stylesheet"
+          />
           <link rel="icon" type="image/png" href="/images/favicon.png" />
         </Head>
 

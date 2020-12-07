@@ -19,7 +19,7 @@ export const StyledSidebar = styled.aside`
       rgba(0, 212, 255, 1) 100%
     );
     color: ${theme.color.white};
-    height: 101%;
+    height: 100vh;
 
     .isoType {
       width: 100%;
