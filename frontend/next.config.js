@@ -1,9 +1,11 @@
 // Dependencies
-import path from 'path'
-import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
-import Dotenv from 'dotenv-webpack'
+const path = require('path')
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
+const Dotenv = require('dotenv-webpack')
 
-export default {
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
+
+const myCustomConfig = {
   reactStrictMode: true,
   devIndicators: {
     autoPrerender: false
@@ -45,6 +47,39 @@ export default {
       })
     )
 
+    config.module.rules.push({
+      test: /\.(jpg|png|svg)$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 25000
+        }
+      }
+    })
+
     return config
   }
+}
+
+module.exports = (phase, { defaultConfig }) => {
+  const customConfig = {
+    ...defaultConfig,
+    ...myCustomConfig
+  }
+
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    return {
+      ...customConfig,
+      webpackDevMiddleware: config => {
+        config.watchOptions = {
+          poll: 1000,
+          aggregateTimeout: 300
+        }
+
+        return config
+      }
+    }
+  }
+
+  return customConfig
 }

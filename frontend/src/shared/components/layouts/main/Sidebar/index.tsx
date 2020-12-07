@@ -8,7 +8,7 @@ import { AppContext } from '@contexts/app'
 import { I18nContext } from '@contexts/i18n'
 
 // Constants
-import { STAGE_LINK, ASSET_LINK, LOGOUT_LINK, I18N_LINK } from '@constants/links'
+import { STAGE_LINK, ASSET_LINK, LOGOUT_LINK, I18N_LINK, PLAYGROUND_LINK } from '@constants/links'
 
 // Sidebars
 import ModelSidebar from '@dashboard/components/Models/ModelSidebar'
@@ -82,6 +82,12 @@ const Sidebar: FC<iProps> = ({ router }): ReactElement => {
           <li>
             <Link href={ASSET_LINK(router).as} title={t('Assets')}>
               <Icon type="image" library="feather" />
+            </Link>
+          </li>
+
+          <li>
+            <Link href={PLAYGROUND_LINK(router).as} title={t('Playground')}>
+              <Icon type="cpu" library="feather" />
             </Link>
           </li>
 
