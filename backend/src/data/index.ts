@@ -6,6 +6,7 @@ import ar from './i18n/ar.json'
 import esMX from './i18n/es-MX.json'
 import jaJP from './i18n/ja-JP.json'
 import ptBR from './i18n/pt-BR.json'
+import ruRU from './i18n/ru-RU.json'
 
 // Models
 import models from '../models'
@@ -15,7 +16,8 @@ const translations: any = {
   ar,
   'es-MX': esMX,
   'ja-JP': jaJP,
-  'pt-BR': ptBR
+  'pt-BR': ptBR,
+  'ru-RU': ruRU
 }
 
 async function createInitialContent(): Promise<any> {
