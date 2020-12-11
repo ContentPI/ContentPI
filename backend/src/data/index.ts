@@ -5,6 +5,7 @@ import { forEach } from '@contentpi/utils'
 import ar from './i18n/ar.json'
 import esMX from './i18n/es-MX.json'
 import jaJP from './i18n/ja-JP.json'
+import ptBR from './i18n/pt-BR.json'
 
 // Models
 import models from '../models'
@@ -13,7 +14,8 @@ import models from '../models'
 const translations: any = {
   ar,
   'es-MX': esMX,
-  'ja-JP': jaJP
+  'ja-JP': jaJP,
+  'pt-BR': ptBR
 }
 
 async function createInitialContent(): Promise<any> {
