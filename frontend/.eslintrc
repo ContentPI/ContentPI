@@ -48,7 +48,6 @@
     ],
     "no-param-reassign": "off",
     "no-underscore-dangle": "off",
-    "prettier/prettier": "error",
     "react/jsx-filename-extension": [
       1,
       {
@@ -67,6 +66,12 @@
     "jsx-a11y/label-has-associated-control": "off",
     "react/jsx-one-expression-per-line": "off",
     "no-prototype-builtins": "off",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }
