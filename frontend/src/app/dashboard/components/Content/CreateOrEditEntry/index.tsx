@@ -72,7 +72,10 @@ const CreateOrEditEntry: FC<iProps> = ({ data, router }): ReactElement => {
     if (field.type === 'Dropdown') {
       const enumerationId = field.defaultValue
       const enumeration = getEnumerationsByAppId.find((e: any) => e.id === enumerationId)
-      enumerations.push(enumeration)
+
+      if (enumeration && enumeration.id) {
+        enumerations.push(enumeration)
+      }
     }
 
     if (field.type === 'Reference' && isEditing) {
