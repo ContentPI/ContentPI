@@ -55,7 +55,7 @@ const Fields: FC<iProps> = ({ model, fields, showSystem, language }): ReactEleme
   }
 
   const moveCard = (dragIndex: number, hoverIndex: number) => {
-    const dragCard = _fields[dragIndex]
+    const dragCard = { ..._fields[dragIndex], order: (hoverIndex - 3).toString() }
     setFields(
       update(_fields, {
         $splice: [
@@ -115,6 +115,7 @@ const Fields: FC<iProps> = ({ model, fields, showSystem, language }): ReactEleme
         isDragging: !!monitor.isDragging()
       })
     })
+
     drag(drop(ref))
     return (
       <div

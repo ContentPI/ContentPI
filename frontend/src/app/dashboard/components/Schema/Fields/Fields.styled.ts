@@ -18,6 +18,10 @@ export const StyledFields = styled.div`
     margin-bottom: 20px;
     border-radius: 5px;
     position: relative;
+    user-select: none;
+    &:hover {
+      cursor: move;
+    }
 
     .actions {
       position: absolute;
