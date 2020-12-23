@@ -3,9 +3,7 @@ const path = require('path')
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
 const Dotenv = require('dotenv-webpack')
 
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
-
-const myCustomConfig = {
+module.exports = {
   reactStrictMode: true,
   devIndicators: {
     autoPrerender: false
@@ -59,27 +57,4 @@ const myCustomConfig = {
 
     return config
   }
-}
-
-module.exports = (phase, { defaultConfig }) => {
-  const customConfig = {
-    ...defaultConfig,
-    ...myCustomConfig
-  }
-
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    return {
-      ...customConfig,
-      webpackDevMiddleware: config => {
-        config.watchOptions = {
-          poll: 1000,
-          aggregateTimeout: 300
-        }
-
-        return config
-      }
-    }
-  }
-
-  return customConfig
 }
