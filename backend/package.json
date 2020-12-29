@@ -9,7 +9,7 @@
     "start": "ts-node dist/index.js",
     "build": "tsc -p .",
     "lint": "eslint . --ext .js,.tsx,.ts",
-    "lint:fix": "eslint --fix --ext .js,.tsx,.ts",
+    "lint:fix": "eslint . --fix --ext .js,.tsx,.ts",
     "test": "jest src"
   },
   "husky": {
