@@ -28,7 +28,7 @@
   },
   "languages": {
     "default": "en-US",
-    "list": ["ar", "es-MX", "en-US", "ja-JP", "pt-BR", "fr-FR", "ru-RU"]
+    "list": ["ar", "es-MX", "en-US", "ja-JP", "pt-BR", "fr-FR", "ru-RU", "it-IT"]
   },
   "security": {
     "secretKey": "",
