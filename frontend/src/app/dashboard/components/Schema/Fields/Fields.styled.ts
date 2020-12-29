@@ -20,7 +20,7 @@ export const StyledFields = styled.div`
     position: relative;
     user-select: none;
     &:hover {
-      cursor: grap;
+      cursor: grab;
     }
 
     .actions {
