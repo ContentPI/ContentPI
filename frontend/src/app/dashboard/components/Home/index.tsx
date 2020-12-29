@@ -94,11 +94,11 @@ const Home: FC<iProps> = ({ router }): ReactElement => {
             <p>{t('Explore our guides, API reference and code examples.')}</p>
 
             <p>
-              <Link href="#">
+              <a href="#">
                 <>
                   <Icon type="fas fa-external-link-alt" /> {t('View documentation')}
                 </>
-              </Link>
+              </a>
             </p>
           </div>
 
@@ -110,11 +110,11 @@ const Home: FC<iProps> = ({ router }): ReactElement => {
             <p>{t('Learn how to fetch content with your apps.')}</p>
 
             <p>
-              <Link href="#">
+              <a href="#">
                 <>
                   <Icon type="fas fa-external-link-alt" /> {t('Watch tutorials')}
                 </>
-              </Link>
+              </a>
             </p>
           </div>
 
