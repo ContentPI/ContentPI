@@ -17,7 +17,7 @@ interface iProps {
 
 const Playground = dynamic(
   () => {
-    return import('../../../../../app/dashboard/components/Playground')
+    return import('@dashboard/components/Playground')
   },
   { ssr: false }
 )
@@ -34,7 +34,7 @@ const Page: FC<iProps> = ({ __ }): ReactElement => {
     <ContentProvider __={__} language={language}>
       <UserProvider>
         <AppProvider id={appId}>
-          <MainLayout title="Home" sidebar router={router.query}>
+          <MainLayout title="Playground" sidebar router={router.query}>
             <Playground />
           </MainLayout>
         </AppProvider>
