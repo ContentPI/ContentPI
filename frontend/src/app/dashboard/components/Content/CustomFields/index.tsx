@@ -150,6 +150,11 @@ const CustomFields: FC<iProps> = ({
   const renderDropdown = (field: any) => {
     const enumId = field.defaultValue
     const enumeration = enumerations.find((enu: any) => enu.id === enumId)
+
+    if (!enumeration) {
+      return <div />
+    }
+
     const options: any = JSON.parse(enumeration.values)
 
     if (action === 'edit') {
