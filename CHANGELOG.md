@@ -1,6 +1,6 @@
 # December 2020
 
-- [CPI-8](https://github.com/ContentPI/ContentPI/issues/8): Fix Playground
+- [CPI-99](https://github.com/ContentPI/ContentPI/pull/99): Fix Playground
 
 # November 2020
 
