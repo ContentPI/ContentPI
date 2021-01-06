@@ -67,6 +67,10 @@ export interface iField extends Field, Sequelize {
 }
 
 export interface iCreateFieldInput extends Field {}
+export interface iReorderFieldInput {
+  id: string
+  order: string
+}
 
 // Value
 export interface iValue extends Value, Sequelize {

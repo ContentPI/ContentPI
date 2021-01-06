@@ -23,6 +23,12 @@ type Mutation {
   createField(input: CreateFieldInput): Field!
   deleteField(id: UUID!): Field!
   editField(id: UUID!, input: UpdateFieldInput): Field!
+  reorderFields(fieldsToUpdate: [ReorderFieldInput!]): [Field!]
+}
+
+input ReorderFieldInput {
+  id: UUID!
+  order: String!
 }
 
 input CreateFieldInput {

@@ -1,5 +1,25 @@
 // Interfaces
-import { iField, iCreateFieldInput, iModels } from '../../interfaces'
+import {
+  iField,
+  iCreateFieldInput,
+  iModels,
+  iReorderFieldInput
+} from '../../interfaces'
+
+const editField = async (models: any, id: string, input: iCreateFieldInput) => {
+  const fieldToEdit = await models.Field.findByPk(id)
+
+  if (fieldToEdit) {
+    const updatedField = await fieldToEdit.update(
+      { ...input },
+      { where: { id } }
+    )
+
+    return updatedField
+  }
+
+  return null
+}
 
 export default {
   Mutation: {
@@ -49,18 +69,33 @@ export default {
       { id, input }: { id: string; input: iCreateFieldInput },
       { models }: { models: iModels }
     ): Promise<any> => {
-      const fieldToEdit = await models.Field.findByPk(id)
+      return editField(models, id, input)
+    },
+    reorderFields: async (
+      _: any,
+      { fieldsToUpdate }: { fieldsToUpdate: iReorderFieldInput[] },
+      { models }: { models: iModels }
+    ): Promise<any> => {
+      const reorderFieldsPromises: any = []
 
-      if (fieldToEdit) {
-        const updatedField = await fieldToEdit.update(
-          { ...input },
-          { where: { id } }
-        )
+      fieldsToUpdate.forEach((fieldToUpdate: any) => {
+        const reorderFieldsPromise = new Promise((resolve: any) => {
+          models.Field.update(
+            { order: fieldToUpdate.order },
+            {
+              where: {
+                id: fieldToUpdate.id
+              }
+            }
+          ).then(() => resolve(fieldToUpdate))
+        })
 
-        return updatedField
-      }
+        reorderFieldsPromises.push(reorderFieldsPromise)
+      })
 
-      return null
+      const reorderFieldsValues = await Promise.all(reorderFieldsPromises)
+
+      return reorderFieldsValues
     }
   }
 }
