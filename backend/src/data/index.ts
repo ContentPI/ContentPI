@@ -3,6 +3,7 @@ import { forEach } from '@contentpi/utils'
 
 // Data
 import ar from './i18n/ar.json'
+import deDE from './i18n/de-DE.json'
 import esMX from './i18n/es-MX.json'
 import itIT from './i18n/it-IT.json'
 import jaJP from './i18n/ja-JP.json'
@@ -16,6 +17,7 @@ import models from '../models'
 // Content
 const translations: any = {
   ar,
+  'de-DE': deDE,
   'es-MX': esMX,
   'it-IT': itIT,
   'ja-JP': jaJP,
