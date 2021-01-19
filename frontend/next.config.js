@@ -1,9 +1,9 @@
 // Dependencies
-import path from 'path'
-import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
-import Dotenv from 'dotenv-webpack'
+const path = require('path')
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
+const Dotenv = require('dotenv-webpack')
 
-export default {
+module.exports = {
   reactStrictMode: true,
   devIndicators: {
     autoPrerender: false
