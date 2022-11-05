@@ -14,28 +14,28 @@ export default {
           modelName: model
         }
       })
-      console.log('MDOEL INSTANCE', Model)
+
       if (Model.length === 1) {
-        const modelData = Model[0].dataValues
-        const modelId = modelData.id
-        console.log('MODEL ID===>>>', modelId)
         const Fields = await models.Field.findAll({
           where: {
             modelName: model
           }
         })
+
         const promises: any = []
+        const fields: any = []
+        const fieldsData: any = {}
 
         if (Fields.length > 0) {
           Fields.forEach((field: any) => {
-            const { id: fieldId } = field.dataValues
+            const { id: fieldId, identifier: fieldName } = field.dataValues
+            fields.push(fieldName)
 
             const Value = models.Value.findAll({
               where: {
                 fieldId
               }
             })
-            console.log('VALUE===>>>>>>>', Value)
 
             promises.push(
               new Promise(resolve => {
@@ -44,35 +44,53 @@ export default {
             )
           })
 
-          const data = await Promise.all(promises)
-            .then((valuesBulk: any) => {
-              const entries: any = []
-              console.log('VALUES BULK', valuesBulk)
-              valuesBulk.forEach((valuesEntry: any, index: number) => {
-                const fieldsValues: any = []
-                valuesEntry.forEach((v: any) => {
-                  const entry: any = {}
-                  const { fieldIdentifier, value } = v.dataValues
+          console.log('FIELDS====>>>', fields)
 
-                  entry[fieldIdentifier] = value
-
-                  fieldsValues.push({
-                    ...entry
-                  })
+          const promiseData = await Promise.all(promises)
+            .then(resolvedValues => {
+              resolvedValues.forEach((fieldValues, index) => {
+                const values = fieldValues.map((value: any) => {
+                  const { entry, value: fieldValue } = value.dataValues
+                  return {
+                    entry,
+                    fieldValue
+                  }
                 })
-                entries.push(fieldsValues)
-                console.log('FIELDS VALUES', fieldsValues)
+
+                fieldsData[fields[index]] = values
               })
 
-              return entries
+              return fieldsData
             })
             .then((response: any) => {
+              console.log('RESPONSE====>>>', response)
+              const entries: any = {}
+
+              Object.keys(response).forEach(field => {
+                response[field].forEach((value: any) => {
+                  const { entry, fieldValue } = value
+                  if (entries[entry]) {
+                    entries[entry][field] = fieldValue
+                  } else {
+                    entries[entry] = {
+                      [field]: fieldValue
+                    }
+                  }
+                })
+              })
+
+              const data: any = []
+
+              Object.keys(entries).forEach(entry => {
+                data.push(entries[entry])
+              })
+
               return {
-                data: response
+                data
               }
             })
-          console.log('DATA XXX>>', data)
-          return data
+
+          return promiseData
         }
       }
 
