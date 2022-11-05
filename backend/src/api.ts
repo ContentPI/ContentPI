@@ -1,33 +1,57 @@
 // Dependencies
-import { ApolloServer } from 'apollo-server'
-import { importSchema } from 'graphql-import'
+import { ApolloServer } from 'apollo-server-express'
+import { makeExecutableSchema } from '@graphql-tools/schema'
+import cors from 'cors'
+import express from 'express'
 
-// Apollo Server
-const resolvers = {
-  Query: {
-    getAllPosts: (): any => {
-      return [
-        {
-          id: '7a99ff36-6b39-4cd6-a4a4-83b6660fe881',
-          title: 'Test',
-          slug: 'test',
-          content: '<p>Content</p>',
-          status: 'published'
-        }
-      ]
-    }
-  }
+// Data
+import { setInitialData } from './data'
+
+// Models
+import models from './models'
+
+// Type Definitions & Resolvers
+import resolvers from './api/resolvers'
+import typeDefs from './api/types'
+
+const app = express()
+
+const corsOptions = {
+  origin: '*',
+  credentials: true
 }
 
-const apolloServer = new ApolloServer({
-  typeDefs: importSchema('src/schemas/schema.graphql'),
+app.use(cors(corsOptions))
+
+// Schema
+const schema = makeExecutableSchema({
+  typeDefs,
   resolvers
 })
 
-apolloServer
-  .listen(4000)
-  // eslint-disable-next-line no-console
-  .then(({ url }) => {
-    // eslint-disable-next-line no-console
-    console.log(`Running on ${url}`)
+// Apollo Server
+const apolloServer = new ApolloServer({
+  schema,
+  context: {
+    models
+  }
+})
+
+const alter = true
+const force = false
+
+models.sequelize.sync({ alter, force }).then(() => {
+  apolloServer.start().then(() => {
+    apolloServer.applyMiddleware({ app, path: '/graphql', cors: corsOptions })
+
+    app.listen({ port: 4001 }, () => {
+      // Setting up initial seeds
+      console.log('Initializing Seeds...')
+      // Setting up initial data
+      setInitialData()
+
+      // eslint-disable-next-line no-console
+      console.log('Running on http://localhost:4001')
+    })
   })
+})

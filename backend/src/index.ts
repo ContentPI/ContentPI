@@ -14,9 +14,6 @@ import models from './models'
 import resolvers from './graphql/resolvers'
 import typeDefs from './graphql/types'
 
-// Configuration
-import { $server } from '../config'
-
 const app = express()
 
 const corsOptions = {
