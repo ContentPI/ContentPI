@@ -35,6 +35,8 @@
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-no-constructed-context-values": "off",
     "no-restricted-syntax": "off",
     "no-use-before-define": "off",
     "import/extensions": "off",

@@ -1,7 +1,7 @@
 // Dependencies
 import React, { FC, createContext, ReactElement, useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
-import { getGraphQlError, redirectTo, getDebug } from '@contentpi/utils'
+import { redirectTo, getDebug } from '@contentpi/utils'
 import { useQuery, useMutation } from '@apollo/client'
 
 // Mutations
@@ -26,7 +26,7 @@ export const UserContext = createContext<iUserContext>({
   user: null
 })
 
-const UserProvider: FC<iProps> = ({ children }): ReactElement => {
+const UserProvider: FC<iProps> = ({ children }) => {
   const [cookies, setCookie] = useCookies()
   const [user, setUser] = useState(null)
 
@@ -68,7 +68,7 @@ const UserProvider: FC<iProps> = ({ children }): ReactElement => {
         return dataLogin.login.token
       }
     } catch (err) {
-      return getGraphQlError(err)
+      console.log('err', err)
     }
   }
 

@@ -1,7 +1,7 @@
 {
   "baseUrl": "http://localhost:3000",
   "api": {
-    "uri": "http://localhost:5000/graphql",
+    "uri": "http://localhost:4000/graphql",
     "credentials": "same-origin"
   },
   "debug": true,

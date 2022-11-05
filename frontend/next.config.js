@@ -1,19 +1,13 @@
-// Dependencies
-import path from 'path'
-import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
-import Dotenv from 'dotenv-webpack'
+const path = require('path')
 
-export default {
-  reactStrictMode: true,
-  devIndicators: {
-    autoPrerender: false
+module.exports = {
+  future: {
+    webpack5: true
   },
-  webpack: (config, { isServer }) => {
-    // Fixes npm packages that depend on `fs` module
-    if (!isServer) {
-      config.node = {
-        fs: 'empty'
-      }
+  webpack(config) {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false
     }
 
     // Aliases
@@ -34,16 +28,6 @@ export default {
     config.resolve.alias['@styles'] = path.resolve(dir, './src/shared/styles')
     config.resolve.alias['@ui'] = path.resolve(dir, './src/shared/components/ui')
     config.resolve.alias.styles = path.resolve(dir, './src/shared/styles')
-
-    // Plugins
-    config.plugins.push(
-      new FilterWarningsPlugin({
-        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
-      }),
-      new Dotenv({
-        silent: true
-      })
-    )
 
     return config
   }
